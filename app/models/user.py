@@ -5,10 +5,12 @@ from flask_login import UserMixin
 class User(db.Model, UserMixin):
   __tablename__ = 'users'
 
-  id = db.Column(db.Integer, primary_key = True)
-  username = db.Column(db.String(40), nullable = False, unique = True)
-  email = db.Column(db.String(255), nullable = False, unique = True)
-  hashed_password = db.Column(db.String(255), nullable = False)
+  id = db.Column(db.Integer, primary_key=True)
+  username = db.Column(db.String(40), nullable=False, unique=True)
+  email = db.Column(db.String(255), nullable=False, unique=True)
+  hashed_password = db.Column(db.String(255), nullable=False)
+  avatar_url = db.Column(db.String(500), nullable=True)
+  biography = db.Column(db.String(2000), nullable=True)
 
 
   @property
