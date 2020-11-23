@@ -1,0 +1,16 @@
+.search {
+    position: absolute;
+    top: 5rem;
+    left: 50%;
+    width: 100%;
+    max-width: 400px;
+    z-index: 2;
+  }
+
+  .title {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    color: whitesmoke;
+    z-index: 2;
+  }

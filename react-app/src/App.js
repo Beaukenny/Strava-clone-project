@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
+import Map from "./components/Map";
 import { authenticate } from "./services/auth";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar setAuthenticated={setAuthenticated} />
+      <Switch>
       <Route path="/login" exact={true}>
         <LoginForm
           authenticated={authenticated}
@@ -41,12 +43,16 @@ function App() {
       <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
         <UsersList/>
       </ProtectedRoute>
+      <ProtectedRoute path="/users/:userId/createRoute" exact={true} authenticated={authenticated}>
+        <Map />
+      </ProtectedRoute>
       <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
         <User />
       </ProtectedRoute>
       <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
         <h1>My Home Page</h1>
       </ProtectedRoute>
+      </Switch>
     </BrowserRouter>
   );
 }
