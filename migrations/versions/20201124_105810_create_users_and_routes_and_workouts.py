@@ -1,8 +1,8 @@
 """create users and routes and workouts
 
-Revision ID: 71c981591531
+Revision ID: c511d950b793
 Revises: 
-Create Date: 2020-11-24 10:20:54.760111
+Create Date: 2020-11-24 10:58:10.741345
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '71c981591531'
+revision = 'c511d950b793'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -51,6 +51,7 @@ def upgrade():
     sa.Column('description', sa.String(length=1000), nullable=True),
     sa.Column('workout_photos', sa.String(length=2000), nullable=True),
     sa.Column('time', sa.Integer(), nullable=False),
+    sa.Column('workout_date', sa.DateTime(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('route_id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),

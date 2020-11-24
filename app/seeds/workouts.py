@@ -1,4 +1,5 @@
 from app.models import db, Workout
+from sqlalchemy import func
 
 
 # Adds a demo user, you can add other workouts here if you want
@@ -7,6 +8,7 @@ def seed_workouts():
                             description='sample description for workout',
                             workout_photos='https://stabmag.com/',
                             time=10001,
+                            workout_date=db.func.now(),
                             user_id=1,
                             route_id=1)
     peak_workout = Workout(name='twin peaks',
@@ -17,6 +19,7 @@ def seed_workouts():
                            'peaks-at-map-18276524-1537887906' +
                            '-1200x630-3-6.jpg',
                            time=20002,
+                           workout_date=db.func.now(),
                            user_id=1,
                            route_id=2)
 
