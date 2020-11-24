@@ -1,8 +1,8 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import Route
+from app.models import Route, db
 import json
-import requests
+
 
 route_routes = Blueprint('routes', __name__)
 
@@ -26,10 +26,11 @@ def route(id):
 @login_required
 def add_custom_route():
     data = request.json
+    print(data)
     errors = []
     route_preview = data['route_preview']
-    route_data = json.dumps(data['route_data'])
-    custom_route = Event(
+    route_data = data['route_data']
+    custom_route = Route(
         name=data['name'],
         host_id=data['host_id'],
         route_preview=f'{route_preview}',

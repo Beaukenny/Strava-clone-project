@@ -1,8 +1,8 @@
 """create users and routes and workouts
 
-Revision ID: c511d950b793
+Revision ID: dd748126ca9f
 Revises: 
-Create Date: 2020-11-24 10:58:10.741345
+Create Date: 2020-11-24 14:05:04.632874
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'c511d950b793'
+revision = 'dd748126ca9f'
 down_revision = None
 branch_labels = None
 depends_on = None
