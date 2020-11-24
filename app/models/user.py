@@ -12,8 +12,11 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     avatar_url = db.Column(db.String(500), nullable=True)
     biography = db.Column(db.String(2000), nullable=True)
+    created_at = db.Column(db.DateTime, default=db.func.now())
+    updated_at = db.Column(db.DateTime, default=db.func.now())
 
-    # route = db.relationship("Route", back_populates="users")
+    route = db.relationship("Route", back_populates="user")
+    workout = db.relationship("Workout", back_populates="user")
 
     @property
     def password(self):
