@@ -22,6 +22,16 @@ def route(id):
     return route.to_dict()
 
 
+@route_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_route(id):
+    data = request.json
+    route = Route.query.get(data['id'])
+    db.session.delete(route)
+    db.session.commit()
+    return "Deleted."
+
+
 @route_routes.route('/custom', methods=['POST'])
 @login_required
 def add_custom_route():

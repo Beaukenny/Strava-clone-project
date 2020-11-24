@@ -17,3 +17,13 @@ def users():
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+
+@user_routes.route('/<int:id>/delete', methods=['DELETE'])
+@login_required
+def delete_user(id):
+    data = request.json
+    user = Workout.query.get(data['id'])
+    db.session.delete(user)
+    db.session.commit()
+    return "Deleted."

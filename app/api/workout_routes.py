@@ -19,6 +19,29 @@ def workout(id):
     return workout.to_dict()
 
 
+@workout_routes.route('/<int:id>/', methods=['DELETE'])
+@login_required
+def delete_workout(id):
+    data = request.json
+    workout = Workout.query.get(data['id'])
+    db.session.delete(workout)
+    db.session.commit()
+    return "Deleted."
+
+
+# @workout_routes.route('/workouts/update', methods=['PUT'])
+# def update_workout():
+#     data = request.json
+#     workout = Workout.query.get(data['id'])
+#     time = data['time']
+#     db.session.commit()
+#     return jsonify({
+#         "workout.id": workout.id,
+#         "workout.name": workout.name,
+#         "workout.photos": workout.time
+#     })
+
+
 @workout_routes.route('/custom', methods=['POST'])
 @login_required
 def add_custom_workout():
