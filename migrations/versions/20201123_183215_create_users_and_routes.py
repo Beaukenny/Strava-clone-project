@@ -1,8 +1,8 @@
 """create users and routes
 
-Revision ID: 270c85e06356
+Revision ID: 3ef773b91ea9
 Revises: 
-Create Date: 2020-11-23 17:47:44.883250
+Create Date: 2020-11-23 18:32:15.024970
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '270c85e06356'
+revision = '3ef773b91ea9'
 down_revision = None
 branch_labels = None
 depends_on = None

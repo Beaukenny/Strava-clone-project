@@ -12,7 +12,7 @@ class Route(db.Model):
     starting_point = db.Column(db.String(200), nullable=False)
     offroad = db.Column(db.Boolean)
 
-    # user = db.relationship("User", back_populates="routes")
+    # user = db.relationship("Route", back_populates="users")
 
     # @property
     # def route_preview(self):
@@ -25,20 +25,20 @@ class Route(db.Model):
     # def getRandomCoords():
     #     pass
 
-    # def to_dict(self):
-    #     return {
-    #         "id": self.id,
-    #         "name": self.name,
-    #         "host": {
-    #             "id": self.user.id,
-    #             "username": self.user.username,
-    #             "email": self.user.email,
-    #             "avatar_url": self.user.avatar_url,
-    #             "biography": self.user.biography,
-    #         },
-    #         "host_id": self.host_id,
-    #         "route_preview": self.route_preview,
-    #         "route_data": self.route_data,
-    #         "starting_point": self.starting_point,
-    #         "offroad": self.offroad
-    #     }
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "host_id": self.host_id,
+            #     "id": self.User.id,
+            #     "username": self.User.username,
+            #     "email": self.User.email,
+            #     "avatar_url": self.User.avatar_url,
+            #     "biography": self.User.biography,
+            # },
+            # "host_id": self.host_id,
+            "route_preview": self.route_preview,
+            "route_data": self.route_data,
+            "starting_point": self.starting_point,
+            "offroad": self.offroad
+        }

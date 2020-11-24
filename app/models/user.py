@@ -13,6 +13,8 @@ class User(db.Model, UserMixin):
     avatar_url = db.Column(db.String(500), nullable=True)
     biography = db.Column(db.String(2000), nullable=True)
 
+    # route = db.relationship("Route", back_populates="users")
+
     @property
     def password(self):
         return self.hashed_password
