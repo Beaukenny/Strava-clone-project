@@ -10,6 +10,7 @@ class Workout(db.Model):
     description = db.Column(db.String(1000), nullable=True)
     workout_photos = db.Column(db.String(2000), nullable=True)
     time = db.Column(db.Integer, nullable=False)
+    workout_date = db.Column(db.DateTime, default=db.func.now())
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"),
                         nullable=False)
     route_id = db.Column(db.Integer, db.ForeignKey("routes.id"),
@@ -46,6 +47,7 @@ class Workout(db.Model):
             # "host_id": self.host_id,
             "workout_photos": self.workout_photos,
             "time": self.time,
+            "workout_date": self.workout_date,
             "user_id": self.user_id,
             "route_id": self.route_id,
             "route": {
@@ -55,8 +57,8 @@ class Workout(db.Model):
                 "route_preview": self.route.route_preview,
                 "route_data": self.route.route_data,
                 "starting_point": self.route.starting_point,
-                "offroad": self.route.offroad
+                "offroad": self.route.offroad,
             },
             "created_at": self.created_at,
-            "updated_at": self.updated_at
+            "updated_at": self.updated_at,
         }
