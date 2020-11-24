@@ -1,24 +1,29 @@
-from werkzeug.security import generate_password_hash
 from app.models import db, User
+from werkzeug.security import generate_password_hash
 
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
 
     demo = User(username='demo', email='demo@demo.com',
-                password='appacademy', avatar_url='www.google.com', 
+                hashed_password=generate_password_hash('appacademy'),
+                avatar_url='www.google.com',
                 biography='test bio')
     peter = User(username='peter', email='peter@peter.com',
-                 password='appacademy', avatar_url='www.google.com', 
+                 hashed_password=generate_password_hash('appacademy'),
+                 avatar_url='www.google.com',
                  biography='test bio')
     beau = User(username='beau', email='beau@beau.com',
-                password='appacademy', avatar_url='www.google.com', 
+                hashed_password=generate_password_hash('appacademy'),
+                avatar_url='www.google.com',
                 biography='test bio')
     mary = User(username='mary', email='mary@mary.com',
-                password='appacademy', avatar_url='www.google.com', 
+                hashed_password=generate_password_hash('appacademy'),
+                avatar_url='www.google.com',
                 biography='test bio')
     clay = User(username='clay', email='clay@clay.com',
-                password='appacademy', avatar_url='www.google.com', 
+                hashed_password=generate_password_hash('appacademy'),
+                avatar_url='www.google.com',
                 biography='test bio')
 
     db.session.add(demo)
@@ -36,4 +41,5 @@ def seed_users():
 # the auto incrementing primary key
 def undo_users():
     db.session.execute('TRUNCATE users;')
+    # db.session.execute('TRUNCATE routes;')
     db.session.commit()
