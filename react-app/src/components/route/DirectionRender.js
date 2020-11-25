@@ -4,7 +4,7 @@ import { DirectionsRenderer } from "react-google-maps"
 
 
 const DirectionRender = ({ markers, directionsService }) => {
-    const [directions, setDirection] = useState()
+    const [data, setData] = useState()
     useEffect(() => {
 
 
@@ -36,7 +36,8 @@ const DirectionRender = ({ markers, directionsService }) => {
             }
             directionsService.route(request, (result, status) => {
                 if (status === "OK") {
-                    setDirection(result)
+                    console.log("result" , result)
+                    setData(result)
                 }
             })
 
@@ -45,20 +46,24 @@ const DirectionRender = ({ markers, directionsService }) => {
     }, [markers])
 
 
+    // DirectionsRenderer.addListener("dragend",()=> {
 
+    // })
 
     return (
 
         <>
+        <button
+        onClick={()=>console.log(data)}
+        > console log direction</button>
             <DirectionsRenderer
-                directions={directions}
+                directions={data}
                 options={{
                     polylineOptions: {
                         strokeColor: 'purple',
                     },
                     draggable: true,
-                    markerOptions: { icon: "/purple-dot.png" }
-
+                    markerOptions: { icon: "/purple-dot.png" },
                 }}
             />
         </>
