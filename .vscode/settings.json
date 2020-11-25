@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/Users/marylark/Desktop/appacademy/week19/Strava-clone-project/.venv/bin/python3.8",
+    "python.pythonPath": ".venv/bin/python",
     "python.linting.pylintEnabled": false,
     "python.linting.enabled": true,
     "python.linting.pycodestyleEnabled": true
