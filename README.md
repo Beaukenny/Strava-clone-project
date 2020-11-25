@@ -117,7 +117,7 @@ Components are broken into feature components with particular emphasis on reusin
 
 The signup page, and the login page are specific use components which will not include any aggregate components:
 
-![Signup Page](/doc/Component-SignUp.png).
+![Signup Page](/doc/images/Component-SignUp.png).
 
 
 ![Login Page](/doc/images/Component-Login.png)
@@ -131,7 +131,7 @@ However, most of the pages contain additional components, such as the navbar com
 ![NavBar component](/doc/images/Component-NavBar)
 
 And the search bar component used as a common component on multiple pages:
-![SearchBar Component](/docs/images/SearchBar.png)
+![SearchBar Component](/docs/images/Component-SearchBar.png)
 
 The photo array will be used for many different workouts, and as such in itself will be a component:
 
