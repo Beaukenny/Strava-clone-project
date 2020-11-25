@@ -38,8 +38,7 @@ The MVP for this website encompasses the following:
 
 The following is a flow-chart with the flow of user interaction with the web pages:
 
-![Flowchart Image](/docs/images/WebPage-Flow.png)
-
+![User Interaction Flow Chart](/doc/images/WebPage-Flow.png)
 
 ## Wireframes
 
@@ -140,7 +139,7 @@ The photo array will be used for many different workouts, and as such in itself 
 
 ![PhotoArray Component](/doc/images/Component-PhotoArray.png)
 
-The Map component will be used multiple times on a page, and across multiple pages, which in itself begged to be componentized.  Notice only a couple of areas deviate on this component depending upon whether this component is being utilised on the Explor Routes page, or the Workouts Collection Page:
+The Map component will be used multiple times on a page, and across multiple pages, which in itself begged to be componentized.  Notice only a couple of areas deviate on this component depending upon whether this component is being utilised on the Explore Routes page, or the Workouts Collection Page:
 
 ![Map Component](/doc/images/Component-Map.png)
 
