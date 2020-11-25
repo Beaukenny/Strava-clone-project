@@ -38,7 +38,8 @@ The MVP for this website encompasses the following:
 
 The following is a flow-chart with the flow of user interaction with the web pages:
 
-![Flowchart Image](/docs/images/WebPage-Flow.png
+![Flowchart Image](/docs/images/WebPage-Flow.png)
+
 
 ## Wireframes
 
@@ -58,7 +59,7 @@ On the Explore routes page, the user has the option to create a brand new route,
 
 Once route details have been edited and saved, this route is updated on the user's workout page to show that the route has been completed.  (The pending flag is removed, and the "view details" button is enabled).
 
-![View Workouts](/docs/images/4a-WorkoutDetails.png)
+![View Workouts](/doc/images/4a-WorkoutDetails.png)
 
 Refering the reader back to the Explore Routes page, if the user does not find any routes to their liking, there is an option to create a new route.  This option refers the user over to the Create Route page as shown below.  On this page, the user is able to either enter a location to start their route, and begin mapping out a new route from scratch ... or, by entering that location, all routes available to the public within 25 miles of that starting location will be shown with the user's avatar and a brief summary of the route on the right-hand pane of the page.
 
@@ -119,6 +120,7 @@ The signup page, and the login page are specific use components which will not i
 
 ![Signup Page](/doc/images/Component-SignUp.png).
 
+The Login Page Component:
 
 ![Login Page](/doc/images/Component-Login.png)
 
@@ -128,10 +130,11 @@ The splash screen utilises the search component, and NavBar component, so this c
 
 However, most of the pages contain additional components, such as the navbar component used across all pages:
 
-![NavBar component](/doc/images/Component-NavBar)
+![NavBar component](/doc/images/Component-NavBar.png)
 
 And the search bar component used as a common component on multiple pages:
-![SearchBar Component](/docs/images/Component-SearchBar.png)
+
+![SearchBar Component](/doc/images/Component-SearchBar.png)
 
 The photo array will be used for many different workouts, and as such in itself will be a component:
 
