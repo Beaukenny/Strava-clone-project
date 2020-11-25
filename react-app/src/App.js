@@ -6,7 +6,7 @@ import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
-import Map from "./components/Map";
+import MapRoute from "./components/route/MapRoute";
 import { authenticate } from "./services/auth";
 
 function App() {
@@ -43,8 +43,8 @@ function App() {
       <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
         <UsersList/>
       </ProtectedRoute>
-      <ProtectedRoute path="/users/:userId/createRoute" exact={true} authenticated={authenticated}>
-        <Map />
+      <ProtectedRoute path="/users/:userId/route/create" exact={true} authenticated={authenticated}>
+        <MapRoute />
       </ProtectedRoute>
       <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
         <User />
