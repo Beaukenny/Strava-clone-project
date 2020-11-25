@@ -38,8 +38,7 @@ The MVP for this website encompasses the following:
 
 The following is a flow-chart with the flow of user interaction with the web pages:
 
-![Flowchart Image](/docs/images/WebPage-Flow.png)
-Format: ![Flowchart Image](url)
+![Flowchart Image](/docs/images/WebPage-Flow.png
 
 ## Wireframes
 
@@ -84,3 +83,42 @@ Not to forget about the user login page, a Demo user has been provided for those
 However, if the user does not have an account, there is a link on the Login Page to take the user to the Sign Up page where the user will be able to create a login account, indicate their avatar URL, and log in:
 
 ![Sign-Up.png](/doc/images/8-Sign-Up.png)
+
+## Database Model
+
+In order to facilitate the large amount of map related data, we chose to store a JSON object within the database for each route.  Elevation, turn-by-turn information, distances, estimated time to complete are among the information stored in this JSON object.
+
+However, to be able to search efficiently for locations within a certain geo-location, we also included a row in the Routes table with the starting longitude and latitude.  A calculation is made of starting long/lat +- 25 miles to determine whether this route fits the search parameters.  Additional rows in the Route table provide more specific search information such as whether the route is suitable for road bikes.
+
+Each user will have many Routes, but one route will belong to only one user.  When a user modifies a route, a new entry in the Route table will be made associating that user to the new route.
+
+When a user creates a workout, the routeId is maintained in the workout,  A user may have many workouts - but workouts belong to only one user.
+
+The following is a graphic representation of the database models.
+
+[Insert png file here.]
+
+
+## Google Maps API
+
+The following API's were utilised from Google:
+
+1. Google Map's DirectionsService -
+
+   1. provides origin{lat, lng},
+   2. destination{lat, lng},
+   3. waypoints{lat, lng},
+   4. travelMode used to fetch estimated timing information from the Google Map API.
+2. Google Map's ElevationService
+3. Uses an array of locations to fetch the elevation data of those locations.
+
+## React/MDN API's Associated with Google Maps
+
+1. use-places-autocomplete:  Provides autocompletion for search bar to enter location names to fetch in conjunction with their getGeocode method which provides a {lat,lng} when given a location's name to fetch (Such as {37.7749N, 122.4194W} in response to "San Francisco")
+2. MDN's navigator.geolocation to get currentPosition from the browser in {lat, lng},
+
+
+
+
+
+1. google map's DirectionsService - provide origin{lat, lng}, destination{lat, lng}, waypoints{lat, lng}, travleMode to fetch direction information from google map api. 2. google map's ElevationService - provide an array locations to fetch elevation data of those locations. 3. use-places-autocomplete's getGeocode - provide location's name to fetch {lat, lng}  4. use navigator.geolocation to get currentPosition in {lat, lng},
