@@ -1,75 +1,105 @@
 /*global google*/
-import React, { useState } from 'react';
-import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow, Polyline } from "react-google-maps"
-import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption, } from "@reach/combobox";
-import { settingMarkers } from "../routeUtil/utils"
+import React, { useState, useCallback, useEffect } from 'react';
+import { GoogleMap, withScriptjs, withGoogleMap, Marker } from "react-google-maps"
+import { settingMarkers, getElevationData, staticMapImage } from "../routeUtil/utils"
 import DirectionRender from "./DirectionRender"
-
+import MyLocation from './Mylocation'
+import Search from "./Search"
 const Map = () => {
   const directionsService = new google.maps.DirectionsService();
+  const elevation = new google.maps.ElevationService();
   const [defaultLocation, setDefaultLocation] = useState({ lat: 38.9072, lng: -77.0369 })
   const [markers, setMarkers] = useState([])
-  const [selected, setSelected] = useState(null)
-  const [totalData, setTotalData] = useState("")
-  const [renderRoute, setRenderRoute] = useState(false)
-  const [renderMarkAndLine, setRenderMarkAndLine] = useState(true)
-  const [polyLines, setPolyLines] = useState([])
+  const [travelingMode, setTravelingMode] = useState("BICYCLING")
+  const [distanceData, setDistanceData] = useState('')
+  const [elevationData, setElevationData] = useState('')
+  const [totalDistance, setTotalDistance] = useState('')
+  const [totalElevation, setTotalElevation] = useState('')
+  const [statisImageURL, setStaticImageURL] = useState("")
+  const [totalDuration, setTotalDuration] = useState('')
+  const mapLocation = useCallback(({lat, lng}) => {
+    setDefaultLocation({lat,lng})
+  },[])
 
-  const onMapClick = (event) => settingMarkers(event, markers, setMarkers, directionsService, setTotalData, totalData)
+  const onMapClick = (event) => settingMarkers(event, markers, setMarkers, directionsService)
+  
+  const getElevations = () => {
+    getElevationData(distanceData,elevation, setElevationData, setTotalElevation)
+  }
 
-  const createRoute = () => {
-    setRenderMarkAndLine(!renderMarkAndLine)
-    setRenderRoute(!renderRoute)
+  const createThisRoute = () => {
+    staticMapImage(distanceData,setStaticImageURL)
+  }
+  const clearData=()=>{
+    setMarkers([])
+    setDistanceData('')
+setElevationData('')
+setTotalDistance('')
+setTotalElevation('')
+setStaticImageURL('')
+setTotalDuration('')
   }
 
 
+useEffect(()=>{
+  if(markers.length > 1) {
+    getElevations()
+    
+  }
+},[totalDistance])
+
   return (
-    <>
-      <button onClick={() => console.log(totalData)}>totalData</button>
-      <button onClick={() => console.log(markers)}>markers</button>
-      <button onClick={createRoute}>Create Route!</button>
+    <> 
+    <h1>total distance: {totalDistance}</h1>
+    <h1>total elevation gain: {totalElevation} ft </h1>
+  <h1>total duration : {totalDuration}</h1>
+ <button onClick={createThisRoute}>Create this Route</button>
+    <button
+    onClick={()=>{setTravelingMode("BICYCLING")}}
+    >switch mode to Bicycling</button>
+    <button
+    onClick={()=>{setTravelingMode("WALKING")}}
+    > switch mode to Walking</button>
+    
+    <button onClick={()=>console.log(markers)}> console log marker</button>
+    <button onClick={()=>console.log(distanceData)}> console log distance data</button>
+    <button onClick={()=>console.log(elevationData)}>console log Elevation Data</button>
+    <button onClick={clearData}>Clear Data</button>
+    <Search mapLocation={mapLocation}></Search>
+     <MyLocation mapLocation={mapLocation}></MyLocation> 
       <GoogleMap
         defaultZoom={14}
         center={defaultLocation}
         onClick={onMapClick}
       >
-        {renderMarkAndLine ? 
-        markers.map((marker, i) => <Marker
-          key={i}
-          position={{ lat: marker.lat, lng: marker.lng }}
-          icon={{
-            url: marker.markerIcon,
-            scaledSize: new window.google.maps.Size(34, 34),
-            origin: new window.google.maps.Point(0,0),
-            anchor: new window.google.maps.Point(17,17)
-          }}
-          onClick={(e) => {
-            setSelected(marker);
-          }}
-        />
-        )
+     {markers.length == 1? <Marker
+      position={{lat:markers[0].lat, lng: markers[0].lng}}
+      icon={{
+        url: "/purple-dot.png",
+        scaledSize: new window.google.maps.Size(34, 34),
+        origin: new window.google.maps.Point(0,0),
+        anchor: new window.google.maps.Point(17,17)
+      }}
+      ></Marker>:null}
+  
+        {markers.length > 0 ? 
+        <DirectionRender
+        markers={markers}
+        directionsService={directionsService}
+        travelingMode={travelingMode}
+        distanceData={distanceData}
+        setDistanceData={setDistanceData}
+        setTotalDistance={setTotalDistance}
+        getElevations={getElevations}
+        setTotalDuration={setTotalDuration}
+        ></DirectionRender>
         :null}
-        {selected ? (<InfoWindow
-          position={{ lat: selected.lat, lng: selected.lng }}
-          onCloseClick={() => setSelected(null)}
-        >
-          <div>
-            <h2>{selected.distance} miles</h2>
-          </div>
-        </InfoWindow>) : null}
-        {renderMarkAndLine ?
-          <Polyline
-            path={markers}
-            key={'0'}
-            geodesic={true}
-            options={{ strokeColor: "purple", strokeOpacity: 0.75, strokeWeight: 2, }}
-          >
-          </Polyline>
-          : null}
-        {renderRoute ?
-          <DirectionRender markers={markers} directionsService={directionsService} />
-          : null}
       </GoogleMap>
+
+
+      <img
+      src={statisImageURL}
+      ></img>
     </>
   )
 }
