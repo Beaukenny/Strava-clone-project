@@ -1,14 +1,8 @@
 """create tables
 
-<<<<<<< HEAD:migrations/versions/20201124_140504_create_users_and_routes_and_workouts.py
-Revision ID: dd748126ca9f
-Revises: 
-Create Date: 2020-11-24 14:05:04.632874
-=======
 Revision ID: fbeea2483dde
 Revises: 
 Create Date: 2020-11-24 16:56:30.777028
->>>>>>> master:migrations/versions/fbeea2483dde_create_tables.py
 
 """
 from alembic import op
@@ -16,11 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-<<<<<<< HEAD:migrations/versions/20201124_140504_create_users_and_routes_and_workouts.py
-revision = 'dd748126ca9f'
-=======
 revision = 'fbeea2483dde'
->>>>>>> master:migrations/versions/fbeea2483dde_create_tables.py
 down_revision = None
 branch_labels = None
 depends_on = None
