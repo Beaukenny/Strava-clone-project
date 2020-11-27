@@ -10,6 +10,7 @@ import MapRoute from "./components/route/MapRoute";
 import { authenticate } from "./services/auth";
 import { CssBaseline } from "@material-ui/core";
 import Theme from './Theme';
+import Splash from './Splash';
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -35,6 +36,9 @@ function App() {
       <BrowserRouter>
         <NavBar setAuthenticated={setAuthenticated} />
         <Switch>
+        <Route path='/' exact={true}>
+          <Splash />
+        </Route>
         <Route path="/login" exact={true}>
           <LoginForm
             authenticated={authenticated}
@@ -52,9 +56,6 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
           <User />
-        </ProtectedRoute>
-        <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
-          <h1>My Home Page</h1>
         </ProtectedRoute>
         </Switch>
       </BrowserRouter>
