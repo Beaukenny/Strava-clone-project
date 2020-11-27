@@ -30,7 +30,8 @@ export const getElevationData = async (distanceData, elevation, setElevationData
       }).reduce((acc, ele) => {
         return acc + ele
       })
-      setTotalElevation(positiveElevation.toFixed(2))
+
+      setTotalElevation(`${positiveElevation.toFixed(2)} ft`)
       setElevationData(data)
     }
   })

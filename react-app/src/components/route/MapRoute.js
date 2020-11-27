@@ -88,90 +88,153 @@ const Map = () => {
 
   return (
     <>
-      <Toolbar className="toolBar">
-        <Grid container spacing={2} alignItems="center">
-          <Grid item>
-            <SearchIcon className={classes.block} color="inherit" />
+      <Paper>
+        <Toolbar className="toolBar">
+          <Grid container spacing={2} alignItems="center">
+            <Grid item>
+              <SearchIcon className={classes.block} color="inherit" />
+            </Grid>
+            <Grid item xs>
+              <Search mapLocation={mapLocation}></Search>
+            </Grid>
+            <Grid item>
+              <MyLocation mapLocation={mapLocation}></MyLocation>
+              <Tooltip title="Delete">
+                <IconButton
+                  onClick={clearData}>
+                  <DeleteIcon className={classes.block} color="inherit" />
+                </IconButton>
+              </Tooltip>
+            </Grid>
           </Grid>
-          <Grid item xs>
-            <Search mapLocation={mapLocation}></Search>
+        </Toolbar>
+        <Toolbar className="toolBar">
+          <Grid container spacing={2} alignItems="center" style={{ justifyContent: "space-around" }}>
+            <Typography component="h4" variant="h4" style={{ color: "gray" }}>Select Mode:</Typography>
+            <IconButton
+              onClick={() => { setTravelingMode("WALKING") }}>
+              <DirectionsWalkIcon></DirectionsWalkIcon>
+            </IconButton>
+            <IconButton
+              onClick={() => { setTravelingMode("BICYCLING") }}>
+              <DirectionsBikeIcon></DirectionsBikeIcon>
+            </IconButton>
           </Grid>
-          <Grid item>
-            <MyLocation mapLocation={mapLocation}></MyLocation>
-            <Tooltip title="Delete">
-              <IconButton
-                onClick={clearData}>
-                <DeleteIcon className={classes.block} color="inherit" />
-              </IconButton>
-            </Tooltip>
-          </Grid>
+        </Toolbar>
+
+        <Grid container>
+            <Grid item xs={3}>
+              <Typography variant="h6"
+                component="h6"
+                align="center"
+                style={{ color: "gray" }}
+              >Distance
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant="h6"
+                component="h6"
+                align="center"
+                style={{ color: "gray" }}
+              >Elevation
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant="h6"
+                component="h6"
+                align="center"
+                style={{ color: "gray" }}
+              >Est. Moving Time
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant="h6"
+                component="h6"
+                align="center"
+                style={{ color: "gray" }}
+              >Surface Type
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant="h6"
+                component="h6"
+                align="center"
+                style={{ fontWeight: "bold" }}
+              >{totalDistance}
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant="h6"
+                component="h6"
+                align="center"
+                style={{ fontWeight: "bold" }}
+              >{totalElevation}
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant="h6"
+                component="h6"
+                align="center"
+                style={{ fontWeight: "bold" }}
+              >{totalDuration}
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant="h6"
+                component="h6"
+                align="center"
+                style={{ fontWeight: "bold" }}
+              >Surface Type
+              </Typography>
+            </Grid>
         </Grid>
-      </Toolbar>
-      <Toolbar className="toolBar">
-        <Grid container spacing={2} alignItems="center" style={{justifyContent:"space-around"}}>
-          <Typography component="h4" variant="h4" color="inherit">Select Mode:</Typography>
-          <IconButton
-            onClick={() => { setTravelingMode("WALKING") }}>
-            <DirectionsWalkIcon></DirectionsWalkIcon>
-          </IconButton>
-          <IconButton
-            onClick={() => { setTravelingMode("BICYCLING") }}>
-            <DirectionsBikeIcon></DirectionsBikeIcon>
-          </IconButton>
-        </Grid>
-      </Toolbar>
-        <Paper className={classes.paper} >
 
-
-          <h1>total distance: {totalDistance}</h1>
-          <h1>total elevation gain: {totalElevation} ft </h1>
-          <h1>total duration : {totalDuration}</h1>
-          <button onClick={createThisRoute}>Create this Route</button>
-          <button onClick={() => console.log(markers)}> console log marker</button>
-          <button onClick={() => console.log(distanceData)}> console log distance data</button>
-          <button onClick={() => console.log(elevationData)}>console log Elevation Data</button>
-          <button onClick={clearData}>Clear Data</button>
+        <button onClick={createThisRoute}>Create this Route</button>
+        <button onClick={() => console.log(markers)}> console log marker</button>
+        <button onClick={() => console.log(distanceData)}> console log distance data</button>
+        <button onClick={() => console.log(elevationData)}>console log Elevation Data</button>
+        <button onClick={clearData}>Clear Data</button>
 
 
 
 
-          <GoogleMap
-            mapContainerStyle={{
-              border: '5px solid red'
+        <GoogleMap
+          mapContainerStyle={{
+            border: '5px solid red'
+          }}
+          defaultZoom={14}
+          center={defaultLocation}
+          onClick={onMapClick}
+        >
+          {markers.length == 1 ? <Marker
+            position={{ lat: markers[0].lat, lng: markers[0].lng }}
+            icon={{
+              url: "/purple-dot.png",
+              scaledSize: new window.google.maps.Size(34, 34),
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(17, 17)
             }}
-            defaultZoom={14}
-            center={defaultLocation}
-            onClick={onMapClick}
-          >
-            {markers.length == 1 ? <Marker
-              position={{ lat: markers[0].lat, lng: markers[0].lng }}
-              icon={{
-                url: "/purple-dot.png",
-                scaledSize: new window.google.maps.Size(34, 34),
-                origin: new window.google.maps.Point(0, 0),
-                anchor: new window.google.maps.Point(17, 17)
-              }}
-            ></Marker> : null}
+          ></Marker> : null}
 
-            {markers.length > 0 ?
-              <DirectionRender
-                markers={markers}
-                directionsService={directionsService}
-                travelingMode={travelingMode}
-                distanceData={distanceData}
-                setDistanceData={setDistanceData}
-                setTotalDistance={setTotalDistance}
-                getElevations={getElevations}
-                setTotalDuration={setTotalDuration}
-              ></DirectionRender>
-              : null}
-          </GoogleMap>
+          {markers.length > 0 ?
+            <DirectionRender
+              markers={markers}
+              directionsService={directionsService}
+              travelingMode={travelingMode}
+              distanceData={distanceData}
+              setDistanceData={setDistanceData}
+              setTotalDistance={setTotalDistance}
+              getElevations={getElevations}
+              setTotalDuration={setTotalDuration}
+            ></DirectionRender>
+            : null}
+        </GoogleMap>
 
 
-          <img
-            src={statisImageURL}
-          ></img>
-        </Paper>
+        <img
+          src={statisImageURL}
+        ></img>
+      </Paper>
     </>
   )
 }
