@@ -5,6 +5,43 @@ import { settingMarkers, getElevationData, staticMapImage } from "../routeUtil/u
 import DirectionRender from "./DirectionRender"
 import MyLocation from './Mylocation'
 import Search from "./Search"
+import SearchIcon from '@material-ui/icons/Search';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Toolbar from '@material-ui/core/Toolbar';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
+import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
+const styles = makeStyles((theme) => ({
+  paper: {
+    maxWidth: 936,
+    margin: 'auto',
+    overflow: 'hidden',
+  },
+  searchBar: {
+    borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
+  },
+  searchInput: {
+    fontSize: theme.typography.fontSize,
+  },
+  block: {
+    display: 'block',
+  },
+  addUser: {
+    marginRight: theme.spacing(1),
+  },
+  contentWrapper: {
+    margin: '40px 16px',
+  },
+}));
+
+
 const Map = () => {
   const directionsService = new google.maps.DirectionsService();
   const elevation = new google.maps.ElevationService();
@@ -17,89 +54,124 @@ const Map = () => {
   const [totalElevation, setTotalElevation] = useState('')
   const [statisImageURL, setStaticImageURL] = useState("")
   const [totalDuration, setTotalDuration] = useState('')
-  const mapLocation = useCallback(({lat, lng}) => {
-    setDefaultLocation({lat,lng})
-  },[])
+  const classes = styles()
+  const mapLocation = useCallback(({ lat, lng }) => {
+    setDefaultLocation({ lat, lng })
+  }, [])
 
   const onMapClick = (event) => settingMarkers(event, markers, setMarkers, directionsService)
-  
+
   const getElevations = () => {
-    getElevationData(distanceData,elevation, setElevationData, setTotalElevation)
+    getElevationData(distanceData, elevation, setElevationData, setTotalElevation)
   }
 
   const createThisRoute = () => {
-    staticMapImage(distanceData,setStaticImageURL)
+    staticMapImage(distanceData, setStaticImageURL)
   }
-  const clearData=()=>{
+  const clearData = () => {
     setMarkers([])
     setDistanceData('')
-setElevationData('')
-setTotalDistance('')
-setTotalElevation('')
-setStaticImageURL('')
-setTotalDuration('')
+    setElevationData('')
+    setTotalDistance('')
+    setTotalElevation('')
+    setStaticImageURL('')
+    setTotalDuration('')
   }
 
 
-useEffect(()=>{
-  if(markers.length > 1) {
-    getElevations()
-    
-  }
-},[totalDistance])
+  useEffect(() => {
+    if (markers.length > 1) {
+      getElevations()
+
+    }
+  }, [totalDistance])
 
   return (
-    <> 
-    <h1>total distance: {totalDistance}</h1>
-    <h1>total elevation gain: {totalElevation} ft </h1>
-  <h1>total duration : {totalDuration}</h1>
- <button onClick={createThisRoute}>Create this Route</button>
-    <button
-    onClick={()=>{setTravelingMode("BICYCLING")}}
-    >switch mode to Bicycling</button>
-    <button
-    onClick={()=>{setTravelingMode("WALKING")}}
-    > switch mode to Walking</button>
-    
-    <button onClick={()=>console.log(markers)}> console log marker</button>
-    <button onClick={()=>console.log(distanceData)}> console log distance data</button>
-    <button onClick={()=>console.log(elevationData)}>console log Elevation Data</button>
-    <button onClick={clearData}>Clear Data</button>
-    <Search mapLocation={mapLocation}></Search>
-     <MyLocation mapLocation={mapLocation}></MyLocation> 
-      <GoogleMap
-        defaultZoom={14}
-        center={defaultLocation}
-        onClick={onMapClick}
-      >
-     {markers.length == 1? <Marker
-      position={{lat:markers[0].lat, lng: markers[0].lng}}
-      icon={{
-        url: "/purple-dot.png",
-        scaledSize: new window.google.maps.Size(34, 34),
-        origin: new window.google.maps.Point(0,0),
-        anchor: new window.google.maps.Point(17,17)
-      }}
-      ></Marker>:null}
-  
-        {markers.length > 0 ? 
-        <DirectionRender
-        markers={markers}
-        directionsService={directionsService}
-        travelingMode={travelingMode}
-        distanceData={distanceData}
-        setDistanceData={setDistanceData}
-        setTotalDistance={setTotalDistance}
-        getElevations={getElevations}
-        setTotalDuration={setTotalDuration}
-        ></DirectionRender>
-        :null}
-      </GoogleMap>
+    <>
+      <Toolbar className="toolBar">
+        <Grid container spacing={2} alignItems="center">
+          <Grid item>
+            <SearchIcon className={classes.block} color="inherit" />
+          </Grid>
+          <Grid item xs>
+            <Search mapLocation={mapLocation}></Search>
+          </Grid>
+          <Grid item>
+            <MyLocation mapLocation={mapLocation}></MyLocation>
+            <Tooltip title="Delete">
+              <IconButton
+                onClick={clearData}>
+                <DeleteIcon className={classes.block} color="inherit" />
+              </IconButton>
+            </Tooltip>
+          </Grid>
+        </Grid>
+      </Toolbar>
+      <Toolbar className="toolBar">
+        <Grid container spacing={2} alignItems="center" style={{justifyContent:"space-around"}}>
+          <Typography component="h4" variant="h4" color="inherit">Select Mode:</Typography>
+          <IconButton
+            onClick={() => { setTravelingMode("WALKING") }}>
+            <DirectionsWalkIcon></DirectionsWalkIcon>
+          </IconButton>
+          <IconButton
+            onClick={() => { setTravelingMode("BICYCLING") }}>
+            <DirectionsBikeIcon></DirectionsBikeIcon>
+          </IconButton>
+        </Grid>
+      </Toolbar>
+        <Paper className={classes.paper} >
 
 
-      <img
-      src={statisImageURL}
-      ></img>
+          <h1>total distance: {totalDistance}</h1>
+          <h1>total elevation gain: {totalElevation} ft </h1>
+          <h1>total duration : {totalDuration}</h1>
+          <button onClick={createThisRoute}>Create this Route</button>
+          <button onClick={() => console.log(markers)}> console log marker</button>
+          <button onClick={() => console.log(distanceData)}> console log distance data</button>
+          <button onClick={() => console.log(elevationData)}>console log Elevation Data</button>
+          <button onClick={clearData}>Clear Data</button>
+
+
+
+
+          <GoogleMap
+            mapContainerStyle={{
+              border: '5px solid red'
+            }}
+            defaultZoom={14}
+            center={defaultLocation}
+            onClick={onMapClick}
+          >
+            {markers.length == 1 ? <Marker
+              position={{ lat: markers[0].lat, lng: markers[0].lng }}
+              icon={{
+                url: "/purple-dot.png",
+                scaledSize: new window.google.maps.Size(34, 34),
+                origin: new window.google.maps.Point(0, 0),
+                anchor: new window.google.maps.Point(17, 17)
+              }}
+            ></Marker> : null}
+
+            {markers.length > 0 ?
+              <DirectionRender
+                markers={markers}
+                directionsService={directionsService}
+                travelingMode={travelingMode}
+                distanceData={distanceData}
+                setDistanceData={setDistanceData}
+                setTotalDistance={setTotalDistance}
+                getElevations={getElevations}
+                setTotalDuration={setTotalDuration}
+              ></DirectionRender>
+              : null}
+          </GoogleMap>
+
+
+          <img
+            src={statisImageURL}
+          ></img>
+        </Paper>
     </>
   )
 }
@@ -109,8 +181,8 @@ const WrappedMap = withScriptjs(withGoogleMap(Map))
 const MapRoute = () => {
   return (
     <>
-      <h1>CREATE YOUR ROUTE</h1>
-      <div style={{ width: '800px', height: '500px' }}>
+
+      <div style={{ width: '700px', height: '350px', margin: "auto" }}>
         <WrappedMap
           googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
           loadingElement={<div style={{ height: '100%' }} />}
