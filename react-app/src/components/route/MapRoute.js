@@ -33,7 +33,7 @@ const Map = () => {
         center={defaultLocation}
         onClick={onMapClick}
       >
-        {renderMarkAndLine ? 
+        {renderMarkAndLine ?
         markers.map((marker, i) => <Marker
           key={i}
           position={{ lat: marker.lat, lng: marker.lng }}
