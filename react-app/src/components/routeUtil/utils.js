@@ -6,9 +6,17 @@ export const settingMarkers = async (event, markers, setMarkers) => { //define a
   }])
 }
 
+export const calculateChartData = (elevationData, totalDistance) => {
+  let data = elevationData.map((each,i) => {
+    let distance=(Number(totalDistance.split(" mi")[0])/elevationData.length).toFixed(2)
+    return {x:distance * i, y:Number(each.elevation.toFixed(2))}
+  })
+  return data
+}
 
 
-export const getElevationData = async (distanceData, elevation, setElevationData,setTotalElevation) => {
+
+export const getElevationData = async (distanceData, elevation, setElevationData,setTotalElevation, totalDistance, setChartData) => {
   const overview_path = distanceData.routes[0].overview_path
   const eachOverViewArray = overview_path.map(each=>{return {lat:each.lat(), lng:each.lng()}})
   try {
@@ -33,6 +41,7 @@ export const getElevationData = async (distanceData, elevation, setElevationData
 
       setTotalElevation(`${positiveElevation.toFixed(2)} ft`)
       setElevationData(data)
+      setChartData(calculateChartData(data,totalDistance))
     }
   })
   }catch(e){
@@ -64,12 +73,4 @@ export const staticMapImage = async (distanceData,setStaticImageURL) => {
 
 
 
-
-export const calculateChartData = (elevationData, totalDistance) => {
-  let data = elevationData.map((each,i) => {
-    let distance=(Number(totalDistance.split(" mi")[0])/elevationData.length).toFixed(2)
-    return {x:distance * i, y:Number(each.elevation.toFixed(2))}
-  })
-  return data
-}
 

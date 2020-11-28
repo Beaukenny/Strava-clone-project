@@ -3,46 +3,21 @@ import * as d3 from "d3"
 import {calculateChartData} from "../routeUtil/utils"
 
 
-const Chart = ({elevationData, totalDistance})=> {
+const Chart = ({chartData})=> {
 const margin = { top: 10, right: 30, bottom: 30, left: 50 }
 const width = 700 - margin.left - margin.right
 const height = 155 - margin.top - margin.bottom
 const [data, setData] = useState([
 {x:0, y:0},{x:5, y:0},{x:10, y:0}])
 
-// console.log("data from charts", elevationData)
-// let newData =calculateChartData(elevationData, totalDistance)
-// drawChart(data)
-// setData(newData)
-// useEffect(() => {
-//   destroyChart()
-//   drawChart(data)
-// let newData =calculateChartData(elevationData, totalDistance)
-//   setData(newData)
-  
-// }, [elevationData]);
+useEffect(()=> {
 
-//   const savingData = async () => {
-//    await drawChart(data)
-//   }
-let newData
-if (elevationData) {
-  newData =calculateChartData(elevationData, totalDistance)
-}
-useEffect(()=>{  
-  console.log(elevationData)
-  if (data.length !== elevationData.length){
-    destroyChart()
-  }
-  
-  if (elevationData) {
-     let newData =calculateChartData(elevationData, totalDistance)
-  setData(newData)
-  drawChart(data)
-  }
- 
+  if (data.length !== chartData.length){
+        destroyChart()
+      }
+      drawChart(chartData)
+}, [chartData])
 
-},[elevationData])
   const destroyChart = () => {
     d3.selectAll("#elevationChart > *").remove()
   }
@@ -97,7 +72,6 @@ useEffect(()=>{
   svg
   .append("path")
   .attr("d", area(data))
-  .attr("class", "chartLine")
   .style("stroke", "#787979")
   .style("stroke-opacity", 0.2)
   .style("stroke-width", 1)

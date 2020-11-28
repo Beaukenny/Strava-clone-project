@@ -58,7 +58,8 @@ const Map = () => {
   const [staticImageURL, setStaticImageURL] = useState("")
   const [requestData, setRequestData] = useState("")
 //////chart/////////////////////////////////////////////
-
+  const [chartData , setChartData] = useState([
+    {x:0, y:0},{x:5, y:0},{x:10, y:0}])
   //////////////////////////////////////////
   const classes = styles()
   const mapLocation = useCallback(({ lat, lng }) => {
@@ -68,7 +69,7 @@ const Map = () => {
   const onMapClick = (event) => settingMarkers(event, markers, setMarkers, directionsService)
 
   const getElevations = async () => {
-   await getElevationData(distanceData, elevation, setElevationData, setTotalElevation)
+   await getElevationData(distanceData, elevation, setElevationData, setTotalElevation,totalDistance, setChartData)
   }
 
   // const createThisRoute = () => {
@@ -194,8 +195,7 @@ const Map = () => {
               
     </Grid>
     <Chart 
-    elevationData={elevationData}
-    totalDistance={totalDistance}
+    chartData={chartData}
     ></Chart>
     <Form
     totalDistance={totalDistance}
