@@ -1,15 +1,17 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 
 
 
 const MyLocation = ({mapLocation}) => {
-    return <button
+    return <Button
+    variant="contained" color="primary"
     onClick={()=>{
       navigator.geolocation.getCurrentPosition((position)=>{
         mapLocation({lat: position.coords.latitude, lng: position.coords.longitude})
       }, ()=>null)
     }}
-    >Go To My Location</button>
+    >My Location</Button>
   }
 
   export default MyLocation

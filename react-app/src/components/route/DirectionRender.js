@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
-
+import { staticMapImage } from "../routeUtil/utils"
 import { DirectionsRenderer } from "react-google-maps"
 
 
-const DirectionRender = ({ markers, directionsService, travelingMode, setDistanceData, distanceData, setTotalDistance,setTotalDuration }) => {
-    const getData = () => {
+const DirectionRender = ({ markers, directionsService, travelingMode, setDistanceData, distanceData, setTotalDistance,setTotalDuration,setStaticImageURL,setRequestData }) => {
+    const getData =  () => {
         if (markers.length === 1) {
             return
         }
         let request
+        let waypts = []
         if (markers.length > 2) {
-            let waypts = []
+            
             let newMarkers = markers.slice(1, markers.length - 1)
             newMarkers.map(each => {
                 waypts.push({ location: each, stopover: false })
@@ -31,12 +32,14 @@ const DirectionRender = ({ markers, directionsService, travelingMode, setDistanc
                 travelMode: travelingMode
             }
         }
-        directionsService.route(request, (result, status) => {
+        directionsService.route(request, async(result, status) => {
             if (status === "OK") {
 
-                setDistanceData(result)
-                setTotalDistance(result.routes[0].legs[0].distance.text)
-                setTotalDuration(result.routes[0].legs[0].duration.text)
+               await setRequestData(request)
+               await setDistanceData(result)
+               await setTotalDistance(result.routes[0].legs[0].distance.text)
+               await setTotalDuration(result.routes[0].legs[0].duration.text)
+               await staticMapImage(result, setStaticImageURL)
             }
         })
     }
