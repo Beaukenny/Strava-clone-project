@@ -19,6 +19,7 @@ import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
+import Chart from "./Chart"
 const styles = makeStyles((theme) => ({
   paper: {
     maxWidth: 936,
@@ -59,6 +60,12 @@ const Map = () => {
   const [elevationData, setElevationData] = useState('')
   const [staticImageURL, setStaticImageURL] = useState("")
   const [requestData, setRequestData] = useState("")
+//////chart/////////////////////////////////////////////
+const data = [
+  { x: 5, y: 15 },
+  { x: 15, y: 20 },
+  { x: 35, y: 5 }
+]
 
   //////////////////////////////////////////
   const classes = styles()
@@ -203,6 +210,9 @@ const Map = () => {
     elevationData={elevationData}
     staticImageURL={staticImageURL}
     ></Form>
+
+<h1>Chart here</h1>
+    <Chart data={data}></Chart>
       <h1> still developing below</h1>
         {/* <button onClick={createThisRoute}>Create this Route</button> */}
         <button onClick={() => console.log(markers)}> console log marker</button>
