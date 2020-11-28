@@ -5,6 +5,7 @@ import { settingMarkers, getElevationData, staticMapImage } from "../routeUtil/u
 import DirectionRender from "./DirectionRender"
 import MyLocation from './Mylocation'
 import Search from "./Search"
+import Form from "./Form"
 import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -47,13 +48,19 @@ const Map = () => {
   const elevation = new google.maps.ElevationService();
   const [defaultLocation, setDefaultLocation] = useState({ lat: 38.9072, lng: -77.0369 })
   const [markers, setMarkers] = useState([])
+  
+  
+  //for form////////////////////////////////
+  const [totalDistance, setTotalDistance] = useState('')
+  const [totalElevation, setTotalElevation] = useState('')
+  const [totalDuration, setTotalDuration] = useState('')  
   const [travelingMode, setTravelingMode] = useState("BICYCLING")
   const [distanceData, setDistanceData] = useState('')
   const [elevationData, setElevationData] = useState('')
-  const [totalDistance, setTotalDistance] = useState('')
-  const [totalElevation, setTotalElevation] = useState('')
-  const [statisImageURL, setStaticImageURL] = useState("")
-  const [totalDuration, setTotalDuration] = useState('')
+  const [staticImageURL, setStaticImageURL] = useState("")
+
+
+  //////////////////////////////////////////
   const classes = styles()
   const mapLocation = useCallback(({ lat, lng }) => {
     setDefaultLocation({ lat, lng })
@@ -65,16 +72,16 @@ const Map = () => {
     getElevationData(distanceData, elevation, setElevationData, setTotalElevation)
   }
 
-  const createThisRoute = () => {
-    staticMapImage(distanceData, setStaticImageURL)
-  }
+  // const createThisRoute = () => {
+  //   staticMapImage(distanceData, setStaticImageURL)
+  // }
   const clearData = () => {
     setMarkers([])
     setDistanceData('')
     setElevationData('')
     setTotalDistance('')
     setTotalElevation('')
-    setStaticImageURL('')
+    // setStaticImageURL('')
     setTotalDuration('')
   }
 
@@ -88,8 +95,7 @@ const Map = () => {
 
   return (
     <>
-      <Paper>
-        <Toolbar className="toolBar">
+        <Toolbar className="toolBar" >
           <Grid container spacing={2} alignItems="center">
             <Grid item>
               <SearchIcon className={classes.block} color="inherit" />
@@ -109,19 +115,21 @@ const Map = () => {
           </Grid>
         </Toolbar>
         <Toolbar className="toolBar">
-          <Grid container spacing={2} alignItems="center" style={{ justifyContent: "space-around" }}>
-            <Typography component="h4" variant="h4" style={{ color: "gray" }}>Select Mode:</Typography>
+          <Grid container spacing={2} alignItems="center" style={{ justifyContent: "left"}}>
+            <Typography component="h4" variant="h4" style={{ color: "gray", marginRight:"10%"  }}>Select Mode:</Typography>
             <IconButton
+            style={{ marginRight:"10%"  }}
+
               onClick={() => { setTravelingMode("WALKING") }}>
-              <DirectionsWalkIcon></DirectionsWalkIcon>
+              <DirectionsWalkIcon fontSize="large"></DirectionsWalkIcon>
             </IconButton>
             <IconButton
               onClick={() => { setTravelingMode("BICYCLING") }}>
-              <DirectionsBikeIcon></DirectionsBikeIcon>
+              <DirectionsBikeIcon fontSize="large"></DirectionsBikeIcon>
             </IconButton>
           </Grid>
         </Toolbar>
-
+    <Grid container className="gridContainer">
         <Grid container>
             <Grid item xs={3}>
               <Typography variant="h6"
@@ -184,16 +192,26 @@ const Map = () => {
                 component="h6"
                 align="center"
                 style={{ fontWeight: "bold" }}
-              >Surface Type
+              >???
               </Typography>
             </Grid>
         </Grid>
-
-        <button onClick={createThisRoute}>Create this Route</button>
+              
+    </Grid>
+    <Form
+    totalDistance={totalDistance}
+    totalElevation={totalElevation}
+    totalDuration={totalDuration}
+    travelingMode={travelingMode}
+    distanceData={distanceData}
+    elevationData={elevationData}
+    staticImageURL={staticImageURL}
+    ></Form>
+      <h1> still developing below</h1>
+        {/* <button onClick={createThisRoute}>Create this Route</button> */}
         <button onClick={() => console.log(markers)}> console log marker</button>
         <button onClick={() => console.log(distanceData)}> console log distance data</button>
         <button onClick={() => console.log(elevationData)}>console log Elevation Data</button>
-        <button onClick={clearData}>Clear Data</button>
 
 
 
@@ -226,15 +244,12 @@ const Map = () => {
               setTotalDistance={setTotalDistance}
               getElevations={getElevations}
               setTotalDuration={setTotalDuration}
+              setStaticImageURL={setStaticImageURL}
+              
             ></DirectionRender>
             : null}
         </GoogleMap>
 
-
-        <img
-          src={statisImageURL}
-        ></img>
-      </Paper>
     </>
   )
 }

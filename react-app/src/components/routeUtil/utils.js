@@ -43,8 +43,7 @@ export const getElevationData = async (distanceData, elevation, setElevationData
 }
 
 
-export const staticMapImage = (distanceData,setStaticImageURL) => {
-
+export const staticMapImage = async (distanceData,setStaticImageURL) => {
   const keyOption = `key=${process.env.REACT_APP_GOOGLE_KEY}`;
   const prefix = `http://maps.googleapis.com/maps/api/staticmap?`
   const size = `size=400x400` 
@@ -56,7 +55,7 @@ export const staticMapImage = (distanceData,setStaticImageURL) => {
     const path = "&path=" + overViewPoline.join("|")
     const url = prefix + size + '&markers=color:green|' + firstPoly+ path + '&sensor=false'+ '&markers=color:red|'+lastPoly+'&' + keyOption
    
-    setStaticImageURL(url)
+    await setStaticImageURL(url)
   
   }
 

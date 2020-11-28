@@ -81,3 +81,15 @@
   border-bottom: 2px solid black;
 
 }
+
+
+.gridContainer{
+  position:relative;
+  bottom:7em;
+}
+
+
+.formContainer{
+  position:relative;
+  bottom:7em;
+}

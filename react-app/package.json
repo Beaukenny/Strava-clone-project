@@ -13,6 +13,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-google-maps": "^9.4.5",
+    "react-material-ui-form-validator": "^2.1.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "use-places-autocomplete": "^1.3.5"
