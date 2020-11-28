@@ -37,7 +37,7 @@
   transform: translateX(-50%);
   width: 60%;
   max-width: 100%;
-  z-index: 10;
+  z-index: 99;
 }
 
 .search input {
@@ -46,13 +46,13 @@
   width: 100%;
   border-radius: 15px;
   height: 1.5em;
-  z-index: 10;
+  z-index: 99;
 
 }
 .search input:focus{
   background-color: rgb(226, 218, 255);
   outline: none;
-  z-index: 10;
+  z-index: 99;
 
 }
 
@@ -62,7 +62,7 @@
   right: 1rem;
   background: none;
   border: none;
-  z-index: 10;
+  z-index: 50;
 }
 .locate img {
   width: 30px;
@@ -71,7 +71,7 @@
 .toolBar{
   position:absolute;
   bottom:480px;
-  z-index: 50;
+  z-index: 30;
 }
 .searchOptions{
   background: white;
@@ -79,7 +79,7 @@
   border-radius: 5px;
   border-right: 2px solid black;
   border-bottom: 2px solid black;
-
+  z-index: 90
 }
 
 
@@ -91,5 +91,5 @@
 
 .formContainer{
   position:relative;
-  bottom:7em;
+  bottom:6em;
 }

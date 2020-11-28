@@ -167,7 +167,6 @@ const Map = () => {
               <Typography variant="h6"
                 component="h6"
                 align="center"
-                style={{ fontWeight: "bold" }}
               >{totalDistance}
               </Typography>
             </Grid>
@@ -175,7 +174,6 @@ const Map = () => {
               <Typography variant="h6"
                 component="h6"
                 align="center"
-                style={{ fontWeight: "bold" }}
               >{totalElevation}
               </Typography>
             </Grid>
@@ -183,7 +181,6 @@ const Map = () => {
               <Typography variant="h6"
                 component="h6"
                 align="center"
-                style={{ fontWeight: "bold" }}
               >{totalDuration}
               </Typography>
             </Grid>
@@ -191,7 +188,6 @@ const Map = () => {
               <Typography variant="h6"
                 component="h6"
                 align="center"
-                style={{ fontWeight: "bold" }}
               >???
               </Typography>
             </Grid>
