@@ -1,75 +1,252 @@
 /*global google*/
-import React, { useState } from 'react';
-import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow, Polyline } from "react-google-maps"
-import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption, } from "@reach/combobox";
-import { settingMarkers } from "../routeUtil/utils"
+import React, { useState, useCallback, useEffect } from 'react';
+import { GoogleMap, withScriptjs, withGoogleMap, Marker } from "react-google-maps"
+import { settingMarkers, getElevationData, staticMapImage } from "../routeUtil/utils"
 import DirectionRender from "./DirectionRender"
+import MyLocation from './Mylocation'
+import Search from "./Search"
+import Form from "./Form"
+import SearchIcon from '@material-ui/icons/Search';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Toolbar from '@material-ui/core/Toolbar';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
+import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
+const styles = makeStyles((theme) => ({
+  paper: {
+    maxWidth: 936,
+    margin: 'auto',
+    overflow: 'hidden',
+  },
+  searchBar: {
+    borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
+  },
+  searchInput: {
+    fontSize: theme.typography.fontSize,
+  },
+  block: {
+    display: 'block',
+  },
+  addUser: {
+    marginRight: theme.spacing(1),
+  },
+  contentWrapper: {
+    margin: '40px 16px',
+  },
+}));
+
 
 const Map = () => {
   const directionsService = new google.maps.DirectionsService();
+  const elevation = new google.maps.ElevationService();
   const [defaultLocation, setDefaultLocation] = useState({ lat: 38.9072, lng: -77.0369 })
   const [markers, setMarkers] = useState([])
-  const [selected, setSelected] = useState(null)
-  const [totalData, setTotalData] = useState("")
-  const [renderRoute, setRenderRoute] = useState(false)
-  const [renderMarkAndLine, setRenderMarkAndLine] = useState(true)
-  const [polyLines, setPolyLines] = useState([])
 
-  const onMapClick = (event) => settingMarkers(event, markers, setMarkers, directionsService, setTotalData, totalData)
 
-  const createRoute = () => {
-    setRenderMarkAndLine(!renderMarkAndLine)
-    setRenderRoute(!renderRoute)
+  //for form////////////////////////////////
+  const [totalDistance, setTotalDistance] = useState('')
+  const [totalElevation, setTotalElevation] = useState('')
+  const [totalDuration, setTotalDuration] = useState('')
+  const [travelingMode, setTravelingMode] = useState("BICYCLING")
+  const [distanceData, setDistanceData] = useState('')
+  const [elevationData, setElevationData] = useState('')
+  const [staticImageURL, setStaticImageURL] = useState("")
+  const [requestData, setRequestData] = useState("")
+
+  //////////////////////////////////////////
+  const classes = styles()
+  const mapLocation = useCallback(({ lat, lng }) => {
+    setDefaultLocation({ lat, lng })
+  }, [])
+
+  const onMapClick = (event) => settingMarkers(event, markers, setMarkers, directionsService)
+
+  const getElevations = () => {
+    getElevationData(distanceData, elevation, setElevationData, setTotalElevation)
+  }
+
+  // const createThisRoute = () => {
+  //   staticMapImage(distanceData, setStaticImageURL)
+  // }
+  const clearData = () => {
+    setMarkers([])
+    setDistanceData('')
+    setElevationData('')
+    setTotalDistance('')
+    setTotalElevation('')
+    // setStaticImageURL('')
+    setTotalDuration('')
   }
 
 
+  useEffect(() => {
+    if (markers.length > 1) {
+      getElevations()
+
+    }
+  }, [totalDistance])
+
   return (
     <>
-      <button onClick={() => console.log(totalData)}>totalData</button>
-      <button onClick={() => console.log(markers)}>markers</button>
-      <button onClick={createRoute}>Create Route!</button>
-      <GoogleMap
-        defaultZoom={14}
-        center={defaultLocation}
-        onClick={onMapClick}
-      >
-        {renderMarkAndLine ?
-        markers.map((marker, i) => <Marker
-          key={i}
-          position={{ lat: marker.lat, lng: marker.lng }}
-          icon={{
-            url: marker.markerIcon,
-            scaledSize: new window.google.maps.Size(34, 34),
-            origin: new window.google.maps.Point(0,0),
-            anchor: new window.google.maps.Point(17,17)
+        <Toolbar className="toolBar" >
+          <Grid container spacing={2} alignItems="center">
+            <Grid item>
+              <SearchIcon className={classes.block} color="inherit" />
+            </Grid>
+            <Grid item xs>
+              <Search mapLocation={mapLocation}></Search>
+            </Grid>
+            <Grid item>
+              <MyLocation mapLocation={mapLocation}></MyLocation>
+              <Tooltip title="Delete">
+                <IconButton
+                  onClick={clearData}>
+                  <DeleteIcon className={classes.block} color="inherit" />
+                </IconButton>
+              </Tooltip>
+            </Grid>
+          </Grid>
+        </Toolbar>
+        <Toolbar className="toolBar">
+          <Grid container spacing={2} alignItems="center" style={{ justifyContent: "left"}}>
+            <Typography component="h4" variant="h4" style={{ color: "gray", marginRight:"10%"  }}>Select Mode:</Typography>
+            <IconButton
+            style={{ marginRight:"10%"  }}
+
+              onClick={() => { setTravelingMode("WALKING") }}>
+              <DirectionsWalkIcon fontSize="large"></DirectionsWalkIcon>
+            </IconButton>
+            <IconButton
+              onClick={() => { setTravelingMode("BICYCLING") }}>
+              <DirectionsBikeIcon fontSize="large"></DirectionsBikeIcon>
+            </IconButton>
+          </Grid>
+        </Toolbar>
+    <Grid container className="gridContainer">
+        <Grid container>
+            <Grid item xs={3}>
+              <Typography variant="h6"
+                component="h6"
+                align="center"
+                style={{ color: "gray" }}
+              >Distance
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant="h6"
+                component="h6"
+                align="center"
+                style={{ color: "gray" }}
+              >Elevation
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant="h6"
+                component="h6"
+                align="center"
+                style={{ color: "gray" }}
+              >Est. Moving Time
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant="h6"
+                component="h6"
+                align="center"
+                style={{ color: "gray" }}
+              >Surface Type
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant="h6"
+                component="h6"
+                align="center"
+              >{totalDistance}
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant="h6"
+                component="h6"
+                align="center"
+              >{totalElevation}
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant="h6"
+                component="h6"
+                align="center"
+              >{totalDuration}
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant="h6"
+                component="h6"
+                align="center"
+              >???
+              </Typography>
+            </Grid>
+        </Grid>
+
+    </Grid>
+    <Form
+    totalDistance={totalDistance}
+    totalElevation={totalElevation}
+    totalDuration={totalDuration}
+    travelingMode={travelingMode}
+    requestData={requestData}
+    elevationData={elevationData}
+    staticImageURL={staticImageURL}
+    ></Form>
+      <h1> still developing below</h1>
+        {/* <button onClick={createThisRoute}>Create this Route</button> */}
+        <button onClick={() => console.log(markers)}> console log marker</button>
+        <button onClick={() => console.log(distanceData)}> console log distance data</button>
+        <button onClick={() => console.log(elevationData)}>console log Elevation Data</button>
+
+
+
+
+        <GoogleMap
+          mapContainerStyle={{
+            border: '5px solid red'
           }}
-          onClick={(e) => {
-            setSelected(marker);
-          }}
-        />
-        )
-        :null}
-        {selected ? (<InfoWindow
-          position={{ lat: selected.lat, lng: selected.lng }}
-          onCloseClick={() => setSelected(null)}
+          defaultZoom={14}
+          center={defaultLocation}
+          onClick={onMapClick}
         >
-          <div>
-            <h2>{selected.distance} miles</h2>
-          </div>
-        </InfoWindow>) : null}
-        {renderMarkAndLine ?
-          <Polyline
-            path={markers}
-            key={'0'}
-            geodesic={true}
-            options={{ strokeColor: "purple", strokeOpacity: 0.75, strokeWeight: 2, }}
-          >
-          </Polyline>
-          : null}
-        {renderRoute ?
-          <DirectionRender markers={markers} directionsService={directionsService} />
-          : null}
-      </GoogleMap>
+          {markers.length == 1 ? <Marker
+            position={{ lat: markers[0].lat, lng: markers[0].lng }}
+            icon={{
+              url: "/purple-dot.png",
+              scaledSize: new window.google.maps.Size(34, 34),
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(17, 17)
+            }}
+          ></Marker> : null}
+
+          {markers.length > 0 ?
+            <DirectionRender
+              markers={markers}
+              directionsService={directionsService}
+              travelingMode={travelingMode}
+              distanceData={distanceData}
+              setDistanceData={setDistanceData}
+              setTotalDistance={setTotalDistance}
+              getElevations={getElevations}
+              setTotalDuration={setTotalDuration}
+              setStaticImageURL={setStaticImageURL}
+              setRequestData={setRequestData}
+
+            ></DirectionRender>
+            : null}
+        </GoogleMap>
+
     </>
   )
 }
@@ -79,8 +256,8 @@ const WrappedMap = withScriptjs(withGoogleMap(Map))
 const MapRoute = () => {
   return (
     <>
-      <h1>CREATE YOUR ROUTE</h1>
-      <div style={{ width: '800px', height: '500px' }}>
+
+      <div style={{ width: '700px', height: '350px', margin: "auto" }}>
         <WrappedMap
           googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
           loadingElement={<div style={{ height: '100%' }} />}

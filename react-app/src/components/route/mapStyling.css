@@ -1,11 +1,12 @@
-.search {
+
+/* .search {
     position: absolute;
     top: 5rem;
     left: 50%;
     width: 100%;
     max-width: 400px;
     z-index: 2;
-  }
+  } */
 
   /* .title {
     position: absolute;
@@ -14,3 +15,81 @@
     color: whitesmoke;
     z-index: 2;
   } */
+/* .searchInput{
+  width: 25em;
+  height: 3em;
+  border-radius: 10px;
+}
+.searchInput:focus{
+  background-color: rgb(111, 95, 163);
+  color: black;
+  border-color: 1px solid rgb(111, 95, 163) !important;
+   border: 1px solid rgb(111, 95, 163);
+}
+
+.searchInput:hover{
+  border: 1px solid rgb(111, 95, 163);
+} */
+.search {
+  position: absolute;
+  top: 1rem;
+  left: 40%;
+  transform: translateX(-50%);
+  width: 60%;
+  max-width: 100%;
+  z-index: 99;
+}
+
+.search input {
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  width: 100%;
+  border-radius: 15px;
+  height: 1.5em;
+  z-index: 99;
+
+}
+.search input:focus{
+  background-color: rgb(226, 218, 255);
+  outline: none;
+  z-index: 99;
+
+}
+
+.locate {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  z-index: 50;
+}
+.locate img {
+  width: 30px;
+  cursor: pointer;
+}
+.toolBar{
+  position:absolute;
+  bottom:480px;
+  z-index: 30;
+}
+.searchOptions{
+  background: white;
+  border-left: 2px solid black;
+  border-radius: 5px;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  z-index: 90
+}
+
+
+.gridContainer{
+  position:relative;
+  bottom:7em;
+}
+
+
+.formContainer{
+  position:relative;
+  bottom:6em;
+}

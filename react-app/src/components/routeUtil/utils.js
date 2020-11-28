@@ -1,41 +1,71 @@
-import { greenMarker, whiteCircle, redMarker } from "./markers"
 
-export const settingMarkers = async (event, markers, setMarkers, directionsService, setTotalData, totalData) => { //define a funciton that doesnt change property even react rerender. change on [].
-  let distance
-  if (markers.length === 0) {
-    distance = 0
-  } else {
-    let request = {
-      origin: markers[0],
-      destination: {
-        lat: event.latLng.lat(),
-        lng: event.latLng.lng()
-      },
-      optimizeWaypoints: true,
-      travelMode: "BICYCLING"
-    }
-
-
-    await directionsService.route(request, (result, status) => {
-      if (status === "OK") {
-        let distance = result.routes[0].legs[0].distance.text
-
-        let accumulatedDistance = Number(distance.split(" mi").join("")) + markers[markers.length - 1].distance
-        setTotalData((current) =>[...current,result])
-        setMarkers([...markers, {
-          lat: event.latLng.lat(),
-          lng: event.latLng.lng(),
-          distance: accumulatedDistance,
-          markerIcon: "/icon57.png",
-        }])
-      }
-    })
-  }
-  setMarkers([...markers, {
+export const settingMarkers = async (event, markers, setMarkers) => { //define a funciton that doesnt change property even react rerender. change on [].
+ await setMarkers([...markers, {
     lat: event.latLng.lat(),
     lng: event.latLng.lng(),
-    distance,
-    markerIcon: "/purple-dot.png",
   }])
+}
+
+
+
+export const getElevationData = async (distanceData, elevation, setElevationData,setTotalElevation) => {
+  const overview_path = distanceData.routes[0].overview_path
+  const eachOverViewArray = overview_path.map(each=>{return {lat:each.lat(), lng:each.lng()}})
+  try {
+  await elevation.getElevationForLocations({locations: eachOverViewArray}, (results, status)=> {
+    if (status === "OK") {
+      const data = results.map(each => {
+        return {elevation:each.elevation}
+      })
+
+      let array = []
+      for (let i = 0; i < data.length - 1; i ++) {
+
+          array.push(Number(((data[i].elevation *3.28) - (data[i+1].elevation*3.28))))
+      }
+      let positiveElevation = array.filter(each => {
+        if (each > 0) {
+          return each
+        }
+      }).reduce((acc, ele) => {
+        return acc + ele
+      })
+
+      setTotalElevation(`${positiveElevation.toFixed(2)} ft`)
+      setElevationData(data)
+    }
+  })
+  }catch(e){
+    console.log(e)
+  }
+
 
 }
+
+
+export const staticMapImage = async (distanceData,setStaticImageURL) => {
+  const keyOption = `key=${process.env.REACT_APP_GOOGLE_KEY}`;
+  const prefix = `http://maps.googleapis.com/maps/api/staticmap?`
+  const size = `size=400x400` 
+  const overViewPoline = distanceData.routes[0].overview_path.map(each=> {
+      return `${each.lat()},${each.lng()}`
+    })
+    const firstPoly = overViewPoline[0]
+    const lastPoly = overViewPoline[overViewPoline.length -1]
+    const path = "&path=" + overViewPoline.join("|")
+    const url = prefix + size + '&markers=color:green|' + firstPoly+ path + '&sensor=false'+ '&markers=color:red|'+lastPoly+'&' + keyOption
+   
+    await setStaticImageURL(url)
+  
+  }
+
+
+
+
+
+
+
+export const creatingRoute = () => {
+
+}
+
