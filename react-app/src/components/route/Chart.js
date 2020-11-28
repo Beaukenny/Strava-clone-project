@@ -1,25 +1,41 @@
-import React,{useEffect} from "react"
+import React,{useEffect, useState} from "react"
 import * as d3 from "d3"
+import {calculateChartData} from "../routeUtil/utils"
 
 
-const Chart = ()=> {
-const margin = { top: 0, right: 0, bottom: 15, left: 50 }
+const Chart = ({elevationData, totalDistance})=> {
+const margin = { top: 10, right: 30, bottom: 30, left: 50 }
 const width = 700 - margin.left - margin.right
 const height = 155 - margin.top - margin.bottom
-const data = [
-  { x: 5, y: 15 },
-  { x: 15, y: 20 },
-  { x: 35, y: 5 }
-]
-useEffect(() => {
-  drawChart()
+const [data, setData] = useState([ 
+  { x: 0, y: 0 },
+  { x: 15, y: 0 },
+  { x: 30, y: 0 }
+])
 
-}, []);
- console.log("data here", data)
- const drawChart = () => {
+useEffect(() => {
+  drawChart(data)
+  if (elevationData){
+  let newData =calculateChartData(elevationData, totalDistance)
+  setData(newData)
+  console.log(data)
+  }
+}, [elevationData]);
+
+
+  const destroyChart = () => {
+    d3.selectAll("#elevationChart > *").remove()
+  }
+  if (data.length !== elevationData.length){
+    destroyChart()
+  }
+
+ const drawChart = (data) => {
+  const xAxisSpace = 10
+  const yAxisSpace = 6
   const xScale = d3
     .scaleLinear()
-    .domain(d3.extent(data, d => d.x))
+    .domain(d3.extent(data, each => each.x))
     .range([0, width])
   const yScale = d3
     .scaleLinear()
@@ -30,26 +46,56 @@ useEffect(() => {
     .append("svg")
     .attr("width", 700)
     .attr("height", 155)
-    .attr("viewBox", "0 0 " + width + " " + 160)
+    .attr("viewBox", "0 -10 " + width + " " + 160)
     .attr("preserveAspectRatio", "xMinYMid")
     .append("g")
     .attr("transform", `translate(${margin.left}, 2.5)`)
   svg
     .append("g")
     .attr("transform", `translate(0, ${height})`)
-    .call(d3.axisBottom(xScale))
-  svg.append("g").call(d3.axisLeft(yScale))
+    .call(
+      d3
+        .axisBottom(xScale)
+        .ticks(xAxisSpace)
+        .tickFormat(d => d3.format(".1f")((d)) + " mi")
+        .tickSize(0)
+        .tickPadding(9)
+    )
+  svg.append("g").call(
+    d3
+      .axisLeft(yScale)
+      .ticks(yAxisSpace)
+      .tickFormat(d => d3.format(",.0f")((d)) + " ft")
+      .tickSize(0)
+      .tickPadding(8)
+  )
+  const area = d3
+  .area()
+  .x(d => xScale(d.x))
+  .y0(yScale(yScale.domain()[0]))
+  .y1(d => yScale(d.y))
+  .curve(d3.curveCatmullRom.alpha(0.005))
+  svg
+  .append("path")
+  .attr("d", area(data))
+  .attr("class", "chartLine")
+  .style("stroke", "#787979")
+  .style("stroke-opacity", 0.2)
+  .style("stroke-width", 1)
+  .style("fill", "#787979")
+  .style("fill-opacity", 0.2)
+
 }
   
 
     return (
       <>
-      <h1>Chart</h1>
-      <div style={{
+
+      <div className="elevationChart" style={{
         display: "flex",
         justifyContent: "center",
-        boxShadow: "rgba(0, 0, 0, 0.1) 0px 0px 0.625rem 0px"
-      }}>
+        boxShadow: "rgba(0, 0, 0, 0.1) 0px 0px 0.625rem 0px",
+      }}> 
     <div id="elevationChart"/>
       </div>
       </>

@@ -10,12 +10,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
@@ -61,11 +58,7 @@ const Map = () => {
   const [staticImageURL, setStaticImageURL] = useState("")
   const [requestData, setRequestData] = useState("")
 //////chart/////////////////////////////////////////////
-const data = [
-  { x: 5, y: 15 },
-  { x: 15, y: 20 },
-  { x: 35, y: 5 }
-]
+
 
   //////////////////////////////////////////
   const classes = styles()
@@ -201,6 +194,10 @@ const data = [
         </Grid>
               
     </Grid>
+    <Chart 
+    elevationData={elevationData}
+    totalDistance={totalDistance}
+    ></Chart>
     <Form
     totalDistance={totalDistance}
     totalElevation={totalElevation}
@@ -211,8 +208,7 @@ const data = [
     staticImageURL={staticImageURL}
     ></Form>
 
-<h1>Chart here</h1>
-    <Chart data={data}></Chart>
+
       <h1> still developing below</h1>
         {/* <button onClick={createThisRoute}>Create this Route</button> */}
         <button onClick={() => console.log(markers)}> console log marker</button>

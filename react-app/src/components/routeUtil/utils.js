@@ -65,7 +65,10 @@ export const staticMapImage = async (distanceData,setStaticImageURL) => {
 
 
 
-export const creatingRoute = () => {
-
+export const calculateChartData = (elevationData, totalDistance) => {
+  let data = elevationData.map(each => {
+    return {x:(Number(totalDistance.split(" mi")[0])/elevationData.length), y:Number(each.elevation.toFixed(2))}
+  })
+  return data
 }
 
