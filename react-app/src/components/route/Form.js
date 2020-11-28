@@ -6,6 +6,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { Button } from '@material-ui/core';
+import { useParams } from 'react-router-dom';
 const baseUrl = process.env.REACT_APP_BASE_URL
 
 
@@ -14,7 +15,7 @@ const Form = (
         totalElevation,
         totalDuration,
         travelingMode,
-        distanceData,
+        requestData,
         elevationData,
         staticImageURL
          }
@@ -23,24 +24,34 @@ const Form = (
     const [description, setDescription] = useState("")
     const [streetBike, setStreetBike] = useState(false)
     const [routeVisibility, setRouteVisibility] = useState(true)
-//   const [staticImageURL, setStaticImageURL] = useState("")
-
+let {userId} = useParams()
+userId =  Number.parseInt(userId);
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-     console.log(
+        const payload ={
             name,
-            description,
-            streetBike,
-            routeVisibility,
-            totalDistance,
-            totalElevation,
-            totalDuration,
-            travelingMode,
-            distanceData,
-            elevationData,
-            staticImageURL)
+            description
 
+        }
+        console.log(requestData)
+    //  console.log(
+    //         name,
+    //         description,
+    //         streetBike,
+    //         routeVisibility,
+    //         totalDistance,
+    //         totalElevation,
+    //         totalDuration,
+    //         travelingMode,
+    //         distanceData,
+    //         elevationData,
+    //         staticImageURL)
+        // await fetch(`${baseUrl}/api/routes/custom`, {
+        //     method: "POST",
+        //     headers:{"Content-Type":"application/json"},
+        //     body:JSON.stringify()
+        // })
        
     }
 

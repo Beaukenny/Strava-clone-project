@@ -3,14 +3,15 @@ import { staticMapImage } from "../routeUtil/utils"
 import { DirectionsRenderer } from "react-google-maps"
 
 
-const DirectionRender = ({ markers, directionsService, travelingMode, setDistanceData, distanceData, setTotalDistance,setTotalDuration,setStaticImageURL }) => {
+const DirectionRender = ({ markers, directionsService, travelingMode, setDistanceData, distanceData, setTotalDistance,setTotalDuration,setStaticImageURL,setRequestData }) => {
     const getData =  () => {
         if (markers.length === 1) {
             return
         }
         let request
+        let waypts = []
         if (markers.length > 2) {
-            let waypts = []
+            
             let newMarkers = markers.slice(1, markers.length - 1)
             newMarkers.map(each => {
                 waypts.push({ location: each, stopover: false })
@@ -34,6 +35,7 @@ const DirectionRender = ({ markers, directionsService, travelingMode, setDistanc
         directionsService.route(request, async(result, status) => {
             if (status === "OK") {
 
+               await setRequestData(request)
                await setDistanceData(result)
                await setTotalDistance(result.routes[0].legs[0].distance.text)
                await setTotalDuration(result.routes[0].legs[0].duration.text)

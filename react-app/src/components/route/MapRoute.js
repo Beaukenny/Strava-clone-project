@@ -58,7 +58,7 @@ const Map = () => {
   const [distanceData, setDistanceData] = useState('')
   const [elevationData, setElevationData] = useState('')
   const [staticImageURL, setStaticImageURL] = useState("")
-
+  const [requestData, setRequestData] = useState("")
 
   //////////////////////////////////////////
   const classes = styles()
@@ -199,7 +199,7 @@ const Map = () => {
     totalElevation={totalElevation}
     totalDuration={totalDuration}
     travelingMode={travelingMode}
-    distanceData={distanceData}
+    requestData={requestData}
     elevationData={elevationData}
     staticImageURL={staticImageURL}
     ></Form>
@@ -241,6 +241,7 @@ const Map = () => {
               getElevations={getElevations}
               setTotalDuration={setTotalDuration}
               setStaticImageURL={setStaticImageURL}
+              setRequestData={setRequestData}
               
             ></DirectionRender>
             : null}
