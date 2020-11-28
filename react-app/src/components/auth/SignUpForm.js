@@ -1,30 +1,29 @@
-import React, { Redirect, useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Redirect } from "react-router-dom";
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import clsx from 'clsx';
+import Alert from '@material-ui/lab/Alert';
 import { Button,
          Dialog,
-         DialogActions,
          DialogContent,
-         FormControl,
          Grid,
-         IconButton,
-         InputAdornment,
-         InputLabel,
-         Link,
          makeStyles,
-         OutlinedInput,
-         TextField,
          Typography,
          } from '@material-ui/core';
-import {PinDropSharp, Visibility, VisibilityOff } from "@material-ui/icons";
+import { signUp } from '../../services/auth';
+
+
+
 
 const SignUpForm = ({initOpen, authenticated, setAuthenticated}) => {
-
     const [values, setValues] = useState({
         email: '',
-        password: ''
+        password: '',
+        confirmPassword: '',
+        avatar_url: ''
       });
-      const [disableInput, setDisableInput] = useState(false);
+      const [open, setOpen] = useState(initOpen);
+      const [submitted, setSubmitted] = useState(false);
+      const [errors, setErrors] = useState('');
 
       const useStyles = makeStyles((theme) => ({
         //   h2: {
@@ -51,58 +50,52 @@ const SignUpForm = ({initOpen, authenticated, setAuthenticated}) => {
               justifyContent: 'space-between'
           },
         }));
-        const classes = useStyles();
+      const classes = useStyles();
 
-
-      const [open, setOpen] = useState(initOpen);
-      const [submitted, setSubmitted] = useState(false);
-      const handleClickOpen = () => {
-        setOpen(true);
-      };
-      console.log("Open is set to:  ", open, " and initOpen is:  ", initOpen);
-        useEffect(() => {
-            console.log("initOpen:  ", initOpen);
-            setOpen(initOpen);
-            return () => {
-                setOpen(true);
-                console.log("UseEffect ran ... open is:  ", open);
-              };
-        },[])
-      const handleSignIn = (e) => {
+      if (authenticated) {
+        return <Redirect to="/" />;
+      }
+    const handleSignIn = (e) => {
         e.preventDefault()
         setOpen(false);
-        console.log("email:  ", values.email, " password: ", values.password)
       };
 
       const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
       };
 
-    const handleSubmit = () => {
-        setSubmitted(true , () => {
-            setTimeout(() => setSubmitted(false), 5000);
-        });
-    }
-    const handleClose = () => {
-        console.log("Cancelled...")
-        setOpen(false)
-        return <Redirect to="/" />
-      };
-    const goToSignUp = (e) => {
+
+      const onSignUp = async (e) => {
         e.preventDefault();
-        console.log("Supposed to be redirecting to sign-up route.")
-        // handleClose();
-        return <Redirect to="/sign-up" />
+        if (values.password === values.confirmPassword) {
+          const user = await signUp(values.username, values.email, values.password, values.avatar_url);
+          if (!user.errors) {
+            setAuthenticated(true);
+            setSubmitted(true)
+            setOpen(false)
+            setErrors('');
+          } else {
+              setErrors(user.errors);
+        }
 
-      }
-      const loginDemo = () => {}
+      } else {
+          console.log("passwords did not match!")
+      }};
 
-return (
+      ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
+          const len = value.length
+          const pwdPortion = values.password.substring(0,len);
+          if (value === pwdPortion) {
+              return true;
+          } else {
+              return false;
+          }
+      });
+
+    return (
             <div>
-                {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-                    Sign Up
-                </Button> */}
-                <Dialog open={open} style={{width:"100%"}} onClose={handleSignIn} aria-labelledby="form-dialog-title">
+                {/* <Dialog open={open} style={{width:"100%"}} onClose={handleSignIn} aria-labelledby="form-dialog-title"> */}
+                <Dialog open={open} style={{width:"100%"}}  aria-labelledby="form-dialog-title">
                     <div>
                          <img src="CadenceLogo.png" className={classes.img}></img>
                         <Typography component="h6" variant="h6" align="center" color="primary" style={{marginTop: "20px", fontWeight:"bold"}}>Create Your Cadence Account
@@ -113,12 +106,16 @@ return (
                     <Grid container direction="column" justify="center" alignItems="center" spacing={2}>
                         <Grid container item xs={10} >
                         </Grid>
+                        <div className={classes.root}>
+                        { errors ? <Alert severity="error">{errors}</Alert> : <div></div> }
+                        </div>
                         <ValidatorForm
                                 //ref="form"
-                                onSubmit={handleSubmit}
+                                onSubmit={onSignUp}
                                 style={{width:"75%", justifyContent:"center"}}
                             >
                             <br />
+
                             <TextValidator
                                 variant="outlined"
                                 label="User Name"
@@ -161,16 +158,16 @@ return (
                                 value={values.confirmPassword}
                                 type= {"password"}
                                 style={{width:"100%", justifyContent:"center"}}
-                                validators={['required']}
-                                errorMessages={['this field is required']}
+                                validators={['required', 'isPasswordMatch']}
+                                errorMessages={['this field is required', 'passwords do not match']}
                             />
                             <br />
                             <TextValidator
                                 variant="outlined"
                                 label="Avatar Url"
-                                onChange={handleChange('avatarUrl')}
-                                name="avatarUrl"
-                                value={values.avatarUrl}
+                                onChange={handleChange('avatar_url')}
+                                name="avatar_url"
+                                value={values.avatar_url}
                                 style={{width:"100%", justifyContent:"center"}}
                             />
                              <Grid container direction="column" justify="center" alignItems="center" spacing={2}>
@@ -182,7 +179,7 @@ return (
                                 style={{marginTop:"20px", justifyContent:"flex-start", marginBottom:"20px", marginLeft:"auto", marginRight:"auto"}}
                             >
                                 {
-                                    (submitted && 'Your have been signed in!')
+                                    (submitted && 'You have been signed in!')
                                     || (!submitted && 'Create Account')
                                 }
                             </Button>

@@ -1,73 +1,74 @@
-import React, { Redirect, useState } from 'react';
+import React, { useState } from 'react';
+import { Redirect } from "react-router-dom";
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import clsx from 'clsx';
+import { login } from "../../services/auth";
+import Alert from '@material-ui/lab/Alert';
 import { Button,
          Dialog,
-         DialogActions,
          DialogContent,
-         FormControl,
          Grid,
-         IconButton,
-         InputAdornment,
-         InputLabel,
          Link,
          makeStyles,
-         OutlinedInput,
-         TextField,
          Typography,
          } from '@material-ui/core';
-import {Visibility, VisibilityOff } from "@material-ui/icons";
 
-const LoginForm = () => {
+const LoginForm = ({ initOpen, authenticated, setAuthenticated }) => {
 
     const [values, setValues] = useState({
         email: '',
         password: ''
       });
+    const [open, setOpen] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+    const [errors, setErrors] = useState();
+    const useStyles = makeStyles((theme) => ({
+        MuiGrid: {
+            width: "80%"
+        },
+        MuiDialogActions: {
+            justifyContent: "space-around"
+        },
+        img: {
+            display: "block",
+            width: "40%",
+            marginLeft: "auto",
+            marginRight: "auto"
+        },
+        root: {
+            color: theme.primary,
+            input: {
+                textAlign: "center"
+            },
+            width: "100%",
+            justifyContent: 'space-between'
+        },
+    }));
+    const classes = useStyles();
 
-      const useStyles = makeStyles((theme) => ({
-        //   h2: {
-        //       fontFamily: theme.fontFamily,
-        //   },
-          MuiGrid: {
-              width: "80%"
-          },
-          MuiDialogActions: {
-              justifyContent: "space-around"
-          },
-          img: {
-              display: "block",
-              width: "40%",
-              marginLeft: "auto",
-              marginRight: "auto"
-          },
-          root: {
-              color: theme.primary,
-              input: {
-                  textAlign: "center"
-              },
-              width: "100%",
-              justifyContent: 'space-between'
-          },
-        }));
-        const classes = useStyles();
 
-
-      const [open, setOpen] = useState(false);
-      const [submitted, setSubmitted] = useState(false);
-      const handleClickOpen = () => {
+    const handleClickOpen = () => {
         setOpen(true);
-      };
+    };
 
-      const handleSignIn = (e) => {
-        e.preventDefault()
-        setOpen(false);
-        console.log("email:  ", values.email, " password: ", values.password)
-      };
+    const handleSignIn = async (e) => {
+        if (e) { e.preventDefault()};
+        const user = await login(values.email, values.password);
+        if (!user.errors) {
+          setAuthenticated(true);
+          setOpen(false);
+          setValues({['email']:''});
+          setValues({['password']:''});
+          setErrors('');
+        //   return <Redirect to="/" />
+        window.location.href="/"
+        } else {
+          setErrors(user.errors);
+        }
+    };
 
-      const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-      };
+    const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+    };
 
     const handleSubmit = () => {
         setSubmitted(true , () => {
@@ -75,13 +76,26 @@ const LoginForm = () => {
         });
     }
     const goToSignUp = (e) => {
-        e.preventDefault();
-        console.log("Supposed to be redirecting to sign-up route.")
-        // handleClose();
+        e.preventDefault()
         return <Redirect to="/sign-up" />
-        console.log("Supposed to be redirecting to sign-up route.")
       }
-      const loginDemo = () => {}
+
+    const loginDemo = async () => {
+        const user = await login('demo@demo.com', 'appacademy');
+        if (!user.errors) {
+          setAuthenticated(true);
+          setOpen(false);
+          setValues({['email']:''});
+          setValues({['password']:''});
+          setErrors('')
+          //return <Redirect to="/" />
+          window.location.href="/"
+        } else {
+          setErrors(user.errors);
+        }
+    };
+
+
         return (
             <div>
                 <Button variant="outlined" color="primary" onClick={handleClickOpen}>
@@ -94,13 +108,16 @@ const LoginForm = () => {
                         </Typography>
                     </div>
 
+                { errors ? <div className={classes.root}><Alert severity="error">{errors}</Alert></div> : null}
+
                 <DialogContent style={{width:"100%"}}>
                     <Grid container direction="column" justify="center" alignItems="center" spacing={2}>
                         <Grid container item xs={10} >
+
                         </Grid>
                         <ValidatorForm
                                 //ref="form"
-                                onSubmit={handleSubmit}
+                                onSubmit={handleSignIn}
                                 style={{width:"75%", justifyContent:"center"}}
                             >
                             <TextValidator
@@ -134,8 +151,7 @@ const LoginForm = () => {
                                 style={{display:"block", marginLeft:"auto", marginRight:"auto"}}
                             >
                                 {
-                                    (submitted && 'Your have been signed in!')
-                                    || (!submitted && 'Sign In')
+                                    'Sign In'
                                 }
                             </Button>
                             <Grid container direction="column" justify="center" alignItems="center" spacing={2}>
@@ -147,7 +163,19 @@ const LoginForm = () => {
                                 </Grid>
 
                             </Grid>
-
+                            <Button
+                                color="primary"
+                                variant="contained"
+                                type="button"
+                                className="cancel"
+                                value="Submit without validation"
+                                onClick={e => window.location.href="/"}
+                                style={{marginTop:"20px", justifyContent:"flex-end", marginBottom:"20px", marginLeft:"auto", marginRight:"auto"}}
+                            >
+                                {
+                                    ('Cancel')
+                                }
+                            </Button>
                         </ValidatorForm>
 
 
