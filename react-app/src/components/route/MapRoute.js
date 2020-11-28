@@ -48,12 +48,12 @@ const Map = () => {
   const elevation = new google.maps.ElevationService();
   const [defaultLocation, setDefaultLocation] = useState({ lat: 38.9072, lng: -77.0369 })
   const [markers, setMarkers] = useState([])
-  
-  
+
+
   //for form////////////////////////////////
   const [totalDistance, setTotalDistance] = useState('')
   const [totalElevation, setTotalElevation] = useState('')
-  const [totalDuration, setTotalDuration] = useState('')  
+  const [totalDuration, setTotalDuration] = useState('')
   const [travelingMode, setTravelingMode] = useState("BICYCLING")
   const [distanceData, setDistanceData] = useState('')
   const [elevationData, setElevationData] = useState('')
@@ -192,7 +192,7 @@ const Map = () => {
               </Typography>
             </Grid>
         </Grid>
-              
+
     </Grid>
     <Form
     totalDistance={totalDistance}
@@ -242,7 +242,7 @@ const Map = () => {
               setTotalDuration={setTotalDuration}
               setStaticImageURL={setStaticImageURL}
               setRequestData={setRequestData}
-              
+
             ></DirectionRender>
             : null}
         </GoogleMap>
