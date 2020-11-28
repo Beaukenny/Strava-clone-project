@@ -1,35 +1,3 @@
-
-/* .search {
-    position: absolute;
-    top: 5rem;
-    left: 50%;
-    width: 100%;
-    max-width: 400px;
-    z-index: 2;
-  } */
-
-  /* .title {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    color: whitesmoke;
-    z-index: 2;
-  } */
-/* .searchInput{
-  width: 25em;
-  height: 3em;
-  border-radius: 10px;
-}
-.searchInput:focus{
-  background-color: rgb(111, 95, 163);
-  color: black;
-  border-color: 1px solid rgb(111, 95, 163) !important;
-   border: 1px solid rgb(111, 95, 163);
-}
-
-.searchInput:hover{
-  border: 1px solid rgb(111, 95, 163);
-} */
 .search {
   position: absolute;
   top: 1rem;
@@ -90,6 +58,11 @@
 
 
 .formContainer{
+  position:relative;
+  bottom:4em;
+}
+
+.elevationChart{
   position:relative;
   bottom:6em;
 }

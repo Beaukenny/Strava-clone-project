@@ -44,7 +44,7 @@ userId =  Number.parseInt(userId);
     //         totalElevation,
     //         totalDuration,
     //         travelingMode,
-    //         distanceData,
+    //         requestData,
     //         elevationData,
     //         staticImageURL)
         // await fetch(`${baseUrl}/api/routes/custom`, {

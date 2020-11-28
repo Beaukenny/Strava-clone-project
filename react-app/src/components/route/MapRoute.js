@@ -10,15 +10,13 @@ import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
+import Chart from "./Chart"
 const styles = makeStyles((theme) => ({
   paper: {
     maxWidth: 936,
@@ -59,7 +57,9 @@ const Map = () => {
   const [elevationData, setElevationData] = useState('')
   const [staticImageURL, setStaticImageURL] = useState("")
   const [requestData, setRequestData] = useState("")
-
+//////chart/////////////////////////////////////////////
+  const [chartData , setChartData] = useState([
+    {x:0, y:0},{x:5, y:0},{x:10, y:0}])
   //////////////////////////////////////////
   const classes = styles()
   const mapLocation = useCallback(({ lat, lng }) => {
@@ -68,8 +68,8 @@ const Map = () => {
 
   const onMapClick = (event) => settingMarkers(event, markers, setMarkers, directionsService)
 
-  const getElevations = () => {
-    getElevationData(distanceData, elevation, setElevationData, setTotalElevation)
+  const getElevations = async () => {
+   await getElevationData(distanceData, elevation, setElevationData, setTotalElevation,totalDistance, setChartData)
   }
 
   // const createThisRoute = () => {
@@ -194,6 +194,9 @@ const Map = () => {
         </Grid>
 
     </Grid>
+    <Chart 
+    chartData={chartData}
+    ></Chart>
     <Form
     totalDistance={totalDistance}
     totalElevation={totalElevation}
@@ -203,6 +206,8 @@ const Map = () => {
     elevationData={elevationData}
     staticImageURL={staticImageURL}
     ></Form>
+
+
       <h1> still developing below</h1>
         {/* <button onClick={createThisRoute}>Create this Route</button> */}
         <button onClick={() => console.log(markers)}> console log marker</button>
@@ -246,6 +251,7 @@ const Map = () => {
             ></DirectionRender>
             : null}
         </GoogleMap>
+        {/* <img src={staticImageURL}></img> */}
 
     </>
   )
