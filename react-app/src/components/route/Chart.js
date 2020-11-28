@@ -7,35 +7,54 @@ const Chart = ({elevationData, totalDistance})=> {
 const margin = { top: 10, right: 30, bottom: 30, left: 50 }
 const width = 700 - margin.left - margin.right
 const height = 155 - margin.top - margin.bottom
-const [data, setData] = useState([ 
-  { x: 0, y: 0 },
-  { x: 15, y: 0 },
-  { x: 30, y: 0 }
-])
+const [data, setData] = useState([
+{x:0, y:0},{x:5, y:0},{x:10, y:0}])
 
-useEffect(() => {
-  drawChart(data)
-  if (elevationData){
-  let newData =calculateChartData(elevationData, totalDistance)
-  setData(newData)
-  console.log(data)
-  }
-}, [elevationData]);
+// console.log("data from charts", elevationData)
+// let newData =calculateChartData(elevationData, totalDistance)
+// drawChart(data)
+// setData(newData)
+// useEffect(() => {
+//   destroyChart()
+//   drawChart(data)
+// let newData =calculateChartData(elevationData, totalDistance)
+//   setData(newData)
+  
+// }, [elevationData]);
 
-
-  const destroyChart = () => {
-    d3.selectAll("#elevationChart > *").remove()
-  }
+//   const savingData = async () => {
+//    await drawChart(data)
+//   }
+let newData
+if (elevationData) {
+  newData =calculateChartData(elevationData, totalDistance)
+}
+useEffect(()=>{  
+  console.log(elevationData)
   if (data.length !== elevationData.length){
     destroyChart()
   }
+  
+  if (elevationData) {
+     let newData =calculateChartData(elevationData, totalDistance)
+  setData(newData)
+  drawChart(data)
+  }
+ 
+
+},[elevationData])
+  const destroyChart = () => {
+    d3.selectAll("#elevationChart > *").remove()
+  }
+
 
  const drawChart = (data) => {
   const xAxisSpace = 10
   const yAxisSpace = 6
   const xScale = d3
     .scaleLinear()
-    .domain(d3.extent(data, each => each.x))
+    // .domain(d3.extent(data, each => each.x))
+    .domain([d3.min(data, co => co.x), d3.max(data, co => co.x)])
     .range([0, width])
   const yScale = d3
     .scaleLinear()
@@ -106,3 +125,7 @@ useEffect(() => {
 
 
 export default Chart
+
+
+
+

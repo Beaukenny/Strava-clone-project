@@ -59,7 +59,6 @@ const Map = () => {
   const [requestData, setRequestData] = useState("")
 //////chart/////////////////////////////////////////////
 
-
   //////////////////////////////////////////
   const classes = styles()
   const mapLocation = useCallback(({ lat, lng }) => {
@@ -68,8 +67,8 @@ const Map = () => {
 
   const onMapClick = (event) => settingMarkers(event, markers, setMarkers, directionsService)
 
-  const getElevations = () => {
-    getElevationData(distanceData, elevation, setElevationData, setTotalElevation)
+  const getElevations = async () => {
+   await getElevationData(distanceData, elevation, setElevationData, setTotalElevation)
   }
 
   // const createThisRoute = () => {
@@ -252,6 +251,7 @@ const Map = () => {
             ></DirectionRender>
             : null}
         </GoogleMap>
+        {/* <img src={staticImageURL}></img> */}
 
     </>
   )
