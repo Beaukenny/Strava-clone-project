@@ -101,7 +101,13 @@ const Search = () => {
     )
   } else {
     return (<>
+    <div className="splashSearchBar1">
+    <IconButton type="submit" className={classes.iconButton} aria-label="search" onClick={onClick}>
+        <SearchIcon />
+      </IconButton>
+
       <Combobox
+      className="SplashCombo"
         onSelect={async (address) => {
           setValue(address, false)
           clearSuggestions()
@@ -119,19 +125,33 @@ const Search = () => {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           disabled={!ready}
-          placeholder="Choose starting address or city ...">
+          className="splashSearch"
+          placeholder="Search ">
         </ComboboxInput>
         <ComboboxPopover>
-          <ComboboxList>
-            {status === "OK" && data.map(({ id, description }) =>
+          <ComboboxList
+          className="splashSeachOption"
+          >
+            {status === "OK" &&
+            <>
               <ComboboxOption
-                as="h6" key={id} value={description} />)}
+              
+                as="h4" key={data[0].id} value={data[0].description} />
+                <ComboboxOption
+                as="h4" key={data[1].id} value={data[1].description} />
+                <ComboboxOption
+                as="h4" key={data[2].id} value={data[2].description} />
+                </>}
           </ComboboxList>
         </ComboboxPopover>
       </Combobox>
-      <IconButton type="submit" className={classes.iconButton} aria-label="search" onClick={onClick}>
-        <SearchIcon />
-      </IconButton>
+
+
+
+  
+
+      </div>
+
     </>)
   }
 }

@@ -2,10 +2,14 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import { Grid, Typography } from '@material-ui/core';
 import Searchbar from './components/routeSearch/Searchbar';
-
+import Tooltip from '@material-ui/core/Tooltip';
+import Toolbar from '@material-ui/core/Toolbar';
+import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
+import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 const Splash = () => {
 
     return (
+        <>
         <Grid
         container
         padding="20px"
@@ -33,12 +37,29 @@ const Splash = () => {
             </Grid>
             <Grid item>
             <Typography component="h6" variant="h6" align="center" style={{fontWeight:"bold"}}>Search for workout routes nearby, or enter a location to search for more routes:</Typography>
+
             </Grid>
-            <Grid item>
-                <Searchbar />
-            </Grid>
+
+        </Grid>       
+        <Grid container>
+        <Grid item xs={12} align="center" >
+            <DirectionsWalkIcon fontSize="large" style={{marginBottom:'5pt' ,marginTop: '15pt', marginRight:'25pt'}}></DirectionsWalkIcon>
+            <DirectionsBikeIcon fontSize="large" style={{marginBottom:'5pt' ,marginTop: '15pt',marginRight:'12.5pt', marginLeft:"12.5"}}></DirectionsBikeIcon>
+            <DirectionsWalkIcon fontSize="large" style={{marginBottom:'5pt' ,marginTop: '15pt',marginLeft:'25pt'}}></DirectionsWalkIcon>
+
+        </Grid>
         </Grid>
 
+        <Toolbar className="splashToolBar">
+            
+          <Grid container spacing={2} alignItems="center">
+            
+            <Grid item xs align="center">
+              <Searchbar className="splashSearchBar"></Searchbar>
+            </Grid>
+          </Grid>
+        </Toolbar>
+        </>
     )
 
 

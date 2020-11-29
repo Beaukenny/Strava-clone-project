@@ -7,23 +7,23 @@ def seed_users():
 
     demo = User(username='demo', email='demo@demo.com',
                 hashed_password=generate_password_hash('appacademy'),
-                avatar_url='www.google.com',
+                # avatar_url='www.google.com',
                 biography='test bio')
     peter = User(username='peter', email='peter@peter.com',
                  hashed_password=generate_password_hash('appacademy'),
-                 avatar_url='www.google.com',
+                #  avatar_url='www.google.com',
                  biography='test bio')
     beau = User(username='beau', email='beau@beau.com',
                 hashed_password=generate_password_hash('appacademy'),
-                avatar_url='www.google.com',
+                # avatar_url='www.google.com',
                 biography='test bio')
     mary = User(username='mary', email='mary@mary.com',
                 hashed_password=generate_password_hash('appacademy'),
-                avatar_url='www.google.com',
+                # avatar_url='www.google.com',
                 biography='test bio')
     clay = User(username='clay', email='clay@clay.com',
                 hashed_password=generate_password_hash('appacademy'),
-                avatar_url='www.google.com',
+                # avatar_url='www.google.com',
                 biography='test bio')
 
     db.session.add(demo)
