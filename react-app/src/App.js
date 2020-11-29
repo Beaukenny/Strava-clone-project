@@ -11,6 +11,7 @@ import { authenticate } from "./services/auth";
 import { CssBaseline } from "@material-ui/core";
 import Theme from './Theme';
 import Splash from './Splash';
+import SearchResult from './components/routeSearch/SearchResult';
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);

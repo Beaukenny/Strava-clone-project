@@ -89,7 +89,8 @@ const Search =() => {
     const onClick=async () => {
       // console.log(searchCoord)
       await dispatch(searchedPlaceCoord(searchCoord))
-      window.location.replace("/search-result")
+      // window.location.replace("/search-result")
+      
     }
     return (
       <>
@@ -101,23 +102,23 @@ const Search =() => {
           const response = await getGeocode({address});
           const {lat, lng} = await getLatLng(response[0]);
           setSearchCoord({lat:lat, lng:lng})
-          
+
         }catch(e) {
           console.log(e)
         }
       }}>
-  
-        <ComboboxInput 
-        value={value} 
-        onChange={(e)=> setValue(e.target.value)} 
+
+        <ComboboxInput
+        value={value}
+        onChange={(e)=> setValue(e.target.value)}
         disabled={!ready}
         placeholder="Choose starting address or city ...">
         </ComboboxInput>
     <ComboboxPopover>
       <ComboboxList>
-       {status === "OK" && data.map(({id, description})=> 
-       <ComboboxOption 
-       as="h6" key={id} value={description}/>)}     
+       {status === "OK" && data.map(({id, description})=>
+       <ComboboxOption
+       as="h6" key={id} value={description}/>)}
       </ComboboxList>
       </ComboboxPopover>
       </Combobox>

@@ -5,11 +5,6 @@ import Searchbar from './components/routeSearch/Searchbar';
 
 const Splash = () => {
 
-    // const sendToSignup = () => {
-    //     <Redirect path='/signup' />
-    // }
-
-
     return (
         <Grid
         container
@@ -46,6 +41,9 @@ const Splash = () => {
 
     )
 
+
 }
+
+
 
 export default Splash
