@@ -62,7 +62,7 @@ export const staticMapImage = async (distanceData,setStaticImageURL) => {
     const firstPoly = overViewPoline[0]
     const lastPoly = overViewPoline[overViewPoline.length -1]
     const path = "&path=" + overViewPoline.join("|")
-    const url = prefix + size + '&markers=color:green|' + firstPoly+ path + '&sensor=false'+ '&markers=color:red|'+lastPoly+'&' + keyOption
+    const url = prefix + size +'&zoom=15'+ '&markers=color:green|' + firstPoly+ path + '&sensor=false'+ '&markers=color:red|'+lastPoly+'&' + keyOption
    
     await setStaticImageURL(url)
   

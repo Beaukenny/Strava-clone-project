@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import Route, db
+from app.models import Route, db, User
 import json
 
 
@@ -10,8 +10,7 @@ route_routes = Blueprint('routes', __name__)
 @route_routes.route('/')
 # @login_required
 def routes():
-    routes = Route.query.all()
-    print("here")
+    routes = Route.query.join(User).order_by(Route.totalDistance.desc()).all()
     # print([route.to_dict() for route in routes])
     # print(jsonify(routes))
     # return jsonify(routes=routes)

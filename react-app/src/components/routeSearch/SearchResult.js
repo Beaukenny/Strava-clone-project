@@ -1,33 +1,52 @@
 import { formatMs } from '@material-ui/core';
-import React, {useEffect } from 'react';
+import React, {useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllRouteWithCoords } from '../../store/actions/routeSearch';
 import { apiUrl } from '../../config';
+import RouteCard from './RouteCard'
 
 const SearchResult = () =>{
-
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const coordinates = useSelector((state)=> state.search.coordinates)
-    let res;
-
-
+    const [load, setLoad] = useState(false)
+    const [data, setData] = useState("")
     useEffect(() => {
-        async function getRoutes () {
+        async function getAllRoutes () {
             const result = await fetch(`${apiUrl}/routes`)
-            res = await result.json();
+            let res = await result.json();
+            setData(res)
+            setLoad(!load)
         }
-        getRoutes();
+        if (!coordinates){
+           getAllRoutes(); 
+           
+        }
+        
     }, [])
-    
-    return (
-        <div>
-            <button onClick={()=> console.log(res.routes[0].staticImageURL)}>RES</button>
+    if (!load) {
+        return null
+    }
+
+        return (
+            <>
+
+            <button onClick={()=> console.log(data.routes[0].staticImageURL)}>RES</button>
             <button onClick={()=> console.log(coordinates)}>COORDINATES</button>
-            <button onClick={()=> console.log(res)}>ressssssss</button>
+            <button onClick={()=> console.log(data)}>data</button>
+            <button onClick={()=> console.log(load)}>load</button>
 
-        </div>
 
-    )
-}
+     <div>
+         {data.routes.map(each=> 
+         
+            <RouteCard data={each}></RouteCard>
+         
+        )}
+ 
+
+     </div>
+   </>
+    )}
+
 
 export default SearchResult;
