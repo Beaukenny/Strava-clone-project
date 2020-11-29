@@ -17,10 +17,12 @@ export const getAllRouteWithCoords = (data) => async (dispatch) => {
     const response = await fetch(`${apiUrl}/routes`)
     if (response.ok) {
             const jsonData = await response.json()
-            console.log(jsonData)
+            return jsonData;
         }
 
 }
+
+
 
 ////////////////////////////reducer//////////////////////////////////////////
 export default function reducer (state={}, action) {
