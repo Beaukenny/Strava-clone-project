@@ -40,7 +40,8 @@ userId =  Number.parseInt(userId);
             totalDuration,
             travelingMode,
             requestData,
-            staticImageURL
+            staticImageURL,
+            starting_point: {lat:requestData.origin.lat, lng:requestData.origin.lng}
 
         }
         console.log(payload)
