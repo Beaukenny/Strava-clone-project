@@ -1,14 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
+import usePlacesAutocomplete, {getGeocode, getLatLng,} from "use-places-autocomplete"
+import {Combobox,ComboboxInput,ComboboxPopover,ComboboxList,ComboboxOption,} from "@reach/combobox";
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import { Grid, Typography } from '@material-ui/core';
-
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import DirectionsIcon from '@material-ui/icons/Directions';
+import {addSearchCoord} from "../../store/actions/routeSearch"
+import { useSelector, useDispatch } from "react-redux";
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Searchbar() {
+function Searchbar() {
   const classes = useStyles();
 
   return (
@@ -71,3 +76,57 @@ export default function Searchbar() {
 
   );
 }
+
+
+const Search =() => {
+  const classes = useStyles();
+    const {ready, value, suggestions: {status, data}, setValue, clearSuggestions} = usePlacesAutocomplete({
+      location: {lat: ()=> 41.4993, lng: ()=> -81.6944},
+      radius: 200 * 1000,
+    })
+    const [searchCoord, setSearchCoord] = useState("")
+    const dispatch = useDispatch()
+    const onClick=() => {
+      console.log(searchCoord)
+      dispatch(addSearchCoord(searchCoord))
+    }
+    return (
+      <>
+      <Combobox
+      onSelect={async (address) => {
+        setValue(address, false)
+        clearSuggestions()
+        try{
+          const response = await getGeocode({address});
+          const {lat, lng} = await getLatLng(response[0]);
+          // mapLocation({lat, lng})
+          // console.log(lat, lng);
+          setSearchCoord(lat, lng)
+          
+        }catch(e) {
+          console.log(e)
+        }
+      }}>
+  
+        <ComboboxInput 
+        value={value} 
+        onChange={(e)=> setValue(e.target.value)} 
+        disabled={!ready}
+        placeholder="Choose starting address or city ...">
+        </ComboboxInput>
+    <ComboboxPopover>
+      <ComboboxList>
+       {status === "OK" && data.map(({id, description})=> 
+       <ComboboxOption 
+       as="h6" key={id} value={description}/>)}     
+      </ComboboxList>
+      </ComboboxPopover>
+      </Combobox>
+      <IconButton type="submit" className={classes.iconButton} aria-label="search" onClick={onClick}>
+      <SearchIcon/>
+    </IconButton>
+    </>
+    )
+  }
+
+  export default Search

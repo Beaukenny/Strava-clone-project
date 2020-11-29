@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { Grid, Typography } from '@material-ui/core';
-import Searchbar from './Searchbar';
+import Searchbar from './components/routeSearch/Searchbar';
 
 const Splash = () => {
 
