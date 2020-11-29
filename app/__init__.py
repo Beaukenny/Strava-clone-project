@@ -40,6 +40,7 @@ Migrate(app, db)
 
 # Application Security
 CORS(app)
+# CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 
 @app.after_request

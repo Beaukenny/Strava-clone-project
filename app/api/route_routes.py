@@ -34,23 +34,34 @@ def delete_route(id):
 
 
 @route_routes.route('/custom', methods=['POST'])
-@login_required
+# @login_required
 def add_custom_route():
     data = request.json
-    print(data)
-    errors = []
-    route_preview = data['route_preview']
-    route_data = data['route_data']
+    print("hi")
+    # errors = []
+    route_data = data['name']
     custom_route = Route(
         name=data['name'],
-        host_id=data['host_id'],
-        route_preview=f'{route_preview}',
-        route_data=f'{route_data}',
-        starting_point=data['starting_point'],
-        offroad=data['offroad'],
+        description=data['description'],
+        userId=data['userId'],
+        staticImageURL=str(data['staticImageURL']),
+        requestData=str(data['requestData']),
+        starting_point=str(data['starting_point']),
+        streetBike=data['streetBike'],
+        routeVisibility=data['routeVisibility'],
+        totalDistance=data['totalDistance'],
+        totalElevation=data['totalElevation'],
+        totalDuration=data['totalDuration'],
+        travelingMode=data['travelingMode']
     )
-    if errors:
-        return jsonify(errors)
+    print(custom_route)
+    print(data)
+    # print(str(data["staticImageURL"]))
+    # print(custom_route.to_dict())
+
+    # if errors:
+    #     return jsonify(errors)
     db.session.add(custom_route)
     db.session.commit()
-    return jsonify(data)
+    # return jsonify(data)
+    return {"message": "ok"}

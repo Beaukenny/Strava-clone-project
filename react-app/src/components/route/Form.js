@@ -7,7 +7,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { Button } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
-const baseUrl = process.env.REACT_APP_BASE_URL
+import {apiUrl} from "../../config"
 
 
 const Form = (
@@ -44,24 +44,15 @@ userId =  Number.parseInt(userId);
             starting_point: {lat:requestData.origin.lat, lng:requestData.origin.lng}
 
         }
-        console.log(payload)
-    //  console.log(
-    //         name,
-    //         description,
-    //         streetBike,
-    //         routeVisibility,
-    //         totalDistance,
-    //         totalElevation,
-    //         totalDuration,
-    //         travelingMode,
-    //         requestData,
-    //         elevationData,
-    //         staticImageURL)
-        // await fetch(`${baseUrl}/api/routes/custom`, {
-        //     method: "POST",
-        //     headers:{"Content-Type":"application/json"},
-        //     body:JSON.stringify()
-        // })
+        const response = await fetch(`${apiUrl}/routes/custom`, {
+            method: "POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify(payload)
+        })
+        if (response.ok) {
+            const data = await response.json()
+            console.log(data)
+        }
 
     }
 
