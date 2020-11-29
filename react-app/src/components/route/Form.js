@@ -31,10 +31,19 @@ userId =  Number.parseInt(userId);
         e.preventDefault();
         const payload ={
             name,
-            description
+            userId,
+            description,
+            streetBike,
+            routeVisibility,
+            totalDistance,
+            totalElevation,
+            totalDuration,
+            travelingMode,
+            requestData,
+            staticImageURL
 
         }
-        console.log(requestData)
+        console.log(payload)
     //  console.log(
     //         name,
     //         description,
@@ -52,7 +61,7 @@ userId =  Number.parseInt(userId);
         //     headers:{"Content-Type":"application/json"},
         //     body:JSON.stringify()
         // })
-       
+
     }
 
     const updateProperty = (callback) => (e) => {
