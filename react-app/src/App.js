@@ -54,6 +54,9 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
           <User />
         </ProtectedRoute>
+        <Route path="/search-result" exact={true}>
+          <SearchResult/>
+        </Route>
         </Switch>
       </BrowserRouter>
     </Theme>

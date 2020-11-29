@@ -12,8 +12,8 @@ route_routes = Blueprint('routes', __name__)
 def routes():
     routes = Route.query.all()
     print(routes)
-    # return {"routes": [route.to_dict() for route in routes]}
-    return "hi"
+    return {"routes": [route.to_dict() for route in routes]}
+    # return "asdf"
 
 
 @route_routes.route('/<int:id>')

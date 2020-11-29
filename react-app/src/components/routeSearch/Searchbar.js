@@ -10,7 +10,7 @@ import { Grid, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import DirectionsIcon from '@material-ui/icons/Directions';
-import {addSearchCoord} from "../../store/actions/routeSearch"
+import {getAllRouteWithCoords, searchedPlaceCoord} from "../../store/actions/routeSearch"
 import { useSelector, useDispatch } from "react-redux";
 
 
@@ -86,9 +86,10 @@ const Search =() => {
     })
     const [searchCoord, setSearchCoord] = useState("")
     const dispatch = useDispatch()
-    const onClick=() => {
-      console.log(searchCoord)
-      dispatch(addSearchCoord(searchCoord))
+    const onClick=async () => {
+      // console.log(searchCoord)
+      await dispatch(searchedPlaceCoord(searchCoord))
+      window.location.replace("/search-result")
     }
     return (
       <>
@@ -99,9 +100,7 @@ const Search =() => {
         try{
           const response = await getGeocode({address});
           const {lat, lng} = await getLatLng(response[0]);
-          // mapLocation({lat, lng})
-          // console.log(lat, lng);
-          setSearchCoord(lat, lng)
+          setSearchCoord({lat:lat, lng:lng})
           
         }catch(e) {
           console.log(e)
