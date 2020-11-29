@@ -8,11 +8,12 @@ route_routes = Blueprint('routes', __name__)
 
 
 @route_routes.route('/')
-@login_required
+# @login_required
 def routes():
     routes = Route.query.all()
     print(routes)
-    return {"routes": [route.to_dict() for route in routes]}
+    # return {"routes": [route.to_dict() for route in routes]}
+    return "hi"
 
 
 @route_routes.route('/<int:id>')
