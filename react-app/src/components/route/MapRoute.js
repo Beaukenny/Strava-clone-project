@@ -218,6 +218,7 @@ const Map = () => {
 
 
         <GoogleMap
+
           mapContainerStyle={{
             border: '5px solid red'
           }}
@@ -263,7 +264,7 @@ const MapRoute = () => {
   return (
     <>
 
-      <div style={{ width: '700px', height: '350px', margin: "auto" }}>
+      <div className="googleMap" style={{ width: '700px', height: '350px', margin: "auto" }}>
         <WrappedMap
           googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
           loadingElement={<div style={{ height: '100%' }} />}

@@ -66,3 +66,8 @@
   position:relative;
   bottom:6em;
 }
+.googleMap{
+  position: relative;
+  top:10em;
+  /* border: 10px solid red; */
+}
