@@ -1,10 +1,8 @@
 """create tables
 
-
-Revision ID: dd748126ca9f
-Revises:
-Create Date: 2020-11-24 14:05:04.632874
-
+Revision ID: eeddc2c07a37
+Revises: 
+Create Date: 2020-11-29 02:22:55.520508
 
 """
 from alembic import op
@@ -12,8 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-
-revision = 'dd748126ca9f'
+revision = 'eeddc2c07a37'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -37,16 +34,21 @@ def upgrade():
     op.create_table('routes',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=100), nullable=False),
-    sa.Column('host_id', sa.Integer(), nullable=False),
-    sa.Column('route_preview', sa.String(length=1000), nullable=True),
-    sa.Column('route_data', sa.String(length=2000), nullable=True),
+    sa.Column('description', sa.String(length=1000), nullable=True),
+    sa.Column('userId', sa.Integer(), nullable=False),
+    sa.Column('staticImageURL', sa.String(length=2000), nullable=False),
+    sa.Column('requestData', sa.String(length=2000), nullable=False),
     sa.Column('starting_point', sa.String(length=200), nullable=False),
-    sa.Column('offroad', sa.Boolean(), nullable=True),
+    sa.Column('streetBike', sa.Boolean(), nullable=True),
+    sa.Column('routeVisibility', sa.Boolean(), nullable=True),
+    sa.Column('totalDistance', sa.String(length=50), nullable=False),
+    sa.Column('totalElevation', sa.String(length=50), nullable=False),
+    sa.Column('totalDuration', sa.String(length=50), nullable=False),
+    sa.Column('travelingMode', sa.String(length=50), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['host_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('name')
+    sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('workouts',
     sa.Column('id', sa.Integer(), nullable=False),
