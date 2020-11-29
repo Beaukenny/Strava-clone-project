@@ -12,13 +12,13 @@ import { Button,
          Typography,
          } from '@material-ui/core';
 
-const LoginForm = ({ initOpen, authenticated, setAuthenticated }) => {
+const LoginForm = ({ authenticated, setAuthenticated }) => {
 
     const [values, setValues] = useState({
         email: '',
         password: ''
       });
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
     const [submitted, setSubmitted] = useState(false);
     const [errors, setErrors] = useState();
     const useStyles = makeStyles((theme) => ({
@@ -80,6 +80,8 @@ const LoginForm = ({ initOpen, authenticated, setAuthenticated }) => {
         return <Redirect to="/sign-up" />
       }
 
+
+
     const loginDemo = async () => {
         const user = await login('demo@demo.com', 'appacademy');
         if (!user.errors) {
@@ -98,9 +100,7 @@ const LoginForm = ({ initOpen, authenticated, setAuthenticated }) => {
 
         return (
             <div>
-                <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-                    Login
-                </Button>
+
                 <Dialog open={open} style={{width:"100%"}} onClose={handleSignIn} aria-labelledby="form-dialog-title">
                     <div>
                          <img src="CadenceLogo.png" className={classes.img}></img>

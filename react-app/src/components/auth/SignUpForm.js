@@ -14,14 +14,14 @@ import { signUp } from '../../services/auth';
 
 
 
-const SignUpForm = ({initOpen, authenticated, setAuthenticated}) => {
+const SignUpForm = ({authenticated, setAuthenticated}) => {
     const [values, setValues] = useState({
         email: '',
         password: '',
         confirmPassword: '',
         avatar_url: ''
       });
-      const [open, setOpen] = useState(initOpen);
+      const [open, setOpen] = useState(true);
       const [submitted, setSubmitted] = useState(false);
       const [errors, setErrors] = useState('');
 
