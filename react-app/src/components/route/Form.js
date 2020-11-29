@@ -44,6 +44,8 @@ userId =  Number.parseInt(userId);
             starting_point: {lat:requestData.origin.lat, lng:requestData.origin.lng}
 
         }
+        console.log(JSON.stringify(payload))
+
         const response = await fetch(`${apiUrl}/routes/custom`, {
             method: "POST",
             headers:{"Content-Type":"application/json"},

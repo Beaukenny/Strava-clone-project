@@ -21,8 +21,10 @@ const SearchResult = () =>{
     
     return (
         <div>
-            <button onClick={()=> console.log(res.routes)}>RES</button>
+            <button onClick={()=> console.log(res.routes[0].staticImageURL)}>RES</button>
             <button onClick={()=> console.log(coordinates)}>COORDINATES</button>
+            <button onClick={()=> console.log(res)}>ressssssss</button>
+
         </div>
 
     )
