@@ -12,7 +12,7 @@ import { CssBaseline } from "@material-ui/core";
 import Theme from './Theme';
 import Splash from './Splash';
 import SearchResult from './components/routeSearch/SearchResult';
-
+"Hello"
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
