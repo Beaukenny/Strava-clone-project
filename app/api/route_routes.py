@@ -11,9 +11,12 @@ route_routes = Blueprint('routes', __name__)
 # @login_required
 def routes():
     routes = Route.query.all()
-    print(routes)
+    print("here")
+    # print([route.to_dict() for route in routes])
+    # print(jsonify(routes))
+    # return jsonify(routes=routes)
+    # print(type({"routes": [route.to_dict() for route in routes]}))
     return {"routes": [route.to_dict() for route in routes]}
-    # return "asdf"
 
 
 @route_routes.route('/<int:id>')
@@ -54,8 +57,8 @@ def add_custom_route():
         totalDuration=data['totalDuration'],
         travelingMode=data['travelingMode']
     )
-    print(custom_route)
-    print(data)
+
+    # print(data)
     # print(str(data["staticImageURL"]))
     # print(custom_route.to_dict())
 
