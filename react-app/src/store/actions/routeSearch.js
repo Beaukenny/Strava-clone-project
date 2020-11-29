@@ -14,11 +14,13 @@ export const searchedPlaceCoord = (data) => {
 }
 //////////////////////////thunks below/////////////////////////////////////////////////////////
 export const addSearchCoord = (data) => async (dispatch) => {
-    const response = await fetch(`${apiUrl}/routes`,{
-        method:"get",
-        headers:{'Content-Type':"application/json"},
-        // body: JSON.stringify(data)
-    })
+    const response = await fetch(`${apiUrl}/routes`)
+    // ,{
+    //     method:"get",
+    //     headers:{'Content-Type':"application/json"},
+    //     // body: JSON.stringify(data)
+    // })
+    // if (response)
 }
 
 ////////////////////////////reducer//////////////////////////////////////////
