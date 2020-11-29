@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/NavBar";
@@ -10,8 +10,13 @@ import MapRoute from "./components/route/MapRoute";
 import { authenticate } from "./services/auth";
 import { CssBaseline } from "@material-ui/core";
 import Theme from './Theme';
+
+import Home from "./components/Home";
+import Menuw from "./components/Menu";
+
 import Splash from './Splash';
 import SearchResult from './components/routeSearch/SearchResult';
+
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -36,16 +41,27 @@ function App() {
     <Theme>
       <BrowserRouter>
         <NavBar setAuthenticated={setAuthenticated} />
+        {/* <Switch>
+          <Redirect exact from="/home" to="/home/workouts" />
+          <Route exact path="/home/:page?" render={props => <Home {...props} />} />
+        </Switch> */}
         <Switch>
+
+        <Route exact path="/sign-up" component={SignUpForm} />
+        <Route exact path="/login" component={LoginForm} />
+
         <Route path='/' exact={true}>
           <Splash />
         </Route>
+
         <Route path="/login" exact={true}>
           <LoginForm initOpen={true} authenticated={authenticated} setAuthenticated={setAuthenticated} />
         </Route>
-        <Route path="/sign-up" exact={true}>
-          <SignUpForm initOpen={true} authenticated={authenticated} setAuthenticated={setAuthenticated} />
-        </Route>
+
+        {/* <Route path="/sign-up" exact={true}>
+          <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
+        </Route> */}
+
         <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
           <UsersList/>
         </ProtectedRoute>
@@ -55,9 +71,20 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
           <User />
         </ProtectedRoute>
+
+    <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
+          <h1>My Home Page</h1>
+        </ProtectedRoute>
+        <ProtectedRoute path="/user-options" exact={true} authenticated={authenticated}>
+          <div style={{ height: "fit-content", width: "fit-content", marginLeft: "60vw"}}>
+            <Menuw />
+          </div>
+        </ProtectedRoute>
+
         <Route path="/search-result" exact={true}>
           <SearchResult/>
         </Route>
+
         </Switch>
       </BrowserRouter>
     </Theme>
