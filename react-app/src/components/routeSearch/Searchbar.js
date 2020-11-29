@@ -130,7 +130,7 @@ const Search = () => {
         </ComboboxInput>
         <ComboboxPopover>
           <ComboboxList
-          className="searchOptions"
+          className="splashSeachOption"
           >
             {status === "OK" &&
             <>
