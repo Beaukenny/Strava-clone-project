@@ -6,9 +6,17 @@ export const settingMarkers = async (event, markers, setMarkers) => { //define a
   }])
 }
 
+export const calculateChartData = (elevationData, totalDistance) => {
+  let data = elevationData.map((each,i) => {
+    let distance=(Number(totalDistance.split(" mi")[0])/elevationData.length).toFixed(2)
+    return {x:distance * i, y:Number(each.elevation.toFixed(2))}
+  })
+  return data
+}
 
 
-export const getElevationData = async (distanceData, elevation, setElevationData,setTotalElevation) => {
+
+export const getElevationData = async (distanceData, elevation, setElevationData,setTotalElevation, totalDistance, setChartData) => {
   const overview_path = distanceData.routes[0].overview_path
   const eachOverViewArray = overview_path.map(each=>{return {lat:each.lat(), lng:each.lng()}})
   try {
@@ -30,8 +38,10 @@ export const getElevationData = async (distanceData, elevation, setElevationData
       }).reduce((acc, ele) => {
         return acc + ele
       })
-      setTotalElevation(positiveElevation.toFixed(2))
+
+      setTotalElevation(`${positiveElevation.toFixed(2)} ft`)
       setElevationData(data)
+      setChartData(calculateChartData(data,totalDistance))
     }
   })
   }catch(e){
@@ -42,8 +52,7 @@ export const getElevationData = async (distanceData, elevation, setElevationData
 }
 
 
-export const staticMapImage = (distanceData,setStaticImageURL) => {
-
+export const staticMapImage = async (distanceData,setStaticImageURL) => {
   const keyOption = `key=${process.env.REACT_APP_GOOGLE_KEY}`;
   const prefix = `http://maps.googleapis.com/maps/api/staticmap?`
   const size = `size=400x400` 
@@ -55,7 +64,7 @@ export const staticMapImage = (distanceData,setStaticImageURL) => {
     const path = "&path=" + overViewPoline.join("|")
     const url = prefix + size + '&markers=color:green|' + firstPoly+ path + '&sensor=false'+ '&markers=color:red|'+lastPoly+'&' + keyOption
    
-    setStaticImageURL(url)
+    await setStaticImageURL(url)
   
   }
 
@@ -64,8 +73,4 @@ export const staticMapImage = (distanceData,setStaticImageURL) => {
 
 
 
-
-export const creatingRoute = () => {
-
-}
 

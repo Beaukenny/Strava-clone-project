@@ -2,6 +2,8 @@ import React from 'react';
 import usePlacesAutocomplete, {getGeocode, getLatLng,} from "use-places-autocomplete"
 import {Combobox,ComboboxInput,ComboboxPopover,ComboboxList,ComboboxOption,} from "@reach/combobox";
 import mapStyles from "./mapStyling.css"
+
+
 const Search =({mapLocation}) => {
     const {ready, value, suggestions: {status, data}, setValue, clearSuggestions} = usePlacesAutocomplete({
       location: {lat: ()=> 41.4993, lng: ()=> -81.6944},
@@ -28,12 +30,16 @@ const Search =({mapLocation}) => {
         <ComboboxInput 
         value={value} 
         onChange={(e)=> setValue(e.target.value)} 
-        disabled={!ready} 
-        placeholder="Where To Start?">
+        disabled={!ready}
+        className="searchInput"
+        placeholder="Choose starting address or city ...">
         </ComboboxInput>
-    <ComboboxPopover>
+    <ComboboxPopover
+    className="searchOptions">
       <ComboboxList>
-       {status === "OK" && data.map(({id, description})=> <ComboboxOption key={id} value={description}/>)}     
+       {status === "OK" && data.map(({id, description})=> 
+       <ComboboxOption 
+       as="h4" key={id} value={description}/>)}     
       </ComboboxList>
       </ComboboxPopover>
       </Combobox>

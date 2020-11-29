@@ -1,16 +1,68 @@
 .search {
-    position: absolute;
-    top: 5rem;
-    left: 50%;
-    width: 100%;
-    max-width: 400px;
-    z-index: 2;
-  }
+  position: absolute;
+  top: 1rem;
+  left: 40%;
+  transform: translateX(-50%);
+  width: 60%;
+  max-width: 100%;
+  z-index: 99;
+}
 
-  /* .title {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    color: whitesmoke;
-    z-index: 2;
-  } */
+.search input {
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  width: 100%;
+  border-radius: 15px;
+  height: 1.5em;
+  z-index: 99;
+
+}
+.search input:focus{
+  background-color: rgb(226, 218, 255);
+  outline: none;
+  z-index: 99;
+
+}
+
+.locate {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  z-index: 50;
+}
+.locate img {
+  width: 30px;
+  cursor: pointer;
+}
+.toolBar{
+  position:absolute;
+  bottom:480px;
+  z-index: 30;
+}
+.searchOptions{
+  background: white;
+  border-left: 2px solid black;
+  border-radius: 5px;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  z-index: 90
+}
+
+
+.gridContainer{
+  position:relative;
+  bottom:7em;
+}
+
+
+.formContainer{
+  position:relative;
+  bottom:4em;
+}
+
+.elevationChart{
+  position:relative;
+  bottom:6em;
+}
