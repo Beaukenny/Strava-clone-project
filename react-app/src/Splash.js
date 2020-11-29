@@ -2,10 +2,13 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import { Grid, Typography } from '@material-ui/core';
 import Searchbar from './components/routeSearch/Searchbar';
+import Tooltip from '@material-ui/core/Tooltip';
+import Toolbar from '@material-ui/core/Toolbar';
 
 const Splash = () => {
 
     return (
+        <>
         <Grid
         container
         padding="20px"
@@ -34,11 +37,19 @@ const Splash = () => {
             <Grid item>
             <Typography component="h6" variant="h6" align="center" style={{fontWeight:"bold"}}>Search for workout routes nearby, or enter a location to search for more routes:</Typography>
             </Grid>
-            <Grid item>
-                <Searchbar />
-            </Grid>
-        </Grid>
 
+        </Grid>       
+
+                    
+        <Toolbar className="splashToolBar">
+          <Grid container spacing={2} alignItems="center">
+
+            <Grid item xs align="center">
+              <Searchbar className="splashSearchBar"></Searchbar>
+            </Grid>
+          </Grid>
+        </Toolbar>
+        </>
     )
 
 

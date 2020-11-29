@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllRouteWithCoords } from '../../store/actions/routeSearch';
 import { apiUrl } from '../../config';
 import RouteCard from './RouteCard'
+import Search from "./Searchbar"
 
 const SearchResult = () =>{
     // const dispatch = useDispatch();
@@ -19,7 +20,6 @@ const SearchResult = () =>{
         }
         if (!coordinates){
            getAllRoutes(); 
-           
         }
         
     }, [])
@@ -35,7 +35,7 @@ const SearchResult = () =>{
             <button onClick={()=> console.log(data)}>data</button>
             <button onClick={()=> console.log(load)}>load</button>
 
-
+            <Search></Search>
      <div>
          {data.routes.map(each=> 
          

@@ -47,7 +47,8 @@
   border-radius: 5px;
   border-right: 2px solid black;
   border-bottom: 2px solid black;
-  z-index: 90
+  z-index: 90;
+  transform: translate3d(0px, -15px, 0px)!important;
 }
 
 
@@ -70,4 +71,32 @@
   position: relative;
   top:10em;
   /* border: 10px solid red; */
+}
+
+.splashSearchBar1{
+  width: 400px;
+  /* max-width: 100%; */
+  z-index: 99; 
+  display: flex;
+}
+
+
+.splashSearch {
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  width: 100%;
+  border-radius: 15px;
+  height: 1.5em;
+  z-index: 99;
+  outline: none;
+
+}
+
+.splashSearch input:focus{
+  background-color: rgb(226, 218, 255);
+  outline: none;
+  z-index: 99;
+}
+.SplashCombo{
+  width: 500px
 }
