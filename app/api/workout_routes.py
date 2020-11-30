@@ -55,7 +55,7 @@ def add_custom_workout():
         description=data['description'],
         workout_photos=f'{workout_photos}',
         time=f'{time}',
-        workout_date=data['workout_date'],
+        # workout_date=data['workout_date'],
         user_id=data['user_id'],
         route_id=data['route_id'],
     )
