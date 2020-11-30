@@ -1,10 +1,10 @@
 import React, { setState, useEffect, useState, history } from "react";
-import { Tabs, Tab, AppBar, Button, List, ListItem, ListItemText, ListItemAvatar, Grid, Menu, MenuItem } from "@material-ui/core";
+import { Tabs, Tab, makeStyles, AppBar, Button, List, ListItem, ListItemText, ListItemAvatar, Grid, Menu, MenuItem, ListItemIcon, GridListTile, GridList, GridListTileBar } from "@material-ui/core";
 import LoginForm from "./auth/LoginForm";
 import UsersList from "./UsersList";
 import MapRoute from "./route/MapRoute";
 import App from "../App";
-import { NavLink, useHistory, useLocation, useParams} from "react-router-dom";
+import { NavLink, useHistory, useLocation, useParams } from "react-router-dom";
 import User from "./User";
 import Search from "./route/Search";
 import MyLocation from "./route/Mylocation";
@@ -17,12 +17,54 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import Menuw from "./Menu";
+import geolib from 'geolib';
+import TabNav from "./Header/TabNav";
+
+ const useStyles = makeStyles((theme) => ({
+        //   h2: {
+        //       fontFamily: theme.fontFamily,
+        //   },
+        //   MuiGrid: {
+        //       width: "80%"
+        //   },
+        //   MuiDialogActions: {
+        //       justifyContent: "space-around"
+        //   },
+        //   img: {
+        //       display: "block",
+        //       width: "40%",
+        //       marginLeft: "auto",
+        //       marginRight: "auto"
+        //   },
+        //   root: {
+        //       color: theme.primary,
+        //       input: {
+        //           textAlign: "center"
+        //       },
+        //       width: "100%",
+        //       justifyContent: 'space-between'
+        //   },
+          indicator: {
+            backgroundColor: theme.primary,
+        }
+        }));
+   
+
+
+
+
 const Home = () => {
     // const { match, classes, value, history } = props;
+//     const useStyles = theme => ({
+//         indicator: {
+//             backgroundColor: 'primary',
+//         },
+//     })
+//    const classes = useStyles();
     // const { params } = match;
     // const { page } = params;
-    const { page } = useParams();
-    const { classes, value } = useState();
+    // const { page } = useParams();
+    // const { classes, value } = useState();
     const history = useHistory()
     const tabNameToIndex = {
         0: "home",
@@ -32,19 +74,19 @@ const Home = () => {
         4: "user",
     }
 
-    const indexToTabName = {
-        home: 0,
-        workouts: 1,
-        routes: 2,
-        explore: 3,
-        user: 4,
-    }
+    // const indexToTabName = {
+    //     home: 0,
+    //     workouts: 1,
+    //     routes: 2,
+    //     explore: 3,
+    //     user: 4,
+    // }
     
-    const [selectedTab, setSelectedTab] = useState(indexToTabName[page]);
+    // const [selectedTab, setSelectedTab] = useState(indexToTabName[page]);
     // const { classes } = props;
     // const { value } = props;
 
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
 
     const handleClick = () => {
         setOpen(!open);
@@ -78,77 +120,60 @@ const Home = () => {
         //     </div>
         // )
     }
-
-    const handleChange = (event, newValue) => {
-        setSelectedTab(newValue);
+    const changeBackground = (e) => {
+        // e.preventDefault()
+        e.target.style.backgroundColor = 'orange'
+        // setTimeout(() => {e.target.style.backgroundColor = 'blue' }, 500)
+        
     }
+
+    // const handleChange = (event, newValue) => {
+    //     setSelectedTab(newValue);
+    //     // event.target.indicatorColor = "primary";
+    // }
 
     const handleLogout = () => {
         // handle logout here
         history.push('/');
     }
 
+    const options = [{"key": 0, "value":"home"}, {"key": 1, "value": "workouts"}, {"key": 2, "value": "routes"}, {"key": 3, "value": "explore"}, {"key": 4, "value": "user"}];
     return (
-        <div style={{ maxWidth: "1000px", margin: "3em auto"}}>
-            <div style={{borderBottom: "1px solid grey", display: "grid", position: "static", flexDirection: "row", width: "100%", maxHeight: "100px" }}>
-                {/* <AppBar position="static"> */}
-                {/* !!!!!!!!!! PUT LOGO HERE !!!!!!! */}
-                {/* <div style={{ height: "5px", width: "5px", position: "relative", left: "10%", top: "2.5vh"}}>
-                    <NavLink to="/" activeclass="active">
-                        <AllInclusiveIcon />
-                    </NavLink>
-                </div> */}
-                <div style={{ position: "relative", left: "-5vw", justifySelf: "center", width: "fit-content", height: "fit-content"}}>
-                    <Tabs value={selectedTab} onChange={handleChange}>
-                            <Tab onClick={() => history.push('/')}
-                                label={<AllInclusiveIcon />}>
-                                    {/* <AllInclusiveIcon /> */}
-                                </Tab>
-                            <Tab onClick={() => history.push('/workouts')}
-                                label="Workouts" />
-                            <Tab onClick={() => history.push('/routes')}
-                            label="Routes" />
-                            <Tab onClick={() => history.push('/explore')}
-                            label="Explore" />
-                            <Tab 
-                            
-                            onClick={() => history.push('/user-options')}
-                            label={<EmojiEmotionsIcon/>}>
-                                
-                            </Tab>
-                            {/* <Tab label="User"/> */}
-                        {/* </div> */}
-                        {/* <div style={{ width: "200px", border: "1px solid blue", display: "inline-block"}}> */}
-                            {/* <Tabs value={3} onChange={handleChange}> */}
-                            {/* </Tabs> */}
-                    </Tabs>
-                {/* <div style={{ alignSelf: "flex-start", borderRadius: "50%", position: "absolute", left: "60%", justifySelf: "flex-end", height: "50px", width: "fit-content", border: "1px solid blue"}}>
-                    <List >
-                        <ListItem button onClick={handleClick}>
-                            <ListItemText primary="PROFILE_PIC" />
-                            {open ? <ExpandLess /> : <ExpandMore />}
-                        </ListItem>
-                        <Collapse in={open} timeout="auto" unmountOnExit>
-                            <ListItem button onClick={() => history.push('/login')}>
-                                <ListItemText primary="Log In" />
-                            </ListItem>
-                            <ListItem button onClick={() => history.push('/sign-up')}>
-                                <ListItemText primary="Sign Up" />
-                            </ListItem>
-                            <ListItem button onClick={handleClick}>
-                                <ListItemText primary="Demo" />
-                            </ListItem>
-                            <ListItem button onClick={handleLogout}>
-                                <ListItemText primary="Log Out" />
-                            </ListItem>
-                        </Collapse>
-                    </List>
-                </div> */}
-                </div>
-                {/* </AppBar> */}
+        <div style={{marginTop: "10vh", marginLeft: "auto", marginRight: "auto", borderBottom: "2px solid lightGrey", display: "grid", position: "fixed block", width: "75vw", height: "100%", maxHeight: "10vh", top: "10vh"}}>
+            <Grid style={{ border: "0px solid blue"}} container xs={12}>
+                    <Grid style={{ border: "0px solid purple"}} item xs={2} />
+                    <Grid item xs={6} container justify={"space-between"} style={{ minWidth: "40vw"}}>
+                        <TabNav />
+                    </Grid>
+                    <Grid style={{ border: "0px solid orange"}} item xs={2} justify={'flex-end'} container >
+                        <Grid item style={{ border: "0px solid cyan", position: "absolute", top: "8vh", zIndex: 100}} >
+                            {/* <UserNav /> */}
+                            <List>
+                                    <ListItem button onClick={handleClick} >
+                                        <ListItemText primary={<EmojiEmotionsIcon/>} />
+                                        {open ? <ExpandLess /> : <ExpandMore />}
+                                    </ListItem>
+                                    <Collapse in={open} timeout="auto" unmountOnExit >
+                                        <ListItem button onClick={handleClick}>
+                                            <ListItemText primary="Profile" />
+                                        </ListItem>
+                                        <ListItem button onClick={() => history.push('/login')}>
+                                            <ListItemText primary="Create Route" />
+                                        </ListItem>
+                                        <ListItem button onClick={() => history.push('/sign-up')}>
+                                            <ListItemText primary="Create Workout" />
+                                        </ListItem>
+                                        <ListItem button onClick={handleLogout}>
+                                            <ListItemText primary="Log Out" />
+                                        </ListItem>
+                                    </Collapse>
+                                </List>
+                        </Grid>
+                    </Grid>
+                    <Grid style={{ border: "0px solid purple"}} item xs={2} />
+                </Grid>
             </div>
-             
-        </div>
+       
     )
 };
 

@@ -1,0 +1,76 @@
+import React, {useState, history} from 'react';
+import { 
+    Tabs, 
+    Tab, 
+    // makeStyles, 
+    // AppBar, 
+    // Button, 
+    // List, 
+    // ListItem, 
+    // ListItemText, 
+    // ListItemAvatar, 
+    // Grid, 
+    // Menu, 
+    // MenuItem, 
+    // ListItemIcon 
+} from "@material-ui/core";
+
+import { useHistory, useLocation, useParams } from "react-router-dom";
+
+import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
+
+const TabNav = () => {
+
+    const tabNameToIndex = {
+        0: "home",
+        1: "workouts",
+        2: "routes",
+        3: "explore",
+        4: "user",
+    }
+
+    const indexToTabName = {
+        home: 0,
+        workouts: 1,
+        routes: 2,
+        explore: 3,
+        user: 4,
+    }
+    const { page } = useParams();
+
+    const [selectedTab, setSelectedTab] = useState(indexToTabName[page]);
+    const history = useHistory()
+
+
+    const useStyles = theme => ({
+        indicator: {
+            backgroundColor: 'primary',
+        },
+    })
+    const classes = useStyles();
+
+
+
+    const handleChange = (event, newValue) => {
+        setSelectedTab(newValue);
+        // event.target.indicatorColor = "primary";
+    }
+    
+  return (
+    <>
+        <Tabs indicatorColor={'primary'} value={selectedTab} onChange={handleChange}>
+            <Tab value={0} onClick={() => history.push('/')}
+                label={<AllInclusiveIcon />}>
+                    {/* <AllInclusiveIcon /> */}
+            </Tab>
+            <Tab onClick={() => history.push('/workouts')}
+                label="Workouts" />
+            <Tab onClick={() => history.push('/routes')}
+            label="Routes" />
+            <Tab onClick={() => history.push('/')}
+            label="explore" />
+        </Tabs>
+    </>
+  )}
+
+  export default TabNav;
