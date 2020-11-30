@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { apiUrl } from '../../config';
-import RouteCard from './RouteCard'
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
@@ -14,7 +13,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Paper from '@material-ui/core/Paper';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 import usePlacesAutocomplete, { getGeocode, getLatLng, } from "use-places-autocomplete"
-import { Redirect } from "react-router-dom"
+import { Redirect,useParams } from "react-router-dom"
+import RouteCard from "./RouteCard"
 const styles = makeStyles((theme) => ({
     paper: {
         maxWidth: 750,
@@ -44,20 +44,19 @@ const styles = makeStyles((theme) => ({
 const MyRoutes = () => {
     const classes = styles()
     const [load, setLoad] = useState(false)
-    const [data2, setData] = useState("")
-
+    const [data, setData] = useState([])
+    const {userId} = useParams()
     useEffect(() => {
         async function getAllRoutes() {
-            const result = await fetch(`${apiUrl}/routes`)
-            let res = await result.json();
-            setData(res)
-            setLoad(!load)
-        }
-        // if (!coordinates) {
-        //     getAllRoutes();
-        // } else {
-        //     getCertainRoutes(coordinates, setData, setLoad, load)
-        // }
+            const result = await fetch(`${apiUrl}/routes/myroutes`, {
+                method: "put",
+                headers:{"Content-Type":"application/json"},
+                body: JSON.stringify({userId:userId})
+            })
+            const data = await result.json()
+            setData(data.myRoutes)
+        }   
+        getAllRoutes();
     }, [])
 
 
@@ -82,9 +81,9 @@ const MyRoutes = () => {
                 </Grid>
             </Grid>
             <Paper className={classes.paper}>
-                {/* {data2.routes.length == 0 ? <h1>There is no Route</h1> : data2.routes.map(each =>
+                {data.length == 0 ? <h1>There is no Route</h1> : data.map(each =>
                     <RouteCard data={each}></RouteCard>
-                )} */}
+                )}
 
             </Paper>
         </>
