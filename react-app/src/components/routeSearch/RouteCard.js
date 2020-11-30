@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
         height: 0,
         paddingTop: '40%', // 16:9
     },
-
 }));
 
 export default function RouteCard({ data }) {
@@ -54,7 +53,7 @@ export default function RouteCard({ data }) {
                 action={ <Tooltip title={<h2>Add route to my workouts</h2>}>
                     <IconButton
                     style={{top:"3.5em"}}
-                        onClick={() => { console.log("add this route") }}
+                        onClick={() => {window.location.href=`/users/${window.localStorage.getItem("currentUser")}/route/${data.id}/workout/create`}}
                     >
                         <AddBoxIcon fontSize="large"
                         />
