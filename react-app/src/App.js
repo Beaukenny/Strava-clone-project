@@ -66,22 +66,24 @@ function App() {
         <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
           <UsersList/>
         </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId/route/create" exact={true}>
+        <ProtectedRoute path="/users/:userId/route/create" exact={true} authenticated={authenticated}>
           <MapRoute />
         </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId/myroutes" exact={true}>
+        <ProtectedRoute path="/users/:userId/myroutes" exact={true} authenticated={authenticated}>
           <MyRoutes />
         </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId/myworkouts" exact={true}>
+        <ProtectedRoute path="/users/:userId/myworkouts" exact={true} authenticated={authenticated}>
           <MyWorkouts />
         </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId/route/:routeId/workout/create" exact={true}>
+        <ProtectedRoute path="/users/:userId/route/:routeId/workout/create" exact={true} authenticated={authenticated}>
           <Workout />
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
           <User />
         </ProtectedRoute>
-        <WorkoutFeed path="/workouts" exact={true} ></WorkoutFeed>
+        <ProtectedRoute path="/workouts" exact={true} authenticated={authenticated}>
+          <WorkoutFeed />
+        </ProtectedRoute>
 
     {/* <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
           <h1>My Home Page</h1>
