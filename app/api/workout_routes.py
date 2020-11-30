@@ -6,10 +6,17 @@ workout_routes = Blueprint('workouts', __name__)
 
 
 @workout_routes.route('/')
-@login_required
 def workouts():
     workouts = Workout.query.all()
     return {"workouts": [workout.to_dict() for workout in workouts]}
+
+
+@workout_routes.route('/myworkout/<int:id>')
+def myWorkout(id):
+    workouts = Workout.query.filter(Workout.user_id == id).all()
+    print(id)
+    return {"workouts": [workout.to_dict() for workout in workouts]}
+    # return {"message": "ok"}
 
 
 @workout_routes.route('/<int:id>')

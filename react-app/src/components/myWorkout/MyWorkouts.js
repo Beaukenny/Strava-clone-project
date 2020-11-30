@@ -14,7 +14,7 @@ import Paper from '@material-ui/core/Paper';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 import usePlacesAutocomplete, { getGeocode, getLatLng, } from "use-places-autocomplete"
 import { Redirect,useParams } from "react-router-dom"
-import RouteCard from "./RouteCard"
+import WorkoutCard from "./WorkoutCard"
 const styles = makeStyles((theme) => ({
     paper: {
         maxWidth: 750,
@@ -41,20 +41,18 @@ const styles = makeStyles((theme) => ({
 }));
 
 
-const MyRoutes = () => {
+const MyWorkouts = () => {
     const classes = styles()
     const [load, setLoad] = useState(false)
     const [data, setData] = useState([])
     const {userId} = useParams()
     useEffect(() => {
         async function getAllRoutes() {
-            const result = await fetch(`${apiUrl}/routes/myroutes`, {
-                method: "put",
-                headers:{"Content-Type":"application/json"},
-                body: JSON.stringify({userId:userId})
-            })
+            const result = await fetch(`${apiUrl}/workouts/myworkout/${Number.parseInt(userId)}`)
             const data = await result.json()
-            setData(data.myRoutes)
+            // setData(data.myRoutes)
+            setData(data.workouts)
+            console.log(data.workouts)
         }   
         getAllRoutes();
     }, [])
@@ -63,7 +61,7 @@ const MyRoutes = () => {
 
     return (
         <>
-            <Typography variant="h3" component="h3" color="primary" align="center">My Routes:</Typography>
+            <Typography variant="h3" component="h3" color="primary" align="center">My Workouts:</Typography>
             <Tooltip title={<h2>Create a brand new route</h2>}>
                 <IconButton className="createRouteButtonInSearch">
                     <AddBoxIcon className="createRouteButtonInSearch" fontSize="large" 
@@ -81,8 +79,8 @@ const MyRoutes = () => {
                 </Grid>
             </Grid>
             <Paper className={classes.paper}>
-                {data.length == 0 ? <h1>There is no Route</h1> : data.map(each =>
-                    <RouteCard data={each}></RouteCard>
+                {data.length == 0 ? <h1>There is no Workout</h1> : data.map(each =>
+                    <WorkoutCard data={each}></WorkoutCard>
                 )}
 
             </Paper>
@@ -91,4 +89,4 @@ const MyRoutes = () => {
 }
 
 
-export default MyRoutes;
+export default MyWorkouts;
