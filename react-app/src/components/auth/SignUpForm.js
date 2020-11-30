@@ -74,6 +74,8 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
             setSubmitted(true)
             setOpen(false)
             setErrors('');
+          window.localStorage.setItem("currentUser",user.id)
+
           } else {
               setErrors(user.errors);
         }
@@ -92,6 +94,9 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
           }
       });
 
+      if(window.localStorage.getItem("currentUser")){
+        window.location.replace("/workouts")
+    }
     return (
             <div>
                 {/* <Dialog open={open} style={{width:"100%"}} onClose={handleSignIn} aria-labelledby="form-dialog-title"> */}
