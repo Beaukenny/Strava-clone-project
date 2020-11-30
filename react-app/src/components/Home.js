@@ -141,8 +141,8 @@ const Home = () => {
     return (
         <div style={{marginTop: "10vh", marginLeft: "auto", marginRight: "auto", borderBottom: "2px solid lightGrey", display: "grid", position: "fixed block", width: "75vw", height: "100%", maxHeight: "10vh", top: "10vh"}}>
             <Grid style={{ border: "0px solid blue"}} container xs={12}>
-                    <Grid style={{ border: "0px solid purple"}} item xs={2} />
-                    <Grid item xs={6} container justify={"space-between"} style={{ minWidth: "40vw"}}>
+                    <Grid style={{ border: "0px solid purple"}} item xs={2} m={3}/>
+                    <Grid item xs={6} l={6} container justify={"space-between"} style={{ minWidth: "50vw"}}>
                         <TabNav />
                     </Grid>
                     <Grid style={{ border: "0px solid orange"}} item xs={2} justify={'flex-end'} container >

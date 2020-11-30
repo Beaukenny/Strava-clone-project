@@ -1,8 +1,9 @@
 import React, {useState, history} from 'react';
 import { 
     Tabs, 
-    Tab, 
-    // makeStyles, 
+    Tab,
+    Avatar, 
+    makeStyles, 
     // AppBar, 
     // Button, 
     // List, 
@@ -18,6 +19,27 @@ import {
 import { useHistory, useLocation, useParams } from "react-router-dom";
 
 import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
+// import CadenceLogo;
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  small: {
+    width: theme.spacing(3),
+    height: theme.spacing(3),
+  },
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  },
+  indicator: {
+        backgroundColor: 'primary',
+    },
+}));
+
 
 const TabNav = () => {
 
@@ -42,11 +64,11 @@ const TabNav = () => {
     const history = useHistory()
 
 
-    const useStyles = theme => ({
-        indicator: {
-            backgroundColor: 'primary',
-        },
-    })
+    // const useStyles = theme => ({
+    //     indicator: {
+    //         backgroundColor: 'primary',
+    //     },
+    // })
     const classes = useStyles();
 
 
@@ -60,14 +82,17 @@ const TabNav = () => {
     <>
         <Tabs indicatorColor={'primary'} value={selectedTab} onChange={handleChange}>
             <Tab value={0} onClick={() => history.push('/')}
-                label={<AllInclusiveIcon />}>
+                label={<Avatar  
+                        // src="/CadenceLogo.png"
+                        // className={classes.large}
+                        />}>
                     {/* <AllInclusiveIcon /> */}
             </Tab>
-            <Tab onClick={() => history.push('/workouts')}
+            <Tab value={1} onClick={() => history.push('/workouts')}
                 label="Workouts" />
-            <Tab onClick={() => history.push('/routes')}
+            <Tab value={2} onClick={() => history.push('/routes')}
             label="Routes" />
-            <Tab onClick={() => history.push('/')}
+            <Tab value={3} onClick={() => history.push('/')}
             label="explore" />
         </Tabs>
     </>
