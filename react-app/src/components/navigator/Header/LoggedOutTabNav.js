@@ -80,7 +80,7 @@ const LoggedOutTabNav = () => {
     }
     
 
-
+//history.push('/workouts'
   return (
     <>
         <Tabs indicatorColor={'primary'} value={selectedTab} onChange={handleChange}>

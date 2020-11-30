@@ -81,7 +81,7 @@ const TabNav = () => {
   return (
     <>
         <Tabs indicatorColor={'primary'} value={selectedTab} onChange={handleChange}>
-            <Tab style={{ marginRight: "4em"}} value={0} onClick={() => history.push('/')}
+            <Tab style={{ marginRight: "4em"}} value={0} onClick={() => history.push('/workouts')}
                 label={ <img className={classes.large} style={{maxHeight: "3em", maxWidth: "3em"}} src='favicon-copy.png'/>
                 // <Avatar  
                 //         src="/CadenceLogo.png"
@@ -90,11 +90,11 @@ const TabNav = () => {
                         }>
                     {/* <AllInclusiveIcon /> */}
             </Tab>
-            <Tab value={1} onClick={() => history.push('/workouts')}
+            <Tab value={1} onClick={() => history.push(`/users/${window.localStorage.getItem("currentUser")}/myworkouts`)}
                 label="Workouts" />
-            <Tab value={2} onClick={() => history.push('/routes')}
+            <Tab value={2} onClick={() => history.push(`/users/${window.localStorage.getItem("currentUser")}/myroutes`)}
             label="Routes" />
-            <Tab value={3} onClick={() => history.push('/')}
+            <Tab value={3} onClick={() => history.push('/search-result')}
             label="explore" />
         </Tabs>
     </>
