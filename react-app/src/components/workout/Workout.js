@@ -244,7 +244,6 @@ export default function Workout() {
                     onClick={payloadPost}
                 >Complete</Button>
             </Paper>
-
         </>
     );
 }
