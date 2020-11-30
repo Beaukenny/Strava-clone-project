@@ -13,7 +13,7 @@ import Theme from './Theme';
 import Workout from './components/workout/Workout'
 import Home from "./components/Home";
 import Menuw from "./components/Menu";
-
+import MyRoutes from "./components/myRoute/MyRoutes"
 import Splash from './Splash';
 import SearchResult from './components/routeSearch/SearchResult';
 
@@ -68,6 +68,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId/route/create" exact={true} authenticated={authenticated}>
           <MapRoute />
+        </ProtectedRoute>
+        <ProtectedRoute path="/users/:userId/myroutes" exact={true} authenticated={authenticated}>
+          <MyRoutes />
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId/route/:routeId/workout/create" exact={true} authenticated={authenticated}>
           <Workout />

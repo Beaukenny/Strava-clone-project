@@ -18,6 +18,17 @@ def routes():
     return {"routes": [route.to_dict() for route in routes]}
 
 
+@route_routes.route('/myroutes')
+# @login_required
+def myRoutes():
+    routes = Route.query.join(User).order_by(Route.totalDistance.desc()).all()
+    # print([route.to_dict() for route in routes])
+    # print(jsonify(routes))
+    # return jsonify(routes=routes)
+    # print(type({"routes": [route.to_dict() for route in routes]}))
+    return {"routes": [route.to_dict() for route in routes]}
+
+
 @route_routes.route('/<int:id>')
 # @login_required
 def route(id):
