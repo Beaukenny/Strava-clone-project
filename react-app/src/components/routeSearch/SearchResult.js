@@ -76,34 +76,12 @@ const SearchResult = () => {
                 </Grid>
             </Grid>
             <Paper className={classes.paper}>
-                {data.routes ? data.routes.map(each =>
+                {/* {data.routes ? data.routes.map(each =>
                     <RouteCard data={each}></RouteCard>
-                ): <><h1
-                
-                >NO sssssssssssssssroute</h1><h1
-                
-                >NO sssssssssssssssroute</h1><h1
-                
-                >NO sssssssssssssssroute</h1><h1
-                
-                >NO sssssssssssssssroute</h1><h1
-                
-                >NO sssssssssssssssroute</h1><h1
-                
-                >NO sssssssssssssssroute</h1><h1
-                
-                >NO sssssssssssssssroute</h1><h1
-                
-                >NO sssssssssssssssroute</h1><h1
-                
-                >NO sssssssssssssssroute</h1><h1
-                
-                >NO sssssssssssssssroute</h1><h1
-                
-                >NO sssssssssssssssroute</h1><h1
-                stlye={{zIndex:"99" }}
-                >NO sssssssssssssssroute</h1></>}
-
+                ): null} */}
+            {data.routes.length==0 ? <h1>There is no Route</h1>: data.routes.map(each =>
+                    <RouteCard data={each}></RouteCard>
+                )}
 
             </Paper>
         </>
