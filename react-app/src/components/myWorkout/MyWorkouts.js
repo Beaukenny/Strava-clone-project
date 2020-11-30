@@ -48,13 +48,10 @@ const MyWorkouts = () => {
     const {userId} = useParams()
     useEffect(() => {
         async function getAllRoutes() {
-            const result = await fetch(`${apiUrl}/routes/myroutes`, {
-                method: "put",
-                headers:{"Content-Type":"application/json"},
-                body: JSON.stringify({userId:userId})
-            })
+            const result = await fetch(`${apiUrl}/workouts/myworkout/${Number.parseInt(userId)}`)
             const data = await result.json()
-            setData(data.myRoutes)
+            // setData(data.myRoutes)
+            setData(data)
         }   
         getAllRoutes();
     }, [])
