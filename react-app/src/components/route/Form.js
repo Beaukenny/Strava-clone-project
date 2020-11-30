@@ -6,7 +6,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { Button } from '@material-ui/core';
-import { useParams } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 import {apiUrl} from "../../config"
 
 
@@ -62,6 +62,9 @@ userId =  Number.parseInt(userId);
         callback(e.target.value);
     };
 
+    const handleRedirect = () => {
+        return <Redirect to='/' />
+    }
 
     return (
         <>
@@ -136,7 +139,7 @@ userId =  Number.parseInt(userId);
                             type="submit"
                             variant="contained"
                             color="primary"
-
+                            onClick={() => window.location.href='/'}
                         >Save to My Routes</Button></Grid>
                 </Grid>
 
