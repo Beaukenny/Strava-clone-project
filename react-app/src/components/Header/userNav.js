@@ -7,7 +7,8 @@ import {
     // Button, 
     List, 
     ListItem, 
-    ListItemText, 
+    ListItemText,
+    Avatar, 
     // ListItemAvatar, 
     // Grid, 
     // Menu, 
@@ -66,25 +67,28 @@ const UserNav = () => {
     };
     
     return (
-        <div>
+        <div style={{marginTop: "10vh", marginLeft: "auto", marginRight: "auto", borderBottom: "2px solid lightGrey", display: "grid", position: "fixed block", width: "75vw", height: "100%", maxHeight: "10vh", top: "10vh"}}>
             <List>
                 <ListItem button onClick={handleClick}>
                     {/* <ListItemAvatar /> */}
                     {/* <ListItemIcon /> */}
-                    <ListItemText primary={<EmojiEmotionsIcon/>} />
+                    <ListItemText primary={<Avatar  
+                        // src="/CadenceLogo.png"
+                        className={classes.large}
+                        />} />
                     {open ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
                 <Collapse in={open} timeout="auto" unmountOnExit >
-                    <ListItem button onClick={handleClick}>
+                    {/* <ListItem value={0} button onClick={handleClick}>
                         <ListItemText primary="Profile" />
                     </ListItem>
-                    <ListItem button onClick={() => history.push('/login')}>
+                    <ListItem value={1} button onClick={() => history.push('/login')}>
                         <ListItemText primary="Create Route" />
                     </ListItem>
-                    <ListItem button onClick={() => history.push('/sign-up')}>
+                    <ListItem value={2} button onClick={() => history.push('/sign-up')}>
                         <ListItemText primary="Create Workout" />
-                    </ListItem>
-                    <ListItem button onClick={handleLogout}>
+                    </ListItem> */}
+                    <ListItem value={3} button onClick={handleLogout}>
                         <ListItemText primary="Log Out" />
                     </ListItem>
                 </Collapse>

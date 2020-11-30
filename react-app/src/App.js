@@ -7,7 +7,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import MapRoute from "./components/route/MapRoute";
-import { authenticate } from "./services/auth";
+import { authenticate, logout } from "./services/auth";
 import { CssBaseline } from "@material-ui/core";
 import Theme from './Theme';
 import Workout from './components/workout/Workout'
@@ -45,14 +45,21 @@ function App() {
     <Theme>
       
       <BrowserRouter>
+
+        <NavBar setAuthenticated={setAuthenticated} authenticated={authenticated} />
+        {/* <Switch>
+          <Redirect exact from="/home" to="/home/workouts" />
+          <Route exact path="/home/:page?" render={props => <Home {...props} />} />
+        </Switch> */}
+
       
-        <NavBar setAuthenticated={setAuthenticated} />
         <Switch>
         <Route exact path="/sign-up" component={SignUpForm} />
         <Route exact path="/login" component={LoginForm} />
+        <Route exact path="/logout" redirect="/" />
 
         <Route path='/' exact={true}>
-          <Splash />
+          <Splash setAuthenticated={setAuthenticated} authenticated={authenticated} />
         </Route>
 
         <Route path="/login" exact={true}>
@@ -85,9 +92,9 @@ function App() {
           <WorkoutFeed />
         </ProtectedRoute>
 
-    {/* <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
-          <h1>My Home Page</h1>
-        </ProtectedRoute> */}
+
+          
+        
         <ProtectedRoute path="/user-options" exact={true} authenticated={authenticated}>
           <div style={{ height: "fit-content", width: "fit-content", marginLeft: "60vw"}}>
             <Menuw />

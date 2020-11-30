@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const TabNav = () => {
+const LoggedOutTabNav = () => {
 
     const tabNameToIndex = {
         0: "home",
@@ -81,7 +81,7 @@ const TabNav = () => {
   return (
     <>
         <Tabs indicatorColor={'primary'} value={selectedTab} onChange={handleChange}>
-            <Tab style={{ marginRight: "4em"}}value={0} onClick={() => history.push('/')}
+            <Tab value={0} onClick={() => history.push('/')}
                 label={ <img className={classes.large} style={{maxHeight: "3em", maxWidth: "3em"}} src='favicon-copy.png'/>
                 // <Avatar  
                 //         src="/CadenceLogo.png"
@@ -90,14 +90,14 @@ const TabNav = () => {
                         }>
                     {/* <AllInclusiveIcon /> */}
             </Tab>
-            <Tab value={1} onClick={() => history.push('/workouts')}
+            {/* <Tab value={1} onClick={() => history.push('/workouts')}
                 label="Workouts" />
             <Tab value={2} onClick={() => history.push('/routes')}
             label="Routes" />
             <Tab value={3} onClick={() => history.push('/')}
-            label="explore" />
+            label="explore" /> */}
         </Tabs>
     </>
   )}
 
-  export default TabNav;
+  export default LoggedOutTabNav;
