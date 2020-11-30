@@ -43,7 +43,7 @@ def delete_workout(id):
 
 
 @workout_routes.route('/custom', methods=['POST'])
-@login_required
+# @login_required
 def add_custom_workout():
     data = request.json
     print(data)

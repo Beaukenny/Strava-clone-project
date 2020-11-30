@@ -27,6 +27,7 @@ import { Button } from '@material-ui/core';
 
 
 
+
 const useStyles = makeStyles((theme) => ({
     paper: {
         maxWidth: 750,
@@ -58,9 +59,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Workout() {
     const classes = useStyles();
-    const { userId, routeId } = useParams()
+    const {userId, routeId } = useParams()
     const [userData, setuserData] = useState("")
     const [routeData, setrouteData] = useState("")
+    const [workoutName, setworkoutName] = useState("")
+    const [workoutDescription, setworkoutDescription] = useState("")
+    const [workoutDuration, setworkoutDuration] = useState(0)
+
     // time = time.split("-0500 (Eastern Standard Time")
     useEffect(() => {
         async function getData() {
@@ -73,6 +78,31 @@ export default function Workout() {
         }
         getData();
     }, [])
+    const updateProperty = (cb) => (e) => {
+        cb(e.target.value)
+    }
+    const payloadPost = async() => {
+        const payload = {
+            user_id: userId,
+            route_id: routeId,
+            name: workoutName,
+            description: workoutDescription,
+            time: workoutDuration
+        }
+        const response = await fetch(`${apiUrl}/workouts/custom`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        } )
+        if (response.ok) {
+            const result = await response.json();
+            console.log(result)
+            
+        }
+    }
+
 
     return (
         <>
@@ -175,7 +205,8 @@ export default function Workout() {
                         name="name"
                         label="Workout Name"
                         id="name"
-
+                        value ={workoutName}
+                        onChange={updateProperty(setworkoutName)}
                     />
                 </Grid>
                 <Grid item xs={12}>
@@ -192,8 +223,8 @@ export default function Workout() {
                         name="description"
                         label="Workout Description"
                         id="description"
-                    // value={description}
-                    // onChange={updateProperty(setDescription)}
+                    value={workoutDescription}
+                    onChange={updateProperty(setworkoutDescription)}
                     />
                 </Grid>
                 <TextField
@@ -204,10 +235,13 @@ export default function Workout() {
                         shrink: true,
                     }}
                     variant="filled"
+                    value={workoutDuration}
+                    onChange={updateProperty(setworkoutDuration)}
                 />
                 <Button
                     variant="contained"
                     color="primary"
+                    onClick={payloadPost}
                 >Complete</Button>
             </Paper>
 
