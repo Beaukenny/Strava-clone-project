@@ -54,7 +54,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
         if (e) { e.preventDefault()};
         const user = await login(values.email, values.password);
         if (!user.errors) {
-          setAuthenticated(true);
+        //   setAuthenticated(true);
           setOpen(false);
           setValues({['email']:''});
           setValues({['password']:''});

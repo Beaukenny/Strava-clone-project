@@ -46,7 +46,6 @@ function App() {
           <Route exact path="/home/:page?" render={props => <Home {...props} />} />
         </Switch> */}
         <Switch>
-
         <Route exact path="/sign-up" component={SignUpForm} />
         <Route exact path="/login" component={LoginForm} />
 

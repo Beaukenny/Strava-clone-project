@@ -70,7 +70,7 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
         if (values.password === values.confirmPassword) {
           const user = await signUp(values.username, values.email, values.password, values.avatar_url);
           if (!user.errors) {
-            setAuthenticated(true);
+            // setAuthenticated(true);
             setSubmitted(true)
             setOpen(false)
             setErrors('');
