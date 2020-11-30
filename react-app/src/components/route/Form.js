@@ -54,6 +54,9 @@ userId =  Number.parseInt(userId);
         if (response.ok) {
             const data = await response.json()
             console.log(data)
+            const userId = window.localStorage.getItem("currentUser")
+            window.location.href=`/users/${userId}/myroutes`
+
         }
 
     }
@@ -139,7 +142,6 @@ userId =  Number.parseInt(userId);
                             type="submit"
                             variant="contained"
                             color="primary"
-                            onClick={() => window.location.href='/'}
                         >Save to My Routes</Button></Grid>
                 </Grid>
 
