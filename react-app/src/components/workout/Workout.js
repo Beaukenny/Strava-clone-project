@@ -16,7 +16,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Paper from '@material-ui/core/Paper';
-import { useParams } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 import { apiUrl } from '../../config'
 import Grid from '@material-ui/core/Grid';
 import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
@@ -99,7 +99,9 @@ export default function Workout() {
         } )
         if (response.ok) {
             const result = await response.json();
-            console.log(result)
+            // console.log(result)
+            const userId = window.localStorage.getItem("currentUser")
+            window.location.href=`/users/${userId}/myworkouts`
 
         }
     }
@@ -108,8 +110,8 @@ export default function Workout() {
     return (
         <>
             <Typography variant="h3" component="h3" color="primary" align="center">Edit Workout Details:</Typography>
-            <button onClick={() => console.log(typeof (time))}>bbbbbbbb</button>
-            <h1>{userData.username}</h1>
+            {/* <button onClick={() => console.log(typeof (time))}>bbbbbbbb</button> */}
+            {/* <h1>{userData.username}</h1> */}
             <Paper className={classes.paper}>
                 <Card className={classes.root}>
                     <CardHeader
