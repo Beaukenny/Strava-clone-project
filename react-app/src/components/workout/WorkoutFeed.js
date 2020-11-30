@@ -61,7 +61,7 @@ const MyWorkouts = () => {
 
     return (
         <>
-            <Typography variant="h3" component="h3" color="primary" align="center">My Workouts:</Typography>
+            <Typography variant="h3" component="h3" color="primary" align="center">Workout Feeds</Typography>
             <Tooltip title={<h2>Create a brand new route</h2>}>
                 <IconButton className="createRouteButtonInSearch">
                     <AddBoxIcon className="createRouteButtonInSearch" fontSize="large" 
