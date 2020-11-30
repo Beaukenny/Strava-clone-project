@@ -10,10 +10,10 @@ import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 import {authenticate} from "./services/auth"
 const Splash = () => {
 
-    if(window.localStorage.getItem("currentUser")){
-        window.location.replace("/workouts")
-        //<workout page here >
-    }
+    // if(window.localStorage.getItem("currentUser")){
+    //     window.location.replace("/workouts")
+    //     //<workout page here >
+    // }
 
     return (
         <>

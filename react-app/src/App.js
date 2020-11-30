@@ -81,7 +81,9 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
           <User />
         </ProtectedRoute>
-        <WorkoutFeed path="/workouts" exact={true} ></WorkoutFeed>
+        <ProtectedRoute path="/workouts" exact={true} authenticated={authenticated}>
+          <WorkoutFeed />
+        </ProtectedRoute>
 
     {/* <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
           <h1>My Home Page</h1>
