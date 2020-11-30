@@ -17,7 +17,7 @@ import MyRoutes from "./components/myRoute/MyRoutes"
 import Splash from './Splash';
 import SearchResult from './components/routeSearch/SearchResult';
 import MyWorkouts from "./components/myWorkout/MyWorkouts"
-
+import WorkoutFeed from "./components/workout/WorkoutFeed"
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -66,21 +66,22 @@ function App() {
         <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
           <UsersList/>
         </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId/route/create" exact={true} authenticated={authenticated}>
+        <ProtectedRoute path="/users/:userId/route/create" exact={true}>
           <MapRoute />
         </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId/myroutes" exact={true} authenticated={authenticated}>
+        <ProtectedRoute path="/users/:userId/myroutes" exact={true}>
           <MyRoutes />
         </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId/myworkouts" exact={true} authenticated={authenticated}>
+        <ProtectedRoute path="/users/:userId/myworkouts" exact={true}>
           <MyWorkouts />
         </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId/route/:routeId/workout/create" exact={true} authenticated={authenticated}>
+        <ProtectedRoute path="/users/:userId/route/:routeId/workout/create" exact={true}>
           <Workout />
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
           <User />
         </ProtectedRoute>
+        <WorkoutFeed path="/workouts" exact={true} ></WorkoutFeed>
 
     {/* <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
           <h1>My Home Page</h1>
