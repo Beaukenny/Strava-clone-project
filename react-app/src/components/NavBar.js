@@ -6,7 +6,8 @@ import Home from './Home';
 const NavBar = ({ setAuthenticated }) => {
   return (
     <>
-      <Home />
+      {setAuthenticated && <Home setAuthenticated={setAuthenticated} />}
+      
       {/* <nav>
         <ul>
           <li>
