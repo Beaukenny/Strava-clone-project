@@ -86,6 +86,7 @@ export default function Workout() {
             user_id: userId,
             route_id: routeId,
             name: workoutName,
+            workout_photos: null,
             description: workoutDescription,
             time: workoutDuration
         }
@@ -99,7 +100,7 @@ export default function Workout() {
         if (response.ok) {
             const result = await response.json();
             console.log(result)
-            
+
         }
     }
 
