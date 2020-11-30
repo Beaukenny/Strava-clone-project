@@ -13,7 +13,7 @@ import Theme from './Theme';
 import Workout from './components/workout/Workout'
 import Home from "./components/Home";
 import Menuw from "./components/Menu";
-
+import MyRoutes from "./components/myRoute/MyRoutes"
 import Splash from './Splash';
 import SearchResult from './components/routeSearch/SearchResult';
 
