@@ -51,7 +51,8 @@ const MyWorkouts = () => {
             const result = await fetch(`${apiUrl}/workouts/myworkout/${Number.parseInt(userId)}`)
             const data = await result.json()
             // setData(data.myRoutes)
-            setData(data)
+            setData(data.workouts)
+            console.log(data.workouts)
         }   
         getAllRoutes();
     }, [])
@@ -78,7 +79,7 @@ const MyWorkouts = () => {
                 </Grid>
             </Grid>
             <Paper className={classes.paper}>
-                {data.length == 0 ? <h1>There is no Route</h1> : data.map(each =>
+                {data.length == 0 ? <h1>There is no Workout</h1> : data.map(each =>
                     <WorkoutCard data={each}></WorkoutCard>
                 )}
 
