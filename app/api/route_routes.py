@@ -19,7 +19,7 @@ def routes():
 
 
 @route_routes.route('/<int:id>')
-@login_required
+# @login_required
 def route(id):
     route = Route.query.get(id)
     return route.to_dict()

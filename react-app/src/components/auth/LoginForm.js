@@ -59,6 +59,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
           setValues({['email']:''});
           setValues({['password']:''});
           setErrors('');
+          window.localStorage.setItem("currentUser",user.id)
         //   return <Redirect to="/" />
         window.location.href="/"
         } else {
@@ -91,6 +92,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
           setValues({['password']:''});
           setErrors('')
           //return <Redirect to="/" />
+          window.localStorage.setItem("currentUser",user.id)
           window.location.href="/"
         } else {
           setErrors(user.errors);

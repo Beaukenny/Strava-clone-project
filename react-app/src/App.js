@@ -10,7 +10,7 @@ import MapRoute from "./components/route/MapRoute";
 import { authenticate } from "./services/auth";
 import { CssBaseline } from "@material-ui/core";
 import Theme from './Theme';
-
+import Workout from './components/workout/Workout'
 import Home from "./components/Home";
 import Menuw from "./components/Menu";
 
@@ -67,6 +67,9 @@ function App() {
         <ProtectedRoute path="/users/:userId/route/create" exact={true} authenticated={authenticated}>
           <MapRoute />
         </ProtectedRoute>
+        <ProtectedRoute path="/users/:userId/route/:routeId/workout/create" exact={true} authenticated={authenticated}>
+          <Workout />
+        </ProtectedRoute>
         <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
           <User />
         </ProtectedRoute>
@@ -83,7 +86,6 @@ function App() {
         <Route path="/search-result" exact={true}>
           <SearchResult/>
         </Route>
-
         </Switch>
       </BrowserRouter>
     </Theme>
