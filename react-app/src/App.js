@@ -18,7 +18,7 @@ import Splash from './Splash';
 import SearchResult from './components/routeSearch/SearchResult';
 import MyWorkouts from "./components/myWorkout/MyWorkouts"
 import WorkoutFeed from "./components/workout/WorkoutFeed"
-
+import NavBar2 from "./components/navigator/NavBar"
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -45,8 +45,8 @@ function App() {
     <Theme>
       
       <BrowserRouter>
-
-        <NavBar setAuthenticated={setAuthenticated} authenticated={authenticated} />
+<NavBar2></NavBar2>
+        {/* <NavBar setAuthenticated={setAuthenticated} authenticated={authenticated} /> */}
         {/* <Switch>
           <Redirect exact from="/home" to="/home/workouts" />
           <Route exact path="/home/:page?" render={props => <Home {...props} />} />
