@@ -18,6 +18,7 @@ import Splash from './Splash';
 import SearchResult from './components/routeSearch/SearchResult';
 
 
+
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -27,7 +28,10 @@ function App() {
       const user = await authenticate();
       if (!user.errors) {
         setAuthenticated(true);
+        window.localStorage.setItem("currentUser",user.id)
+
       }
+      
       setLoaded(true);
     })();
   }, []);
@@ -39,12 +43,10 @@ function App() {
   return (
     <CssBaseline>
     <Theme>
+      
       <BrowserRouter>
+      
         <NavBar setAuthenticated={setAuthenticated} />
-        {/* <Switch>
-          <Redirect exact from="/home" to="/home/workouts" />
-          <Route exact path="/home/:page?" render={props => <Home {...props} />} />
-        </Switch> */}
         <Switch>
         <Route exact path="/sign-up" component={SignUpForm} />
         <Route exact path="/login" component={LoginForm} />
@@ -74,9 +76,9 @@ function App() {
           <User />
         </ProtectedRoute>
 
-    <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
+    {/* <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
           <h1>My Home Page</h1>
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         <ProtectedRoute path="/user-options" exact={true} authenticated={authenticated}>
           <div style={{ height: "fit-content", width: "fit-content", marginLeft: "60vw"}}>
             <Menuw />
