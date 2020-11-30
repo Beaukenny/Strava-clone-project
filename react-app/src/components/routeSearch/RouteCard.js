@@ -19,6 +19,8 @@ import Grid from '@material-ui/core/Grid';
 import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
 import AddBoxIcon from '@material-ui/icons/AddBox';
+import Tooltip from '@material-ui/core/Tooltip';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 800,
@@ -49,14 +51,14 @@ export default function RouteCard({ data }) {
                     >
                     </Avatar>
                 }
-                action={
+                action={ <Tooltip title={<h2>Add route to my workouts</h2>}>
                     <IconButton
                     style={{top:"3.5em"}}
                         onClick={() => { console.log("add this route") }}
                     >
                         <AddBoxIcon fontSize="large"
                         />
-                    </IconButton>
+                    </IconButton></Tooltip>
                 }
                 title={data.host.username.toUpperCase()}
                 subheader={date}

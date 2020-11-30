@@ -74,7 +74,7 @@
 }
 
 .splashSearchBar1{
-  width: 400px;
+  width: 500px;
   /* max-width: 100%; */
   z-index: 99; 
   display: flex;
@@ -107,8 +107,12 @@
   border-right: 2px solid black;
   border-bottom: 2px solid black;
   z-index: 90;
-transform: translate3d(0px, -15px, 0px)!important;
+transform: translate3d(0px, -15px, 0px);
 
+}
+
+.createRouteButtonInSearch{
+  left: 80%
 }
 
 /* transform: translate3d(0px, -15px, 0px)!important; */

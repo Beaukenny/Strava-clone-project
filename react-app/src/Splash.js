@@ -6,6 +6,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Toolbar from '@material-ui/core/Toolbar';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
 import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
+import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
+
 const Splash = () => {
 
     return (
@@ -45,7 +47,7 @@ const Splash = () => {
         <Grid item xs={12} align="center" >
             <DirectionsWalkIcon fontSize="large" style={{marginBottom:'5pt' ,marginTop: '15pt', marginRight:'25pt'}}></DirectionsWalkIcon>
             <DirectionsBikeIcon fontSize="large" style={{marginBottom:'5pt' ,marginTop: '15pt',marginRight:'12.5pt', marginLeft:"12.5"}}></DirectionsBikeIcon>
-            <DirectionsWalkIcon fontSize="large" style={{marginBottom:'5pt' ,marginTop: '15pt',marginLeft:'25pt'}}></DirectionsWalkIcon>
+            <DirectionsRunIcon fontSize="large" style={{marginBottom:'5pt' ,marginTop: '15pt',marginLeft:'25pt'}}></DirectionsRunIcon>
 
         </Grid>
         </Grid>
