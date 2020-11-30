@@ -17,6 +17,26 @@ export async function getCertainRoutes(startingPoint, setData, setLoad,load) {
     }) 
     setData({routes:dataWithin25miles})
         setLoad(!load)
+    // console.log(dataWithin25miles)
+}
+
+export async function getCertainRoutes2(startingPoint, setData) {
+    const result = await fetch(`${apiUrl}/routes`)
+    let res = await result.json();
+    const arr = res.routes
+    const dataWithin25miles = arr.filter((each)=> {
+        let origin = each.starting_point
+        let jsonedOrigin = stringToData(origin)
+        let originLat = jsonedOrigin.lat;
+        let originLng = jsonedOrigin.lng;
+        let startingLat = startingPoint.lat;
+        let startingLng = startingPoint.lng;
+        if (measure(startingLat, startingLng, originLat, originLng) < 25) {
+            return each
+        }
+    }) 
+    setData({routes:dataWithin25miles})
+
     console.log(dataWithin25miles)
 }
 //starting point = {lat:41.0814447,lng:-81.51900529999999}
