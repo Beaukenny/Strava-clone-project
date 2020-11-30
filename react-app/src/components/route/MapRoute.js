@@ -62,7 +62,7 @@ const Map = () => {
     {x:0, y:0},{x:5, y:0},{x:10, y:0}])
   //////////////////////////////////////////
   const classes = styles()
-  const mapLocation = useCallback(({ lat, lng }) => {
+  const mapLocation = useCallback(({ lat, lng }) => {//memoize func
     setDefaultLocation({ lat, lng })
   }, [])
 

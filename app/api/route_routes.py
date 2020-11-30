@@ -18,8 +18,22 @@ def routes():
     return {"routes": [route.to_dict() for route in routes]}
 
 
+@route_routes.route('/myroutes', methods=["PUT"])
+# @login_required
+def myRoutes():
+    userId = request.json["userId"]
+    myRoutes = Route.query.join(User).filter(User.id == userId).all()
+    # print([route.to_dict() for route in routes])
+    # print(jsonify(routes))
+    # return jsonify(routes=routes)
+    # print(type({"routes": [route.to_dict() for route in routes]}))
+    return {"myRoutes": [route.to_dict() for route in myRoutes]}
+    # print(myRoutes)
+    # return {"myroutes":"asdf"}
+
+
 @route_routes.route('/<int:id>')
-@login_required
+# @login_required
 def route(id):
     route = Route.query.get(id)
     return route.to_dict()

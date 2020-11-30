@@ -10,13 +10,14 @@ import MapRoute from "./components/route/MapRoute";
 import { authenticate, logout } from "./services/auth";
 import { CssBaseline } from "@material-ui/core";
 import Theme from './Theme';
-
+import Workout from './components/workout/Workout'
 import Home from "./components/Home";
 import Menuw from "./components/Menu";
-
+import MyRoutes from "./components/myRoute/MyRoutes"
 import Splash from './Splash';
 import SearchResult from './components/routeSearch/SearchResult';
-
+import MyWorkouts from "./components/myWorkout/MyWorkouts"
+import WorkoutFeed from "./components/workout/WorkoutFeed"
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -27,7 +28,10 @@ function App() {
       const user = await authenticate();
       if (!user.errors) {
         setAuthenticated(true);
+        window.localStorage.setItem("currentUser",user.id)
+
       }
+      
       setLoaded(true);
     })();
   }, []);
@@ -39,12 +43,16 @@ function App() {
   return (
     <CssBaseline>
     <Theme>
+      
       <BrowserRouter>
+
         <NavBar setAuthenticated={setAuthenticated} authenticated={authenticated} />
         {/* <Switch>
           <Redirect exact from="/home" to="/home/workouts" />
           <Route exact path="/home/:page?" render={props => <Home {...props} />} />
         </Switch> */}
+
+      
         <Switch>
         <Route exact path="/sign-up" component={SignUpForm} />
         <Route exact path="/login" component={LoginForm} />
@@ -68,13 +76,25 @@ function App() {
         <ProtectedRoute path="/users/:userId/route/create" exact={true} authenticated={authenticated}>
           <MapRoute />
         </ProtectedRoute>
+        <ProtectedRoute path="/users/:userId/myroutes" exact={true} authenticated={authenticated}>
+          <MyRoutes />
+        </ProtectedRoute>
+        <ProtectedRoute path="/users/:userId/myworkouts" exact={true} authenticated={authenticated}>
+          <MyWorkouts />
+        </ProtectedRoute>
+        <ProtectedRoute path="/users/:userId/route/:routeId/workout/create" exact={true} authenticated={authenticated}>
+          <Workout />
+        </ProtectedRoute>
         <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
           <User />
         </ProtectedRoute>
+        <ProtectedRoute path="/workouts" exact={true} authenticated={authenticated}>
+          <WorkoutFeed />
+        </ProtectedRoute>
 
-        {/* <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
-          <h1>My Home Page</h1>
-        </ProtectedRoute> */}
+
+          
+        
         <ProtectedRoute path="/user-options" exact={true} authenticated={authenticated}>
           <div style={{ height: "fit-content", width: "fit-content", marginLeft: "60vw"}}>
             <Menuw />
@@ -84,7 +104,6 @@ function App() {
         <Route path="/search-result" exact={true}>
           <SearchResult/>
         </Route>
-
         </Switch>
       </BrowserRouter>
     </Theme>

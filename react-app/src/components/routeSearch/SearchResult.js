@@ -82,7 +82,6 @@ const SearchResult = () => {
         } else {
             getCertainRoutes2(searchCoord, setData)
         }
-        console.log(searchCoord)
     }
     if (!load) {
         return null
@@ -93,7 +92,9 @@ const SearchResult = () => {
             <Typography variant="h3" component="h3" color="primary" align="center">Explore Routes:</Typography>
             <Tooltip title={<h2>Create a brand new route</h2>}>
                 <IconButton className="createRouteButtonInSearch">
-                    <AddBoxIcon className="createRouteButtonInSearch" fontSize="large" />
+                    <AddBoxIcon className="createRouteButtonInSearch" fontSize="large" 
+                    onClick={()=>window.location.replace(`/users/${window.localStorage.getItem("currentUser")}/route/create`)}
+                    />
                 </IconButton>
             </Tooltip>
 
