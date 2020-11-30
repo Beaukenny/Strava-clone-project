@@ -27,7 +27,7 @@ function UserNav() {
     <div style={{left: "30vw", position: "absolute", height:"200px", width: "200px", border: "1px solid blue"}}>
         <ul>
             <li>
-                <Link to="/"><strong>Explore</strong></Link>
+                <Link to="/workouts"><strong>Explore</strong></Link>
                 {/* <strong>Explore</strong> {userId} */}
             </li>
             <li>
