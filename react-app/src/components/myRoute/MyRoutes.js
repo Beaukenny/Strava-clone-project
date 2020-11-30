@@ -64,8 +64,8 @@ const MyRoutes = () => {
 
     return (
         <>
-            <Typography variant="h3" component="h3" color="primary" align="center">Explore Routes:</Typography>
-            <Tooltip title={<h2>My Routes:</h2>}>
+            <Typography variant="h3" component="h3" color="primary" align="center">My Routes:</Typography>
+            <Tooltip title={<h2>Create a brand new route</h2>}>
                 <IconButton className="createRouteButtonInSearch">
                     <AddBoxIcon className="createRouteButtonInSearch" fontSize="large" 
                     onClick={()=>window.location.replace(`/users/${window.localStorage.getItem("currentUser")}/route/create`)}
@@ -82,9 +82,9 @@ const MyRoutes = () => {
                 </Grid>
             </Grid>
             <Paper className={classes.paper}>
-                {data2.routes.length == 0 ? <h1>There is no Route</h1> : data2.routes.map(each =>
+                {/* {data2.routes.length == 0 ? <h1>There is no Route</h1> : data2.routes.map(each =>
                     <RouteCard data={each}></RouteCard>
-                )}
+                )} */}
 
             </Paper>
         </>
