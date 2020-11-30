@@ -16,7 +16,10 @@ def users():
 # @login_required
 def user(id):
     user = User.query.get(id)
+    # print("userrrrrrrrrrrrrr")
+    # print(user.to_dict()["avatar_url"])
     return user.to_dict()
+
 
 
 # ? GET USER'S ROUTES (TESTED BY CLAY)

@@ -6,7 +6,6 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import { Tabs, Tab, makeStyles, AppBar, Button, List, ListItem, ListItemText, ListItemAvatar, Grid, Menu, MenuItem, ListItemIcon, GridListTile, GridList, GridListTileBar, Avatar } from "@material-ui/core";
 import { NavLink, useHistory, useLocation, useParams } from "react-router-dom";
-
 const ShowLoginNav = () => {
         // setOpen(!open);
     const { page } = useParams();
@@ -33,6 +32,8 @@ const ShowLoginNav = () => {
     const [authenticated, setAuthenticated] = useState(false);
     const [loaded, setLoaded] = useState(false);
     const [open, setOpen] = useState(false);
+    const [avatarUrl, setAvatorUrl] = useState('')
+
 
     const handleClick = () => {
         setOpen(!open);

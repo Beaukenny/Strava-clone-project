@@ -1,11 +1,11 @@
-import React, {useState, history} from 'react';
+import React, {useState,useEffect, history} from 'react';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import { Tabs, Tab, makeStyles, AppBar, Button, List, ListItem, ListItemText, ListItemAvatar, Grid, Menu, MenuItem, ListItemIcon, GridListTile, GridList, GridListTileBar, Avatar } from "@material-ui/core";
 import { NavLink, useHistory, useLocation, useParams } from "react-router-dom";
 import {logout} from "../../../services/auth"
-
+import {apiUrl} from "../../../config"
 const ShowLogoutNav = () => {
         // setOpen(!open);
     const { page } = useParams();
@@ -32,6 +32,18 @@ const ShowLogoutNav = () => {
     const [authenticated, setAuthenticated] = useState(false);
     const [loaded, setLoaded] = useState(false);
     const [open, setOpen] = useState(false);
+    const [avatarUrl, setAvatorUrl] = useState('')
+
+    useEffect(()=> {
+
+        const getAvatarUrl = async () => {
+            const responce = await fetch(`${apiUrl}/users/${window.localStorage.getItem("currentUser")}`)
+            const parsedData = await responce.json()
+            setAvatorUrl(parsedData.avatar_url)
+        }
+        getAvatarUrl()
+    },[])
+
 
     const handleClick = () => {
         setOpen(!open);
@@ -45,12 +57,11 @@ const ShowLogoutNav = () => {
         history.push('/');
     }
 
-
         return (
             <List >
                 <ListItem button onClick={handleClick}>
                     <ListItemText primary={<Avatar  
-                        // src="/favicon-copy.png"
+                        src={!avatarUrl ? null : avatarUrl}
                         // className={classes.large}
                         />} />
                     {open ? <ExpandLess /> : <ExpandMore />}

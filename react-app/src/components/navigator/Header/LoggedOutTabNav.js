@@ -85,20 +85,10 @@ const LoggedOutTabNav = () => {
     <>
         <Tabs indicatorColor={'primary'} value={selectedTab} onChange={handleChange}>
             <Tab value={0} onClick={() => history.push('/')}
-                label={ <img className={classes.large} style={{maxHeight: "3em", maxWidth: "3em"}} src='favicon-copy.png'/>
-                // <Avatar  
-                //         src="/CadenceLogo.png"
-                //         className={classes.large}
-                //         />
-                        }>
-                    {/* <AllInclusiveIcon /> */}
+                label={ <img className={classes.large} style={{maxHeight: "3em", maxWidth: "3em"}} src='favicon-copy.png'/>}>
+                
             </Tab>
-            {/* <Tab value={1} onClick={() => history.push('/workouts')}
-                label="Workouts" />
-            <Tab value={2} onClick={() => history.push('/routes')}
-            label="Routes" />
-            <Tab value={3} onClick={() => history.push('/')}
-            label="explore" /> */}
+
         </Tabs>
     </>
   )}
