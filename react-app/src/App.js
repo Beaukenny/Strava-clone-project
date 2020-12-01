@@ -19,6 +19,8 @@ import SearchResult from './components/routeSearch/SearchResult';
 import MyWorkouts from "./components/myWorkout/MyWorkouts"
 import WorkoutFeed from "./components/workout/WorkoutFeed"
 import NavBar2 from "./components/navigator/NavBar"
+import WorkoutDetail from "./components/myWorkout/WorkoutDetail"
+
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -81,6 +83,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId/myworkouts" exact={true} authenticated={authenticated}>
           <MyWorkouts />
+        </ProtectedRoute>
+        <ProtectedRoute path="/users/:userId/workout/:workoutId" exact={true} authenticated={authenticated}>
+          <WorkoutDetail />
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId/route/:routeId/workout/create" exact={true} authenticated={authenticated}>
           <Workout />

@@ -20,7 +20,7 @@ def myWorkout(id):
 
 
 @workout_routes.route('/<int:id>')
-@login_required
+# @login_required
 def workout(id):
     workout = Workout.query.get(id)
     return workout.to_dict()

@@ -56,7 +56,7 @@ export default function RouteCard({ data }) {
                     variant="contained"
                     color="primary"
                     style={{top:"2.5em"}}
-                        onClick={() => console.log("view detail")}
+                        onClick={() => window.location.replace(`/users/${window.localStorage.getItem("currentUser")}/workout/${data.id}`)}
                     >View Detail </Button></Tooltip>
                 }
                 title={data.host.username.toUpperCase()}
