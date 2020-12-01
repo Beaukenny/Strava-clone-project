@@ -26,7 +26,8 @@ import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { apiUrl } from '../../config';
 import { useParams } from 'react-router-dom';
-
+import DeleteIcon from '@material-ui/icons/Delete';
+import { red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -59,11 +60,14 @@ const useStyles = makeStyles((theme) => ({
         height: 0,
         paddingTop: '40%', // 16:9
     },
+    block: {
+        display: 'block',
+      },
 }));
 
 export default function WorkoutDetail() {
     const classes = useStyles();
-    const {workoutId} = useParams()
+    const {workoutId,userId} = useParams()
     const [data, setDate] = useState('')
     const [workoutName, setworkoutName] = useState("")
     const [workoutDescription, setworkoutDescription] = useState("")
@@ -71,15 +75,18 @@ export default function WorkoutDetail() {
     const [editName, setEditName] = useState(false)
     const [editDescription, setDescription] = useState(false)
     const [editDuration, setEditDuration] = useState(false)
-
-
-
+    const [deleteError, setDeleteError] = useState("")
+    const [ableToEdit, setAbleToEdit] = useState(false)
+    const [updated, setUpdated] = useState(false)
+    const [ableToEditDetail, setAbleToEditDetail] = useState('')
     useEffect(()=> {
         const getData = async () => {
             const response = await fetch(`${apiUrl}/workouts/${workoutId}`)
             const workoutData = await response.json()
-            console.log(workoutData)
+            // console.log(workoutData)
+            await setAbleToEdit(workoutData.host.id == userId)
             await setDate(workoutData)
+            
             // const arrayDate = data.created_at.split("GMT")[0].split(",").join("").split(" ")
             // const date = [arrayDate[2], arrayDate[1], ",", arrayDate[3], "at", arrayDate[4]].join(" ")
             // console.log(date)
@@ -88,18 +95,72 @@ export default function WorkoutDetail() {
         getData()
     }, [])
     const updateProperty1 = (cb) => (e) => {
-        setEditName(!editName)
+        if (ableToEdit) {
+          setEditDuration(true)
         cb(e.target.value)
+    }
+        
+  
+
     }
     const updateProperty2 = (cb) => (e) => {
-        setDescription(!editDescription)
+if (ableToEdit) {
+                setEditName(true)
         cb(e.target.value)
+}
+
+
     }
     const updateProperty3 = (cb) => (e) => {
-        
+        if (ableToEdit) {
+            setDescription(true)
         cb(e.target.value)
     }
+    }
+    const deleteWorkout = async () => {
 
+        const response = await fetch(`${apiUrl}/workouts/${Number.parseInt(workoutId)}`,{
+            method:"PUT",
+            headers:{"Content-Type":"application/json"},
+            body: JSON.stringify({userId:window.localStorage.getItem("currentUser")})
+        })
+        const jsonedData = await response.json()
+        if (jsonedData.message == "notgood") {
+            setDeleteError("You are not the owner of this workout.")
+        } else {
+
+      
+        window.location.replace(`/users/${window.localStorage.getItem("currentUser")}/myworkouts`)
+    }
+  }
+
+  const editWorkoutDetail = async () => {
+      const payload = {
+        workoutName,
+        workoutDescription,
+        workoutDuration,
+      }
+    //   console.log(payload)
+    try {
+      const response = await fetch(`${apiUrl}/workouts/${Number.parseInt(workoutId)}/${window.localStorage.getItem("currentUser")}`,{
+        method:"PUT",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify(payload)
+    })
+    if (response.ok) {
+        const jsoned = await response.json()
+        setUpdated(!updated)
+        if (jsoned.message == "notgood") {
+            setAbleToEditDetail("bad")
+        } else {
+            setAbleToEditDetail("good")
+        }
+    }
+} catch(e) {
+    console.log(e)
+}
+
+  }
 
     // [data.created_at.split("GMT")[0].split(",").join("").split(" ")[2], data.created_at.split("GMT")[0].split(",").join("").split(" ")[1], ",", data.created_at.split("GMT")[0].split(",").join("").split(" ")[3], "at",data.created_at.split("GMT")[0].split(",").join("").split(" ")[4]]
 
@@ -135,11 +196,33 @@ export default function WorkoutDetail() {
                     >
                     </Avatar>
                 }
+                action={ <>
+                <Button                            
+                variant="contained"
+                color="primary"
+                style={{top:"2.5em"}}
+                    onClick={() =>editWorkoutDetail()}
+                >Edit Detail </Button>
+                <Tooltip title={deleteError ?<h2>{deleteError}</h2> :<h2>Delete</h2>}>
+                <IconButton
+                style={{top:'25pt'}}
+                onClick={()=>deleteWorkout()}
+                >
+                    {deleteError ? <DeleteIcon style={{ color: red[500] }}/>: <DeleteIcon className={classes.block} color="inherit" />}
+                    
+                    
+
+                    </IconButton></Tooltip>
+</>
+
+                
+            }
                 title={data.host.username.toUpperCase()}
                 subheader={[data.created_at.split("GMT")[0].split(",").join("").split(" ")[2], data.created_at.split("GMT")[0].split(",").join("").split(" ")[1], ",", data.created_at.split("GMT")[0].split(",").join("").split(" ")[3], "at",data.created_at.split("GMT")[0].split(",").join("").split(" ")[4]].join(" ")}
             />
+
             <Typography style={{marginLeft:"1em"}}variant="h5" component="h5">{data.name}</Typography>
-            
+    
             <Grid container>
             <Grid item xs={3}
             align="center">
@@ -203,7 +286,8 @@ export default function WorkoutDetail() {
                         shrink: true,
                     }}
                     value={editDuration ? workoutDuration :data.time}
-                    onClick={()=>setEditDuration(true)}
+                    onClick={()=>{
+                        if (ableToEdit) {setEditDuration(true)}}}
                     onChange={updateProperty1(setworkoutDuration)}
                 />
               </Typography>
@@ -232,7 +316,13 @@ export default function WorkoutDetail() {
                         name="name"
                         id="name"
                         value ={editName ? workoutName :data.name}
-                        onClick={()=>setEditName(true)}
+                        onClick={()=>{
+                            if (ableToEdit) {
+                                setEditName(true)
+                            }
+                            
+                        }
+                        }
                         onChange={updateProperty2(setworkoutName)}
                     />
                 </Grid>
@@ -250,7 +340,8 @@ export default function WorkoutDetail() {
                         name="description"
                         id="description"
                         value ={editDescription ? workoutDescription :data.description}
-                        onClick={()=>setDescription(true)}
+                        onClick={()=>{
+                            if (ableToEdit) {setDescription(true)}}}
                         onChange={updateProperty3(setworkoutDescription)}
                     />
                 </Grid>

@@ -26,14 +26,36 @@ def workout(id):
     return workout.to_dict()
 
 
-@workout_routes.route('/<int:id>/', methods=['DELETE'])
-@login_required
+@workout_routes.route('/<int:id>/<int:uId>', methods=['PUT'])
+def edit_workout(id, uId):
+    data = request.json
+    # user_id = data["userId"]
+    workout = Workout.query.filter(Workout.id == id).first()
+    dictionary = workout.to_dict()
+    
+    if int(dictionary["user_id"]) == int(uId):
+        workout.time = data["workoutDuration"]
+        workout.description = data["workoutDescription"]
+        workout.name = data["workoutName"]
+        db.session.commit()
+        return {"message":"ok"}
+    else:
+        return {"message":"notgood"}
+
+@workout_routes.route('/<int:id>', methods=['PUT'])
 def delete_workout(id):
     data = request.json
-    workout = Workout.query.get(data['id'])
-    db.session.delete(workout)
-    db.session.commit()
-    return "Deleted."
+    print(id)
+    userId = data["userId"]
+    workout = Workout.query.filter(Workout.id == id).first()
+    dictionary = workout.to_dict()
+    if int(dictionary["user_id"]) == int(userId):
+        db.session.delete(workout)
+        db.session.commit()
+        return {"message":"ok"}
+    else:
+        return {"message":"notgood"}
+
 
 
 # @workout_routes.route('/workouts/update', methods=['PUT'])
