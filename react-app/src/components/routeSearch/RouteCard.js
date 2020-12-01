@@ -46,7 +46,7 @@ export default function RouteCard({ data }) {
                 avatar={
                     <Avatar
                         aria-label="recipe"
-                        // src
+                        src={data.host.avatar_url ? data.host.avatar_url : null}
                     >
                     </Avatar>
                 }

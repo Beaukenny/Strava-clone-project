@@ -17,6 +17,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
 import Chart from "./Chart"
+import SideBar from "./SideBar"
 const styles = makeStyles((theme) => ({
   paper: {
     maxWidth: 936,
@@ -107,6 +108,7 @@ const Map = () => {
               <MyLocation mapLocation={mapLocation}></MyLocation>
               <Tooltip title="Delete">
                 <IconButton
+                
                   onClick={clearData}>
                   <DeleteIcon className={classes.block} color="inherit" />
                 </IconButton>
@@ -119,13 +121,19 @@ const Map = () => {
             <Typography component="h4" variant="h4" style={{ color: "gray", marginRight:"10%"  }}>Select Mode:</Typography>
             <IconButton
             style={{ marginRight:"10%"  }}
-
               onClick={() => { setTravelingMode("WALKING") }}>
-              <DirectionsWalkIcon fontSize="large"></DirectionsWalkIcon>
+              {travelingMode=="WALKING" ? <DirectionsWalkIcon 
+              color="primary"
+              fontSize="large"></DirectionsWalkIcon> : <DirectionsWalkIcon 
+              fontSize="large"></DirectionsWalkIcon>}
+
             </IconButton>
             <IconButton
               onClick={() => { setTravelingMode("BICYCLING") }}>
-              <DirectionsBikeIcon fontSize="large"></DirectionsBikeIcon>
+                {travelingMode=="BICYCLING" ? <DirectionsBikeIcon 
+              color="primary"
+              fontSize="large"></DirectionsBikeIcon> : <DirectionsBikeIcon 
+              fontSize="large"></DirectionsBikeIcon>}
             </IconButton>
           </Grid>
         </Toolbar>
@@ -208,14 +216,14 @@ const Map = () => {
     ></Form>
 
 
-      <h1> still developing below</h1>
-        {/* <button onClick={createThisRoute}>Create this Route</button> */}
+      {/* <h1> still developing below</h1>
         <button onClick={() => console.log(markers)}> console log marker</button>
         <button onClick={() => console.log(distanceData)}> console log distance data</button>
-        <button onClick={() => console.log(elevationData)}>console log Elevation Data</button>
+        <button onClick={() => console.log(elevationData)}>console log Elevation Data</button> */}
 
-
-
+{markers.length > 0 ? <SideBar origin={markers[0]}></SideBar> : null}
+{/* <button onClick={() => console.log(markers)}> console log marker</button> */}
+{/* <SideBar></SideBar> */}
 
         <GoogleMap
 
