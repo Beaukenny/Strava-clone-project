@@ -75,8 +75,8 @@ const useStyles = makeStyles((theme) => ({
         <><div className="sideBarContainer">
 
         
-        <Typography variant="h5" component="h5" style={{color:"gray"}}>Select from nearby <br></br>routes to edit:</Typography>
-        <Card className={classes.root} variant="outlined" style={{border: '1pt solid gray', padding: '5px', boxShadow: '3px 0px #888888',borderLeft:'none',borderBottom:'none',borderTop:'none'}}>
+        <Typography align='center' variant="h5" component="h5" style={{color:"gray"}}>Select from nearby <br></br>routes to edit:</Typography>
+        <Card className={classes.root} variant="outlined" style={{padding: '5px', boxShadow: '1px 0px lightgray', borderLeft:'none',borderBottom:'none',borderTop:'none'}}>
             {data.routes.map(each => 
                       <CardContent>
                       <Avatar
