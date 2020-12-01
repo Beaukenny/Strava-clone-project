@@ -52,7 +52,7 @@ import LoggedOutTabNav from "./Header/LoggedOutTabNav";
             backgroundColor: theme.primary,
         }
         }));
-   
+
 
 
 
@@ -85,7 +85,7 @@ const Home = () => {
     //     explore: 3,
     //     user: 4,
     // }
-    
+
     // const [isLoggedin, setIsLoggedin] = useState(false);
     // const [selectedTab, setSelectedTab] = useState(indexToTabName[page]);
     const [authenticated, setAuthenticated] = useState(false);
@@ -118,7 +118,7 @@ const Home = () => {
     //     // e.preventDefault()
     //     e.target.style.backgroundColor = 'orange'
     //     // setTimeout(() => {e.target.style.backgroundColor = 'blue' }, 500)
-        
+
     // }
 
     // const handleChange = (event, newValue) => {
@@ -131,7 +131,7 @@ const Home = () => {
     //     //? TODO *******
     //     history.push('/');
     // }
-    
+
     // const options = [{"key": 0, "value":"home"}, {"key": 1, "value": "workouts"}, {"key": 2, "value": "routes"}, {"key": 3, "value": "explore"}, {"key": 4, "value": "user"}];
     return (
         <div style={{marginTop: "10vh", marginLeft: "auto", marginRight: "auto", borderBottom: "2px solid lightGrey", display: "grid", position: "fixed block", width: "70vw", height: "100%", maxHeight: "10vh", top: "10vh"}}>

@@ -5,16 +5,10 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 // import { deepPurple } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Grid from '@material-ui/core/Grid';
 import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
@@ -52,7 +46,7 @@ export default function RouteCard({ data }) {
                     </Avatar>
                 }
                 action={ <Tooltip title={<h2>View Detail</h2>}>
-                    <Button                            
+                    <Button
                     variant="contained"
                     color="primary"
                     style={{top:"2.5em"}}
@@ -63,7 +57,7 @@ export default function RouteCard({ data }) {
                 subheader={date}
             />
             <Typography style={{marginLeft:"1em"}}variant="h5" component="h5">{data.name}</Typography>
-            
+
             <Grid container>
             <Grid item xs={3}
             align="center">
@@ -134,5 +128,3 @@ export default function RouteCard({ data }) {
         </Card>
     );
 }
-
-
