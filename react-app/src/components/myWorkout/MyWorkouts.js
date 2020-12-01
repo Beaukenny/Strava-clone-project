@@ -52,7 +52,7 @@ const MyWorkouts = () => {
             const data = await result.json()
             // setData(data.myRoutes)
             setData(data.workouts)
-            console.log(data.workouts)
+            // console.log(data.workouts)
         }   
         getAllRoutes();
     }, [])
