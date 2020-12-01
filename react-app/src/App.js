@@ -13,6 +13,7 @@ import Theme from './Theme';
 
 import Home from "./components/Home";
 import Menuw from "./components/Menu";
+import PhotoArray from "./components/PhotoArray";
 
 import Splash from './Splash';
 import SearchResult from './components/routeSearch/SearchResult';
@@ -49,6 +50,7 @@ function App() {
         <Route exact path="/sign-up" component={SignUpForm} />
         <Route exact path="/login" component={LoginForm} />
 
+
         <Route path='/' exact={true}>
           <Splash />
         </Route>
@@ -59,6 +61,9 @@ function App() {
 
         <Route path="/sign-up" exact={true}>
           <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
+        </Route>
+        <Route path="/photos" exact={true}>
+          <PhotoArray></PhotoArray>
         </Route>
 
         <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
