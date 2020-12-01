@@ -62,7 +62,7 @@ const TabNav = () => {
 
     const [selectedTab, setSelectedTab] = useState(indexToTabName[page]);
     const history = useHistory()
-    const [image , setImage] = useState('CadenceLogo.png')
+    const [image , setImage] = useState('/CadenceLogo.png')
 
     // const useStyles = theme => ({
     //     indicator: {
