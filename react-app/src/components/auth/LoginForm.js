@@ -87,7 +87,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     const loginDemo = async () => {
         const user = await login('demo@demo.com', 'appacademy');
         if (!user.errors) {
-          setAuthenticated(true);
+        //   setAuthenticated(true);
           setOpen(false);
           setValues({['email']:''});
           setValues({['password']:''});
