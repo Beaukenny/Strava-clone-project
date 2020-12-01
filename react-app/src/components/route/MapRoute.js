@@ -141,7 +141,7 @@ const Map = () => {
         </Toolbar>
     <Grid container className="gridContainer">
         <Grid container>
-            <Grid item xs={3}>
+            <Grid item xs={4}>
               <Typography variant="h6"
                 component="h6"
                 align="center"
@@ -149,7 +149,7 @@ const Map = () => {
               >Distance
               </Typography>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={4}>
               <Typography variant="h6"
                 component="h6"
                 align="center"
@@ -157,7 +157,7 @@ const Map = () => {
               >Elevation
               </Typography>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={4}>
               <Typography variant="h6"
                 component="h6"
                 align="center"
@@ -165,42 +165,44 @@ const Map = () => {
               >Est. Moving Time
               </Typography>
             </Grid>
-            <Grid item xs={3}>
+            {/* <Grid item xs={3}>
               <Typography variant="h6"
                 component="h6"
                 align="center"
                 style={{ color: "gray" }}
-              >Surface Type
+              >
+                Surface Type
               </Typography>
-            </Grid>
-            <Grid item xs={3}>
+            </Grid> */}
+            <Grid item xs={4}>
               <Typography variant="h6"
                 component="h6"
                 align="center"
               >{totalDistance}
               </Typography>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={4}>
               <Typography variant="h6"
                 component="h6"
                 align="center"
               >{totalElevation}
               </Typography>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={4}>
               <Typography variant="h6"
                 component="h6"
                 align="center"
               >{totalDuration}
               </Typography>
             </Grid>
-            <Grid item xs={3}>
+            {/* <Grid item xs={3}>
               <Typography variant="h6"
                 component="h6"
                 align="center"
-              >???
+              >
+                ???
               </Typography>
-            </Grid>
+            </Grid> */}
         </Grid>
 
     </Grid>
