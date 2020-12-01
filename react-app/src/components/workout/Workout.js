@@ -23,7 +23,7 @@ import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
-
+import workout from "./workout.css"
 
 
 
@@ -153,8 +153,9 @@ export default function Workout() {
                                 component="h6"
                                 align="left"
                                 style={{ color: "gray" }}
-                            >Time
+                            >EST_Time
               </Typography>
+              
                         </Grid>
                         <Grid item xs={3} align="center">
                             {routeData.travelingMode == "BICYCLING" ?
@@ -201,17 +202,30 @@ export default function Workout() {
                     ></Typography>
 
                     <TextField
+                    className="textFieldWorkout"
                         variant="outlined"
                         validators={['required']}
                         required
-                        fullWidth
+                        // fullWidth
                         name="name"
                         label="Workout Name"
                         id="name"
                         value ={workoutName}
                         onChange={updateProperty(setworkoutName)}
-                    />
+                    />                <TextField
+                    className="timeWorkout"
+                    id="filled-number"
+                    type="number"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    label="Total Time in Minutes"
+                    // variant="filled"
+                    value={workoutDuration}
+                    onChange={updateProperty(setworkoutDuration)}
+                />
                 </Grid>
+                
                 <Grid item xs={12}>
                     <Typography
                         variant="h6"
@@ -230,18 +244,20 @@ export default function Workout() {
                     onChange={updateProperty(setworkoutDescription)}
                     />
                 </Grid>
-                <TextField
+                {/* <TextField
+                    className="timeWorkout"
                     id="filled-number"
-                    label="Total Workout Minutes"
                     type="number"
+                    label="Time"
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    variant="filled"
+                    // variant="filled"
                     value={workoutDuration}
                     onChange={updateProperty(setworkoutDuration)}
-                />
+                /> */}
                 <Button
+                    style={{left:'85%'}}
                     variant="contained"
                     color="primary"
                     onClick={payloadPost}

@@ -46,6 +46,7 @@ export default function RouteCard({ data }) {
             <CardHeader
                 avatar={
                     <Avatar
+                    style={{width:'50pt', height:'50pt'}}
                         aria-label="recipe"
                         src={data.host.avatar_url ? data.host.avatar_url : null}
                     >

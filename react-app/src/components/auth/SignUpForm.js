@@ -75,6 +75,7 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
             setOpen(false)
             setErrors('');
           window.localStorage.setItem("currentUser",user.id)
+        window.location.replace("/workouts")
 
           } else {
               setErrors(user.errors);

@@ -47,7 +47,7 @@ function App() {
     <Theme>
       
       <BrowserRouter>
-<NavBar2></NavBar2>
+<NavBar2 ></NavBar2>
         {/* <NavBar setAuthenticated={setAuthenticated} authenticated={authenticated} /> */}
         {/* <Switch>
           <Redirect exact from="/home" to="/home/workouts" />

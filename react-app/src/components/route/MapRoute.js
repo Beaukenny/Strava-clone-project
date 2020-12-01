@@ -84,6 +84,8 @@ const Map = () => {
     setTotalElevation('')
     // setStaticImageURL('')
     setTotalDuration('')
+    setChartData([
+      ])
   }
 
 
