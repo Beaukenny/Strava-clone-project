@@ -82,7 +82,7 @@ const TabNav = () => {
     
   return (
     <>
-        <Tabs style={{marginLeft:"15%"}} indicatorColor={'primary'} value={selectedTab} onChange={handleChange}>
+        <Tabs style={{marginLeft:"5%"}} indicatorColor={'primary'} value={selectedTab} onChange={handleChange}>
             {/* <Tab style={{ marginRight: "4em"}} value={0} onClick={() => history.push('/workouts')}
                 label={ <img className={classes.large} style={{maxHeight: "3em", maxWidth: "3em"}} src={image}/>
                         }>
