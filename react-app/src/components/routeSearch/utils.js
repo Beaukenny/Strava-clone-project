@@ -37,7 +37,7 @@ export async function getCertainRoutes2(startingPoint, setData) {
     }) 
     setData({routes:dataWithin25miles})
 
-    console.log(dataWithin25miles)
+    // console.log(dataWithin25miles)
 }
 //starting point = {lat:41.0814447,lng:-81.51900529999999}
 const stringToData = (data)=> {
