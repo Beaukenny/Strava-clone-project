@@ -1,4 +1,4 @@
-import React, {useState, history} from 'react';
+import React, {useState, history, useEffect} from 'react';
 
 
 import Collapse from '@material-ui/core/Collapse';
@@ -6,6 +6,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import { Tabs, Tab, makeStyles, AppBar, Button, List, ListItem, ListItemText, ListItemAvatar, Grid, Menu, MenuItem, ListItemIcon, GridListTile, GridList, GridListTileBar, Avatar } from "@material-ui/core";
 import { NavLink, useHistory, useLocation, useParams } from "react-router-dom";
+import { logout } from '../../services/auth';
 
 const ShowLogoutNav = () => {
         // setOpen(!open);
@@ -27,7 +28,7 @@ const ShowLogoutNav = () => {
         explore: 3,
         user: 4,
     }
-    
+    const [, setForceUpdate] = useState(Date.now());
     const [isLoggedin, setIsLoggedin] = useState(false);
     const [selectedTab, setSelectedTab] = useState(indexToTabName[page]);
     const [authenticated, setAuthenticated] = useState(false);
@@ -38,8 +39,20 @@ const ShowLogoutNav = () => {
         setOpen(!open);
     };
 
+    // const updoot = () => {
+    //     useEffect(() => {
+    //         setForceUpdate();
+    //     })
+    // }
+
     const handleLogout = () => {
         // handle logout here
+        if (window.localStorage.getItem('currentUser') ){
+            window.localStorage.removeItem('currentUser');
+        }
+        logout();
+        // updoot();
+
         //? TODO *******
         history.push('/');
     }

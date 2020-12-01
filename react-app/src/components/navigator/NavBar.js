@@ -1,11 +1,12 @@
 import React, { useEffect, useState} from "react";
+// import {Date} from 'datetime'
 import { Grid } from "@material-ui/core";
 import TabNav from "./Header/TabNav";
 import ShowLoginNav from "./Header/ShowLoginNav";
 import ShowLogoutNav from "./Header/ShowLogoutNav";
 import LoggedOutTabNav from "./Header/LoggedOutTabNav";
-
 const Home = () => {
+    const [, setForceUpdate] = useState(Date.now());
 
     return (
         <div style={{ border: "0px dotted teal", marginTop: "10vh", marginLeft: "auto", marginRight: "auto", borderBottom: "2px solid lightGrey", display: "grid", position: "fixed block", width: "55vw", minWidth: "900px", height: "100%", maxHeight: "10vh", top: "10vh"}}>
