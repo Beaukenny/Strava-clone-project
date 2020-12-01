@@ -32,13 +32,14 @@ const Home = () => {
         setOpen(!open);
     };
 
-
+    console.log((window.location.href).endsWith("create"))
     
     const options = [{"key": 0, "value":"home"}, {"key": 1, "value": "workouts"}, {"key": 2, "value": "routes"}, {"key": 3, "value": "explore"}, {"key": 4, "value": "user"}];
+  
     return (
-        <div style={{marginTop: "10vh", marginLeft: "auto", marginRight: "auto", borderBottom: "2px solid lightGrey", display: "grid", position: "fixed block", width: "70vw", height: "100%", maxHeight: "10vh", top: "10vh"}}>
+        <div style={{ marginTop: "10vh", marginLeft: "auto", marginRight: "auto", borderBottom: "2px solid lightGrey", display: "grid", position: "fixed block", width: "70vw", height: "100%", maxHeight: "10vh", top: "10vh"}}>
             <Grid style={{ border: "0px solid blue"}} container xs={12}>
-                    <Grid item xs={10} l={10} container justify={"center"} style={{ minWidth: "600px", minHeight: "4em",}}>
+                    <Grid item xs={10} l={10} container justify={"flex-start"} style={{ minWidth: "600px", minHeight: "4em",}}>
                         {window.localStorage.getItem("currentUser") ? <TabNav /> : <LoggedOutTabNav /> }
                     </Grid>
                     <Grid style={{ border: "0px solid orange"}} item xs={2} justify={'flex-end'} container >

@@ -85,7 +85,9 @@ const LoggedOutTabNav = () => {
     <>
         <Tabs indicatorColor={'primary'} value={selectedTab} onChange={handleChange}>
             <Tab value={0} onClick={() => history.push('/')}
-                label={ <img className={classes.large} style={{maxHeight: "3em", maxWidth: "3em"}} src='favicon-copy.png'/>}>
+                // label={ <img className={classes.large} style={{maxHeight: "3em", maxWidth: "3em"}} src='CadenceLogo.png'/>}>
+                label={ <img className={classes.large} style={{maxHeight: "3em", maxWidth: "3em"}} src='CadenceLogo.png'/>}>
+
                 
             </Tab>
 
