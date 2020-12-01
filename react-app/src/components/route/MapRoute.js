@@ -108,6 +108,7 @@ const Map = () => {
               <MyLocation mapLocation={mapLocation}></MyLocation>
               <Tooltip title="Delete">
                 <IconButton
+                
                   onClick={clearData}>
                   <DeleteIcon className={classes.block} color="inherit" />
                 </IconButton>
@@ -120,13 +121,19 @@ const Map = () => {
             <Typography component="h4" variant="h4" style={{ color: "gray", marginRight:"10%"  }}>Select Mode:</Typography>
             <IconButton
             style={{ marginRight:"10%"  }}
-
               onClick={() => { setTravelingMode("WALKING") }}>
-              <DirectionsWalkIcon fontSize="large"></DirectionsWalkIcon>
+              {travelingMode=="WALKING" ? <DirectionsWalkIcon 
+              color="primary"
+              fontSize="large"></DirectionsWalkIcon> : <DirectionsWalkIcon 
+              fontSize="large"></DirectionsWalkIcon>}
+
             </IconButton>
             <IconButton
               onClick={() => { setTravelingMode("BICYCLING") }}>
-              <DirectionsBikeIcon fontSize="large"></DirectionsBikeIcon>
+                {travelingMode=="BICYCLING" ? <DirectionsBikeIcon 
+              color="primary"
+              fontSize="large"></DirectionsBikeIcon> : <DirectionsBikeIcon 
+              fontSize="large"></DirectionsBikeIcon>}
             </IconButton>
           </Grid>
         </Toolbar>
