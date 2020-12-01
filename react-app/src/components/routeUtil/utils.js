@@ -31,13 +31,18 @@ export const getElevationData = async (distanceData, elevation, setElevationData
 
           array.push(Number(((data[i].elevation *3.28) - (data[i+1].elevation*3.28))))
       }
-      let positiveElevation = array.filter(each => {
+      let positiveElevation1 = array.filter(each => {
         if (each > 0) {
           return each
         }
-      }).reduce((acc, ele) => {
-        return acc + ele
       })
+      // let positiveElevation = positiveElevation1.reduce((acc, ele) => {
+      //   return acc + ele
+      // })
+      let positiveElevation = 0
+      for (let i = 0; i < positiveElevation1.length; i ++){
+        positiveElevation += positiveElevation1[i]
+      }
 
       setTotalElevation(`${positiveElevation.toFixed(2)} ft`)
       setElevationData(data)

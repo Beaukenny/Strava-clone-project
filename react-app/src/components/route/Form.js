@@ -6,7 +6,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { Button } from '@material-ui/core';
-import { useParams, Redirect } from 'react-router-dom';
+import { useParams, Redirect, useHistory } from 'react-router-dom';
 import {apiUrl} from "../../config"
 
 
@@ -24,6 +24,8 @@ const Form = (
     const [description, setDescription] = useState("")
     const [streetBike, setStreetBike] = useState(false)
     const [routeVisibility, setRouteVisibility] = useState(true)
+    const history = useHistory()
+
 let {userId} = useParams()
 userId =  Number.parseInt(userId);
 
@@ -55,7 +57,8 @@ userId =  Number.parseInt(userId);
             const data = await response.json()
             console.log(data)
             const userId = window.localStorage.getItem("currentUser")
-            window.location.href=`/users/${userId}/myroutes`
+            // window.location.href=`/users/${userId}/myroutes`
+            history.push(`/workouts`)
 
         }
 
