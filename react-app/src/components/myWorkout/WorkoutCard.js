@@ -20,6 +20,7 @@ import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import Tooltip from '@material-ui/core/Tooltip';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -50,14 +51,13 @@ export default function RouteCard({ data }) {
                     >
                     </Avatar>
                 }
-                action={ <Tooltip title={<h2>Add route to my workouts</h2>}>
-                    <IconButton
-                    style={{top:"3.5em"}}
-                        onClick={() => {window.location.href=`/users/${window.localStorage.getItem("currentUser")}/route/${data.id}/workout/create`}}
-                    >
-                        <AddBoxIcon fontSize="large"
-                        />
-                    </IconButton></Tooltip>
+                action={ <Tooltip title={<h2>View Detail</h2>}>
+                    <Button                            
+                    variant="contained"
+                    color="primary"
+                    style={{top:"2.5em"}}
+                        onClick={() => console.log("view detail")}
+                    >View Detail </Button></Tooltip>
                 }
                 title={data.host.username.toUpperCase()}
                 subheader={date}
@@ -89,7 +89,7 @@ export default function RouteCard({ data }) {
                 component="h6"
                 align="left"
                 style={{ color: "gray" }}
-              >Time
+              >Workout Minutes
               </Typography>
             </Grid>
             <Grid item xs={3} align="center">
@@ -100,31 +100,34 @@ export default function RouteCard({ data }) {
               <Typography variant="h6"
                 component="h6"
                 align="left"
-              >{data.totalDistance}
+              >{data.route.totalDistance}
               </Typography>
             </Grid>
             <Grid item xs={3}>
               <Typography variant="h6"
                 component="h6"
                 align="left"
-              >{data.totalElevation}
+              >{data.route.totalElevation}
               </Typography>
             </Grid>
             <Grid item xs={3}>
               <Typography variant="h6"
                 component="h6"
                 align="left"
-              >{data.totalDuration}
+              >{data.time}
               </Typography>
             </Grid>
 
             </Grid>
             <CardMedia
                 className={classes.media}
-                image={data.staticImageURL}
+                image={data.route.staticImageURL}
             />
             <CardContent>
-                <Typography variant="h6" color="textSecondary" component="h6">
+                {/* <Typography variant="h6" color="textSecondary" component="h6">
+                    About this Route: {data.route.description}
+        </Typography> */}
+        <Typography variant="h6" color="textSecondary" component="h6">
                     Description: {data.description}
         </Typography>
             </CardContent>

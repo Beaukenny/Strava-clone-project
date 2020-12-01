@@ -55,12 +55,14 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
         const user = await login(values.email, values.password);
         if (!user.errors) {
         //   setAuthenticated(true);
+        // console.log(setAuthenticated)
           setOpen(false);
           setValues({['email']:''});
           setValues({['password']:''});
           setErrors('');
+          window.localStorage.setItem("currentUser",user.id)
         //   return <Redirect to="/" />
-        window.location.href="/"
+        window.location.href="/workouts"
         } else {
           setErrors(user.errors);
         }
@@ -91,12 +93,15 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
           setValues({['password']:''});
           setErrors('')
           //return <Redirect to="/" />
-          window.location.href="/"
+          window.localStorage.setItem("currentUser",user.id)
+          window.location.href="/workouts"
         } else {
           setErrors(user.errors);
         }
     };
-
+    if(window.localStorage.getItem("currentUser")){
+        window.location.replace("/workouts")
+    }
 
         return (
             <div>

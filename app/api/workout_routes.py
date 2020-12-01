@@ -6,10 +6,17 @@ workout_routes = Blueprint('workouts', __name__)
 
 
 @workout_routes.route('/')
-@login_required
 def workouts():
     workouts = Workout.query.all()
     return {"workouts": [workout.to_dict() for workout in workouts]}
+
+
+@workout_routes.route('/myworkout/<int:id>')
+def myWorkout(id):
+    workouts = Workout.query.filter(Workout.user_id == id).all()
+    print(id)
+    return {"workouts": [workout.to_dict() for workout in workouts]}
+    # return {"message": "ok"}
 
 
 @workout_routes.route('/<int:id>')
@@ -43,7 +50,7 @@ def delete_workout(id):
 
 
 @workout_routes.route('/custom', methods=['POST'])
-@login_required
+# @login_required
 def add_custom_workout():
     data = request.json
     print(data)
@@ -55,7 +62,7 @@ def add_custom_workout():
         description=data['description'],
         workout_photos=f'{workout_photos}',
         time=f'{time}',
-        workout_date=data['workout_date'],
+        # workout_date=data['workout_date'],
         user_id=data['user_id'],
         route_id=data['route_id'],
     )

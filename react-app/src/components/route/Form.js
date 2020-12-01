@@ -6,7 +6,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { Button } from '@material-ui/core';
-import { useParams } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 import {apiUrl} from "../../config"
 
 
@@ -44,7 +44,7 @@ userId =  Number.parseInt(userId);
             starting_point: {lat:requestData.origin.lat, lng:requestData.origin.lng}
 
         }
-        console.log(JSON.stringify(payload))
+        // console.log(JSON.stringify(payload))
 
         const response = await fetch(`${apiUrl}/routes/custom`, {
             method: "POST",
@@ -54,6 +54,9 @@ userId =  Number.parseInt(userId);
         if (response.ok) {
             const data = await response.json()
             console.log(data)
+            const userId = window.localStorage.getItem("currentUser")
+            window.location.href=`/users/${userId}/myroutes`
+
         }
 
     }
@@ -62,6 +65,9 @@ userId =  Number.parseInt(userId);
         callback(e.target.value);
     };
 
+    const handleRedirect = () => {
+        return <Redirect to='/' />
+    }
 
     return (
         <>
@@ -136,7 +142,6 @@ userId =  Number.parseInt(userId);
                             type="submit"
                             variant="contained"
                             color="primary"
-
                         >Save to My Routes</Button></Grid>
                 </Grid>
 

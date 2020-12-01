@@ -7,8 +7,13 @@ import Toolbar from '@material-ui/core/Toolbar';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
 import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
-
+import {authenticate} from "./services/auth"
 const Splash = () => {
+
+    // if(window.localStorage.getItem("currentUser")){
+    //     window.location.replace("/workouts")
+    //     //<workout page here >
+    // }
 
     return (
         <>
