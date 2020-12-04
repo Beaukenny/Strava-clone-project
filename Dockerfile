@@ -9,7 +9,7 @@ COPY react-app/. .
 #
 # marys heroku account
 # ENV REACT_APP_BASE_URL=https://cadence-appacademy-group-proj.herokuapp.com
-ENV REACT_APP_GOOGLE_KEY=AIzaSyDvvUchLC5a-dAif0IQmZu7yP7pvDSZI9c
+
 
 # Build our React App
 RUN npm install
