@@ -70,6 +70,5 @@ def seed_routes():
 # TRUNCATE Removes all the data from the table, and resets
 # the auto incrementing primary key
 def undo_routes():
-    db.session.execute('TRUNCATE routes;')
+    db.session.execute('TRUNCATE routes CASCADE;')
     db.session.commit()
-

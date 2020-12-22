@@ -25,17 +25,6 @@ class Route(db.Model):
     user = db.relationship("User", back_populates="route")
     workout = db.relationship("Workout", back_populates="route")
 
-    # @property
-    # def route_data(self):
-    #     return self.route_data
-
-    # @route_data.setter
-    # def route_data(self, jsonObj):
-    #     self.route_data = json.dump(jsonObj)
-
-    # def getRandomCoords():
-    #     pass
-
     def to_dict(self):
         return {
             "id": self.id,
