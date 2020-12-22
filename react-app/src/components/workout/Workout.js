@@ -61,8 +61,8 @@ export default function Workout() {
     // time = time.split("-0500 (Eastern Standard Time")
     useEffect(() => {
         async function getData() {
-            const getUser = await fetch(`${apiUrl}/users/${Number.parseInt(userId)}`)
-            const getRoute = await fetch(`${apiUrl}/routes/${Number.parseInt(routeId)}`)
+            const getUser = await fetch(`/api/users/${Number.parseInt(userId)}`)
+            const getRoute = await fetch(`/api/routes/${Number.parseInt(routeId)}`)
             const user = await getUser.json()
             const route = await getRoute.json()
             setuserData(user)
@@ -82,7 +82,7 @@ export default function Workout() {
             description: workoutDescription,
             time: workoutDuration
         }
-        const response = await fetch(`${apiUrl}/workouts/custom`, {
+        const response = await fetch(`/api/workouts/custom`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

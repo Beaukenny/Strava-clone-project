@@ -55,7 +55,7 @@ const SearchResult = () => {
 
     useEffect(() => {
         async function getAllRoutes() {
-            const result = await fetch(`${apiUrl}/routes`)
+            const result = await fetch(`/api/routes`)
             let res = await result.json();
             setData(res)
             setLoad(!load)
@@ -73,7 +73,7 @@ const SearchResult = () => {
 
     const onClick = async () => {
         async function getAllRoutes() {
-            const result = await fetch(`${apiUrl}/routes`)
+            const result = await fetch(`/api/routes`)
             let res = await result.json();
             setData(res)
         }
