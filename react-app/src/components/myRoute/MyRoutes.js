@@ -48,7 +48,7 @@ const MyRoutes = () => {
     const {userId} = useParams()
     useEffect(() => {
         async function getAllRoutes() {
-            const result = await fetch(`${apiUrl}/routes/myroutes`, {
+            const result = await fetch(`/api/routes/myroutes`, {
                 method: "put",
                 headers:{"Content-Type":"application/json"},
                 body: JSON.stringify({userId:userId})

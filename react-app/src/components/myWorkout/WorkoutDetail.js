@@ -81,7 +81,7 @@ export default function WorkoutDetail() {
     const [ableToEditDetail, setAbleToEditDetail] = useState('')
     useEffect(()=> {
         const getData = async () => {
-            const response = await fetch(`${apiUrl}/workouts/${workoutId}`)
+            const response = await fetch(`/api/workouts/${workoutId}`)
             const workoutData = await response.json()
             // console.log(workoutData)
             await setAbleToEdit(workoutData.host.id == userId)
@@ -119,7 +119,7 @@ if (ableToEdit) {
     }
     const deleteWorkout = async () => {
 
-        const response = await fetch(`${apiUrl}/workouts/${Number.parseInt(workoutId)}`,{
+        const response = await fetch(`/api/workouts/${Number.parseInt(workoutId)}`,{
             method:"PUT",
             headers:{"Content-Type":"application/json"},
             body: JSON.stringify({userId:window.localStorage.getItem("currentUser")})
@@ -142,7 +142,7 @@ if (ableToEdit) {
       }
     //   console.log(payload)
     try {
-      const response = await fetch(`${apiUrl}/workouts/${Number.parseInt(workoutId)}/${window.localStorage.getItem("currentUser")}`,{
+      const response = await fetch(`/api/workouts/${Number.parseInt(workoutId)}/${window.localStorage.getItem("currentUser")}`,{
         method:"PUT",
         headers:{"Content-Type":"application/json"},
         body: JSON.stringify(payload)

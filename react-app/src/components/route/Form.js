@@ -48,7 +48,7 @@ userId =  Number.parseInt(userId);
         }
         // console.log(JSON.stringify(payload))
 
-        const response = await fetch(`${apiUrl}/routes/custom`, {
+        const response = await fetch(`/api/routes/custom`, {
             method: "POST",
             headers:{"Content-Type":"application/json"},
             body:JSON.stringify(payload)

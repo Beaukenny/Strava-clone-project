@@ -37,7 +37,7 @@ const ShowLogoutNav = () => {
     useEffect(()=> {
 
         const getAvatarUrl = async () => {
-            const responce = await fetch(`${apiUrl}/users/${window.localStorage.getItem("currentUser")}`)
+            const responce = await fetch(`/api/users/${window.localStorage.getItem("currentUser")}`)
             const parsedData = await responce.json()
             setAvatorUrl(parsedData.avatar_url)
         }
