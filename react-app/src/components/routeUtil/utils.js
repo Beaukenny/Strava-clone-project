@@ -50,7 +50,7 @@ export const getElevationData = async (distanceData, elevation, setElevationData
     }
   })
   }catch(e){
-    console.log(e)
+    // console.log(e)
   }
 
 

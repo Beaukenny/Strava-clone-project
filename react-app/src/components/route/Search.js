@@ -23,7 +23,7 @@ const Search =({mapLocation}) => {
           // console.log(lat, lng);
           
         }catch(e) {
-          console.log(e)
+          // console.log(e)
         }
       }}>
   
