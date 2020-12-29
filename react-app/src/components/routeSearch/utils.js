@@ -1,7 +1,7 @@
 import { apiUrl } from '../../config';
 
 export async function getCertainRoutes(startingPoint, setData, setLoad,load) {
-    const result = await fetch(`/api/routes`)
+    const result = await fetch(`/api/routes/`)
     let res = await result.json();
     const arr = res.routes
     const dataWithin25miles = arr.filter((each)=> {
@@ -21,7 +21,7 @@ export async function getCertainRoutes(startingPoint, setData, setLoad,load) {
 }
 
 export async function getCertainRoutes2(startingPoint, setData) {
-    const result = await fetch(`/api/routes`)
+    const result = await fetch(`/api/routes/`)
     let res = await result.json();
     const arr = res.routes
     const dataWithin25miles = arr.filter((each)=> {
