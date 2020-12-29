@@ -59,7 +59,7 @@ const DirectionRender = ({ markers, directionsService, travelingMode, setDistanc
                     polylineOptions: {
                         strokeColor: 'purple',
                     },
-                    markerOptions: { icon: "/purple-dot.png" },
+                    markerOptions: { icon: "https://cadenceappacademy.s3.amazonaws.com/purple-dot-1.png" },
                     // draggable:true
                 }}
             />

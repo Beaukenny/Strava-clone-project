@@ -241,7 +241,7 @@ const Map = () => {
           {markers.length == 1 ? <Marker
             position={{ lat: markers[0].lat, lng: markers[0].lng }}
             icon={{
-              url: "/purple-dot.png",
+              url: "https://cadenceappacademy.s3.amazonaws.com/purple-dot-1.png",
               scaledSize: new window.google.maps.Size(34, 34),
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(17, 17)
