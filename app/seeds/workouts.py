@@ -34,5 +34,5 @@ def seed_workouts():
 # TRUNCATE Removes all the data from the table, and resets
 # the auto incrementing primary key
 def undo_workouts():
-    db.session.execute('TRUNCATE workouts;')
+    db.session.execute('TRUNCATE workouts CASCADE;')
     db.session.commit()

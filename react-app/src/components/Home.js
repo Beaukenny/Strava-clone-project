@@ -1,22 +1,22 @@
 import React, { setState, useEffect, useState, history } from "react";
 import { Tabs, Tab, makeStyles, AppBar, Button, List, ListItem, ListItemText, ListItemAvatar, Grid, Menu, MenuItem, ListItemIcon, GridListTile, GridList, GridListTileBar, Avatar } from "@material-ui/core";
-import LoginForm from "./auth/LoginForm";
-import UsersList from "./UsersList";
-import MapRoute from "./route/MapRoute";
-import App from "../App";
+// import LoginForm from "./auth/LoginForm";
+// import UsersList from "./UsersList";
+// import MapRoute from "./route/MapRoute";
+// import App from "../App";
 import { NavLink, useHistory, useLocation, useParams } from "react-router-dom";
-import User from "./User";
-import Search from "./route/Search";
-import MyLocation from "./route/Mylocation";
-import UserNav from "./UserNav";
-import SignUpForm from "./auth/SignUpForm";
+// import User from "./User";
+// import Search from "./route/Search";
+// import MyLocation from "./route/Mylocation";
+// import UserNav from "./UserNav";
+// import SignUpForm from "./auth/SignUpForm";
 // import CssBaseline from "@material-ui/core/CssBaseline"
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
-import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
-import Menuw from "./Menu";
+// import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
+// import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
+// import Menuw from "./Menu";
 // import geolib from 'geolib';
 import TabNav from "./Header/TabNav";
 import { authenticate, logout } from "../services/auth";
@@ -52,7 +52,7 @@ import LoggedOutTabNav from "./Header/LoggedOutTabNav";
             backgroundColor: theme.primary,
         }
         }));
-   
+
 
 
 
@@ -69,27 +69,27 @@ const Home = () => {
     // const { page } = params;
     const { page } = useParams();
     // const { classes, value } = useState();
-    const history = useHistory()
-    const tabNameToIndex = {
-        0: "home",
-        1: "workouts",
-        2: "routes",
-        3: "explore",
-        4: "user",
-    }
+    // const history = useHistory()
+    // const tabNameToIndex = {
+    //     0: "home",
+    //     1: "workouts",
+    //     2: "routes",
+    //     3: "explore",
+    //     4: "user",
+    // }
 
-    const indexToTabName = {
-        home: 0,
-        workouts: 1,
-        routes: 2,
-        explore: 3,
-        user: 4,
-    }
-    
-    const [isLoggedin, setIsLoggedin] = useState(false);
-    const [selectedTab, setSelectedTab] = useState(indexToTabName[page]);
+    // const indexToTabName = {
+    //     home: 0,
+    //     workouts: 1,
+    //     routes: 2,
+    //     explore: 3,
+    //     user: 4,
+    // }
+
+    // const [isLoggedin, setIsLoggedin] = useState(false);
+    // const [selectedTab, setSelectedTab] = useState(indexToTabName[page]);
     const [authenticated, setAuthenticated] = useState(false);
-    const [loaded, setLoaded] = useState(false);
+    // const [loaded, setLoaded] = useState(false);
 
     // useEffect(() => {
     //     (async() => {
@@ -108,171 +108,46 @@ const Home = () => {
     // const { classes } = props;
     // const { value } = props;
 
-    const [open, setOpen] = useState(false);
+    // const [open, setOpen] = useState(false);
 
-    const handleClick = () => {
-        setOpen(!open);
-    };
+    // const handleClick = () => {
+    //     setOpen(!open);
+    // };
 
+    // const changeBackground = (e) => {
+    //     // e.preventDefault()
+    //     e.target.style.backgroundColor = 'orange'
+    //     // setTimeout(() => {e.target.style.backgroundColor = 'blue' }, 500)
 
-    const showLoginNav = () => {
-        setOpen(!open);
-        return (
-            <List >
-                <ListItem button onClick={handleClick}>
-                    <ListItemText primary="PROFILE_PIC" />
-                    {open ? <ExpandLess /> : <ExpandMore />}
-                </ListItem>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                    <ListItem value={0} button onClick={() => history.push('/login')}>
-                        <ListItemText primary="Log In" />
-                    </ListItem>
-                    <ListItem value={1} button onClick={() => history.push('/sign-up')}>
-                        <ListItemText primary="Sign Up" />
-                    </ListItem>
-                    <ListItem value={2} button onClick={handleClick}>
-                        <ListItemText primary="Demo" />
-                    </ListItem>
-                    {/* <ListItem value={3} button onClick={handleLogout}>
-                        <ListItemText primary="Log Out" />
-                    </ListItem> */}
-                </Collapse>
-            </List>
-        )
-            // <div style={{width: "100px", height: "100px", border: "1px solid orange", position: "absolute", left: "60%"}}>
-            //     <List >
-            //         <ListItem button onClick={handleClick}>
-            //             <ListItemText primary="PROFILE_PIC" />
-            //             {open ? <ExpandLess /> : <ExpandMore />}
-            //         </ListItem>
-            //         <Collapse in={open} timeout="auto" unmountOnExit>
-            //             <ListItem value={0} button onClick={() => history.push('/login')}>
-            //                 <ListItemText primary="Log In" />
-            //             </ListItem>
-            //             <ListItem value={1} button onClick={() => history.push('/sign-up')}>
-            //                 <ListItemText primary="Sign Up" />
-            //             </ListItem>
-            //             <ListItem value={2} button onClick={handleClick}>
-            //                 <ListItemText primary="Demo" />
-            //             </ListItem>
-            //             {/* <ListItem button onClick={handleLogout}>
-            //                 <ListItemText primary="Log Out" />
-            //             </ListItem> */}
-            //         </Collapse>
-            //     </List>
-            // </div>
-        
-    }
-    const showLogoutNav = () => {
-        setOpen(!open);
-        return (
-            // <div style={{width: "100px", height: "100px", border: "1px solid orange", position: "absolute", left: "60%"}}>
-            //     <List >
-            //         <ListItem button onClick={handleClick}>
-            //             <ListItemText primary="PROFILE_PIC" />
-            //             {open ? <ExpandLess /> : <ExpandMore />}
-            //         </ListItem>
-            //         <Collapse in={open} timeout="auto" unmountOnExit>
-            //             {/* <ListItem value={0} button onClick={() => history.push('/login')}>
-            //                 <ListItemText primary="Log In" />
-            //             </ListItem>
-            //             <ListItem value={1} button onClick={() => history.push('/sign-up')}>
-            //                 <ListItemText primary="Sign Up" />
-            //             </ListItem>
-            //             <ListItem value={2} button onClick={handleClick}>
-            //                 <ListItemText primary="Demo" />
-            //             </ListItem> */}
-            //             <ListItem value={3} button onClick={handleLogout}>
-            //                 <ListItemText primary="Log Out" />
-            //             </ListItem>
-            //         </Collapse>
-            //     </List>
-            // </div>
-            <List >
-                <ListItem button onClick={handleClick}>
-                    <ListItemText primary="PROFILE_PIC" />
-                    {open ? <ExpandLess /> : <ExpandMore />}
-                </ListItem>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                    {/* <ListItem value={0} button onClick={() => history.push('/login')}>
-                        <ListItemText primary="Log In" />
-                    </ListItem>
-                    <ListItem value={1} button onClick={() => history.push('/sign-up')}>
-                        <ListItemText primary="Sign Up" />
-                    </ListItem>
-                    <ListItem value={2} button onClick={handleClick}>
-                        <ListItemText primary="Demo" />
-                    </ListItem> */}
-                    <ListItem value={3} button onClick={handleLogout}>
-                        <ListItemText primary="Log Out" />
-                    </ListItem>
-                </Collapse>
-            </List>
-        )
-    }
-    const changeBackground = (e) => {
-        // e.preventDefault()
-        e.target.style.backgroundColor = 'orange'
-        // setTimeout(() => {e.target.style.backgroundColor = 'blue' }, 500)
-        
-    }
+    // }
 
     // const handleChange = (event, newValue) => {
     //     setSelectedTab(newValue);
     //     // event.target.indicatorColor = "primary";
     // }
 
-    const handleLogout = () => {
-        // handle logout here
-        //? TODO *******
-        history.push('/');
-    }
-    
-    const options = [{"key": 0, "value":"home"}, {"key": 1, "value": "workouts"}, {"key": 2, "value": "routes"}, {"key": 3, "value": "explore"}, {"key": 4, "value": "user"}];
+    // const handleLogout = () => {
+    //     // handle logout here
+    //     //? TODO *******
+    //     history.push('/');
+    // }
+
+    // const options = [{"key": 0, "value":"home"}, {"key": 1, "value": "workouts"}, {"key": 2, "value": "routes"}, {"key": 3, "value": "explore"}, {"key": 4, "value": "user"}];
     return (
         <div style={{marginTop: "10vh", marginLeft: "auto", marginRight: "auto", borderBottom: "2px solid lightGrey", display: "grid", position: "fixed block", width: "70vw", height: "100%", maxHeight: "10vh", top: "10vh"}}>
-            <Grid style={{ border: "0px solid blue"}} container xs={12}>
-                    {/* <Grid style={{ border: "0px solid purple"}} item xs={2} m={3}/> */}
-                    <Grid item xs={10} l={10} container justify={"center"} style={{ minWidth: "600px", minHeight: "4em"}}>
+            <Grid style={{ border: "3px solid blue"}} justify={"center"} container xs={12}>
+                <Grid item xs={10}  container justify={"center"} style={{ width: "1300px", border: "3px solid blue", minWidth: "600px", minHeight: "4em"}}>
+                    <Grid item xs={8}>
                         {!authenticated ? <TabNav /> : <LoggedOutTabNav /> }
                     </Grid>
-                    <Grid style={{ border: "0px solid orange"}} item xs={2} justify={'flex-end'} container >
-                        <Grid item style={{ border: "0px solid cyan", position: "absolute", top: "8vh", zIndex: 100}} 
-                             >
-                                 {/* <ShowLoginNav /> */}
-                                 {/* <ShowLogoutNav /> */}
-                            {!authenticated ? <ShowLoginNav /> : <ShowLogoutNav /> }
-                            {/* <UserNav /> */}
-                            {/* <List>
-                                    <ListItem button onClick={handleClick, showLogoutNav} >
-                                        <ListItemText primary={<Avatar  
-                                            // src="/CadenceLogo.png"
-                                            // className={classes.large}
-                                            />} />
-                                        {open ? <ExpandLess /> : <ExpandMore />}
-                                    </ListItem>
-                                    <Collapse in={open} timeout="auto" unmountOnExit >
-                                        {authenticated && showLoginNav}
-                                        <ListItem value={0} button onClick={() => history.push('/'), handleClick}>
-                                            <ListItemText primary="Home" />
-                                        </ListItem>
-                                        <ListItem value={1} button onClick={() => history.push('/login'), handleClick}>
-                                            <ListItemText primary="Log In" />
-                                        </ListItem>
-                                        <ListItem value={2} button onClick={() => history.push('/sign-up'), handleClick}>
-                                            <ListItemText primary="Sign Up" />
-                                        </ListItem>
-                                        <ListItem value={3} button onClick={handleLogout}>
-                                            <ListItemText primary="Log Out" />
-                                        </ListItem>
-                                    </Collapse>
-                                </List> */}
-                        </Grid>
-                    </Grid>
-                    {/* <Grid style={{ border: "0px solid purple"}} item xs={2} /> */}
                 </Grid>
-            </div>
-       
+                <Grid style={{ border: "2px solid orange"}} item xs={2} justify={'flex-end'} container >
+                    <Grid item style={{ border: "0px solid cyan", position: "absolute", top: "8vh", zIndex: 100}} >
+                        {!authenticated ? <ShowLoginNav /> : <ShowLogoutNav /> }
+                    </Grid>
+                </Grid>
+            </Grid>
+        </div>
     )
 };
 
