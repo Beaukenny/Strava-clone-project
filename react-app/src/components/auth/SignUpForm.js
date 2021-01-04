@@ -103,7 +103,7 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
                 {/* <Dialog open={open} style={{width:"100%"}} onClose={handleSignIn} aria-labelledby="form-dialog-title"> */}
                 <Dialog open={open} style={{width:"100%"}}  aria-labelledby="form-dialog-title">
                     <div>
-                         <img src="CadenceLogo.png" className={classes.img}></img>
+                         <img src='https://cadenceappacademy.s3.amazonaws.com/CadenceLogo.png' className={classes.img}></img>
                         <Typography component="h6" variant="h6" align="center" color="primary" style={{marginTop: "20px", fontWeight:"bold"}}>Create Your Cadence Account
                         </Typography>
                     </div>

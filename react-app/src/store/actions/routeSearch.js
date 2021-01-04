@@ -14,7 +14,7 @@ export const searchedPlaceCoord = (data) => {
 }
 //////////////////////////thunks below/////////////////////////////////////////////////////////
 export const getAllRouteWithCoords = (data) => async (dispatch) => {
-    const response = await fetch(`/api/routes`)
+    const response = await fetch(`/api/routes/`)
     if (response.ok) {
             const jsonData = await response.json()
             return jsonData;

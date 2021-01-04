@@ -55,7 +55,7 @@ const SearchResult = () => {
 
     useEffect(() => {
         async function getAllRoutes() {
-            const result = await fetch(`/api/routes`)
+            const result = await fetch(`/api/routes/`)
             let res = await result.json();
             setData(res)
             setLoad(!load)
@@ -73,7 +73,7 @@ const SearchResult = () => {
 
     const onClick = async () => {
         async function getAllRoutes() {
-            const result = await fetch(`/api/routes`)
+            const result = await fetch(`/api/routes/`)
             let res = await result.json();
             setData(res)
         }
@@ -119,7 +119,7 @@ const SearchResult = () => {
                                     setSearchCoord({ lat: lat, lng: lng })
 
                                 } catch (e) {
-                                    console.log(e)
+                                    // console.log(e)
                                 }
                             }}>
 

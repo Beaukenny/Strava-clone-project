@@ -69,7 +69,7 @@ const Search = () => {
             setSearchCoord({ lat: lat, lng: lng })
 
           } catch (e) {
-            console.log(e)
+            // console.log(e)
           }
         }}>
 

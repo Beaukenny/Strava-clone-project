@@ -6,12 +6,16 @@ COPY react-app/. .
 
 # You have to set this because it should be set during build time.
 
+ENV REACT_APP_BASE_URL=https://aa-cadence.herokuapp.com
+
+
 # You have to set this because it should be set during build time. s/b heroku url not postgres
 # needs to be there at the time npm build runs
 # the REACT_APP_GOOGLE_KEY can be found in the browser so may be unavoidable
 #
 # marys heroku account
 # ENV REACT_APP_BASE_URL=https://cadence-appacademy-group-proj.herokuapp.com
+
 
 
 
