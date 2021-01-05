@@ -85,16 +85,24 @@ const Search = () => {
           <ComboboxList
           className="splashSeachOption"
           >
-            {status === "OK" &&
-            <>
-              <ComboboxOption
-              
-                as="h4" key={data[0].id} value={data[0].description} />
-                <ComboboxOption
-                as="h4" key={data[1].id} value={data[1].description} />
-                <ComboboxOption
-                as="h4" key={data[2].id} value={data[2].description} />
-                </>}
+                                                {status === "OK" && data.length > 3 &&
+                                        <>
+                                            <ComboboxOption
+
+                                                as="h4" key={data[0].id} value={data[0].description} />
+                                            <ComboboxOption
+                                                as="h4" key={data[1].id} value={data[1].description} />
+                                            <ComboboxOption
+                                                as="h4" key={data[2].id} value={data[2].description} />
+                                        </>
+                                        }
+                                            {status === "OK" && data.length === 1 &&
+                                        <>
+                                            <ComboboxOption
+
+                                                as="h4" key={data[0].id} value={data[0].description} />
+                                        </>
+                                        }
           </ComboboxList>
         </ComboboxPopover>
       </Combobox>
