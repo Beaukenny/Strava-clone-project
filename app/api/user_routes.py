@@ -21,7 +21,6 @@ def user(id):
     return user.to_dict()
 
 
-
 # ? GET USER'S ROUTES (TESTED BY CLAY)
 @user_routes.route('/<int:id>/routes')
 @login_required

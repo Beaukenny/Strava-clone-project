@@ -51,19 +51,19 @@ export default function RouteCard({ data }) {
                     >
                     </Avatar>
                 }
-                action={ <Tooltip title={<h2>View Detail</h2>}>
-                    <Button                            
+                action={ <Tooltip title={<h2>Edit Detail</h2>}>
+                    <Button
                     variant="contained"
                     color="primary"
                     style={{top:"2.5em"}}
                         onClick={() => window.location.replace(`/users/${window.localStorage.getItem("currentUser")}/workout/${data.id}`)}
-                    >View Detail </Button></Tooltip>
+                    >Edit Detail </Button></Tooltip>
                 }
                 title={data.host.username.toUpperCase()}
                 subheader={date}
             />
             <Typography style={{marginLeft:"1em"}}variant="h5" component="h5">{data.name}</Typography>
-            
+
             <Grid container>
             <Grid item xs={3}
             align="center">
@@ -134,5 +134,3 @@ export default function RouteCard({ data }) {
         </Card>
     );
 }
-
-

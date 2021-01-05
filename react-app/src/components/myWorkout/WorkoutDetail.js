@@ -86,7 +86,7 @@ export default function WorkoutDetail() {
             // console.log(workoutData)
             await setAbleToEdit(workoutData.host.id == userId)
             await setDate(workoutData)
-            
+
             // const arrayDate = data.created_at.split("GMT")[0].split(",").join("").split(" ")
             // const date = [arrayDate[2], arrayDate[1], ",", arrayDate[3], "at", arrayDate[4]].join(" ")
             // console.log(date)
@@ -99,8 +99,8 @@ export default function WorkoutDetail() {
           setEditDuration(true)
         cb(e.target.value)
     }
-        
-  
+
+
 
     }
     const updateProperty2 = (cb) => (e) => {
@@ -129,7 +129,7 @@ if (ableToEdit) {
             setDeleteError("You are not the owner of this workout.")
         } else {
 
-      
+
         window.location.replace(`/users/${window.localStorage.getItem("currentUser")}/myworkouts`)
     }
   }
@@ -172,7 +172,7 @@ if (ableToEdit) {
 
     return (
         <>
-        <Typography variant="h3" component="h3" color="primary" align="center">Workout Detail:</Typography>
+        <Typography variant="h3" component="h3" color="primary" align="center">Edit Workout Details:</Typography>
 
         <Grid container>
             <Grid item xs={12} align="center" >
@@ -197,7 +197,7 @@ if (ableToEdit) {
                     </Avatar>
                 }
                 action={ <>
-                {/* <Button                            
+                {/* <Button
                 variant="contained"
                 color="primary"
                 style={{top:"2.5em"}}
@@ -209,20 +209,20 @@ if (ableToEdit) {
                 onClick={()=>deleteWorkout()}
                 >
                     {deleteError ? <DeleteIcon style={{ color: red[500] }}/>: <DeleteIcon className={classes.block} color="inherit" />}
-                    
-                    
+
+
 
                     </IconButton></Tooltip>
 </>
 
-                
+
             }
                 title={data.host.username.toUpperCase()}
                 subheader={[data.created_at.split("GMT")[0].split(",").join("").split(" ")[2], data.created_at.split("GMT")[0].split(",").join("").split(" ")[1], ",", data.created_at.split("GMT")[0].split(",").join("").split(" ")[3], "at",data.created_at.split("GMT")[0].split(",").join("").split(" ")[4]].join(" ")}
             />
 
             <Typography style={{marginLeft:"1em"}}variant="h5" component="h5">{data.name}</Typography>
-    
+
             <Grid container>
             <Grid item xs={3}
             align="center">
@@ -260,7 +260,7 @@ if (ableToEdit) {
               <Typography variant="h6"
                 component="h6"
                 align="left"
-              > 
+              >
               {data.route.totalDistance}
               </Typography>
             </Grid>
@@ -322,7 +322,7 @@ if (ableToEdit) {
                             if (ableToEdit) {
                                 setEditName(true)
                             }
-                            
+
                         }
                         }
                         onChange={updateProperty2(setworkoutName)}
@@ -345,13 +345,13 @@ if (ableToEdit) {
                         onClick={()=>{
                             if (ableToEdit) {setDescription(true)}}}
                         onChange={updateProperty3(setworkoutDescription)}
-                        
+
                     />
 
 
                 </Grid>
 
-                <Button                            
+                <Button
                 variant="contained"
                 color="primary"
                 style={{left:'91%'}}
@@ -359,8 +359,7 @@ if (ableToEdit) {
                 >Save</Button>
 
         </Paper>
-        
+
         </>
     );
 }
-

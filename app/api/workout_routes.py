@@ -32,7 +32,6 @@ def edit_workout(id, uId):
     # user_id = data["userId"]
     workout = Workout.query.filter(Workout.id == id).first()
     dictionary = workout.to_dict()
-    
     if int(dictionary["user_id"]) == int(uId):
         workout.time = data["workoutDuration"]
         workout.description = data["workoutDescription"]
