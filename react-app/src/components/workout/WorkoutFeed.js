@@ -62,13 +62,16 @@ const MyWorkouts = () => {
     return (
         <>
             <Typography variant="h3" component="h3" color="primary" align="center">Workout Feeds</Typography>
-            <Tooltip title={<h2>Create a brand new route</h2>}>
+            {/* <Tooltip title={<h2>Create a brand new route</h2>}>
                 <IconButton className="createRouteButtonInSearch">
                     <AddBoxIcon className="createRouteButtonInSearch" fontSize="large" 
                     onClick={()=>window.location.replace(`/users/${window.localStorage.getItem("currentUser")}/route/create`)}
                     />
                 </IconButton>
-            </Tooltip>
+            </Tooltip> */}
+                                <Button style={{left:'70%'}} fontSize="large" color="primary" variant="contained"
+                    onClick={()=>window.location.replace(`/users/${window.localStorage.getItem("currentUser")}/route/create`)}
+                    >Create Route</Button>
 
             <Grid container>
                 <Grid item xs={12} align="center" >
