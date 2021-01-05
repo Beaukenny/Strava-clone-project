@@ -109,7 +109,7 @@ export default function Workout() {
 
     return (
         <>
-            <Typography variant="h3" component="h3" color="primary" align="center">Edit Workout Details:</Typography>
+            <Typography variant="h3" component="h3" color="primary" align="center">Add Workout</Typography>
             {/* <button onClick={() => console.log(typeof (time))}>bbbbbbbb</button> */}
             {/* <h1>{userData.username}</h1> */}
             <Paper className={classes.paper}>

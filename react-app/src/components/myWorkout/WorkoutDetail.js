@@ -197,12 +197,12 @@ if (ableToEdit) {
                     </Avatar>
                 }
                 action={ <>
-                <Button                            
+                {/* <Button                            
                 variant="contained"
                 color="primary"
                 style={{top:"2.5em"}}
                     onClick={() =>editWorkoutDetail()}
-                >Edit Detail </Button>
+                >Edit Detail </Button> */}
                 <Tooltip title={deleteError ?<h2>{deleteError}</h2> :<h2>Delete</h2>}>
                 <IconButton
                 style={{top:'25pt'}}
@@ -300,7 +300,9 @@ if (ableToEdit) {
             />
             <CardContent>
             </CardContent>
+
         </Card>
+
         <Grid item xs={12} >
                     <Typography
                         variant="h6"
@@ -343,9 +345,21 @@ if (ableToEdit) {
                         onClick={()=>{
                             if (ableToEdit) {setDescription(true)}}}
                         onChange={updateProperty3(setworkoutDescription)}
+                        
                     />
+
+
                 </Grid>
+
+                <Button                            
+                variant="contained"
+                color="primary"
+                style={{left:'91%'}}
+                    onClick={() =>editWorkoutDetail()}
+                >Save</Button>
+
         </Paper>
+        
         </>
     );
 }
