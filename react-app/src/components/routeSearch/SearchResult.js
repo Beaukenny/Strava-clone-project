@@ -90,13 +90,16 @@ const SearchResult = () => {
     return (
         <>
             <Typography variant="h3" component="h3" color="primary" align="center">Explore Routes:</Typography>
-            <Tooltip title={<h2>Create a brand new route</h2>}>
+            {/* <Tooltip title={<h2>Create a brand new route</h2>}>
                 <IconButton className="createRouteButtonInSearch">
                     <AddBoxIcon className="createRouteButtonInSearch" fontSize="large"
                         onClick={() => window.location.replace(`/users/${window.localStorage.getItem("currentUser")}/route/create`)}
                     />
                 </IconButton>
-            </Tooltip>
+            </Tooltip> */}
+                                <Button style={{left:'70%'}} fontSize="large" color="primary" variant="contained"
+                    onClick={()=>window.location.replace(`/users/${window.localStorage.getItem("currentUser")}/route/create`)}
+                    >Create Route</Button>
 
             <Grid container>
                 <Grid item xs={12} align="center" >
@@ -104,7 +107,7 @@ const SearchResult = () => {
                     <DirectionsBikeIcon fontSize="large" style={{ color: "gray", marginBottom: '5pt', marginTop: '15pt', marginRight: '12.5pt', marginLeft: "12.5" }}></DirectionsBikeIcon>
                     <DirectionsRunIcon fontSize="large" style={{ color: "gray", marginBottom: '5pt', marginTop: '15pt', marginLeft: '25pt' }}></DirectionsRunIcon>
                     <div className="splashSearchBar1">
-                        <IconButton type="submit" className={classes.iconButton} aria-label="search" onClick={onClick}>
+                        <IconButton >
                             <SearchIcon />
                         </IconButton>
 
@@ -157,6 +160,12 @@ const SearchResult = () => {
                                 </ComboboxList>
                             </ComboboxPopover>
                         </Combobox>
+                        <Button
+      style={{height:"20pt", top:'2pt'}}
+      size="small"
+      variant="contained"
+      color='primary' aria-label="search" onClick={onClick}
+      >Search</Button>
                     </div>
                 </Grid>
             </Grid>
