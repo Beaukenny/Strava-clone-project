@@ -10,15 +10,15 @@ class Picture(db.Model):
                            nullable=False)
     url = db.Column(db.String(1000), nullable=False)
 
-    workout = db.relationship("Workout", back_populates="picture")
+    # workout = db.relationship("Workout", back_populates="picture")
 
     def to_dict(self):
         return {
             "id": self.id,
             "workout_id": self.workout_id,
             "url": self.url,
-            "workouts": {
-                "id": self.workout.id,
-                "name": self.workout.name
-            }
+            # "workouts": {
+            #     "id": self.workout.id,
+            #     "name": self.workout.name
+            # }
         }

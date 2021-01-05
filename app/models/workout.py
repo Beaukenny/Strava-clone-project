@@ -21,7 +21,7 @@ class Workout(db.Model):
 
     user = db.relationship("User", back_populates="workout")
     route = db.relationship("Route", back_populates="workout")
-    picture = db.relationship("Picture", back_populates="workout")
+    # picture = db.relationship("Picture", back_populates="workout")
     # @property
     # def route_preview(self):
     #     return self.route_preview
@@ -39,11 +39,11 @@ class Workout(db.Model):
             "name": self.name,
             "description": self.description,
             "workout_photos": self.workout_photos,
-            "photos": {
-                "id": self.picture.id,
-                "workout_id": self.picture.workout_id,
-                "url": self.picture.url
-            },
+            # "photos": {
+            #     "id": self.picture.id,
+            #     "workout_id": self.picture.workout_id,
+            #     "url": self.picture.url
+            # },
             "time": self.time,
             "workout_date": self.workout_date,
             "user_id": self.user_id,
