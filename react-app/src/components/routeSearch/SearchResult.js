@@ -92,8 +92,8 @@ const SearchResult = () => {
             <Typography variant="h3" component="h3" color="primary" align="center">Explore Routes:</Typography>
             <Tooltip title={<h2>Create a brand new route</h2>}>
                 <IconButton className="createRouteButtonInSearch">
-                    <AddBoxIcon className="createRouteButtonInSearch" fontSize="large" 
-                    onClick={()=>window.location.replace(`/users/${window.localStorage.getItem("currentUser")}/route/create`)}
+                    <AddBoxIcon className="createRouteButtonInSearch" fontSize="large"
+                        onClick={() => window.location.replace(`/users/${window.localStorage.getItem("currentUser")}/route/create`)}
                     />
                 </IconButton>
             </Tooltip>
@@ -134,7 +134,8 @@ const SearchResult = () => {
                                 <ComboboxList
                                     className="splashSeachOption"
                                 >
-                                    {status === "OK" &&
+                                    
+                                    {status === "OK" && data.length > 3 &&
                                         <>
                                             <ComboboxOption
 
@@ -143,7 +144,16 @@ const SearchResult = () => {
                                                 as="h4" key={data[1].id} value={data[1].description} />
                                             <ComboboxOption
                                                 as="h4" key={data[2].id} value={data[2].description} />
-                                        </>}
+                                        </>
+                                        }
+                                            {status === "OK" && data.length === 1 &&
+                                        <>
+                                            <ComboboxOption
+
+                                                as="h4" key={data[0].id} value={data[0].description} />
+                                        </>
+                                        }
+
                                 </ComboboxList>
                             </ComboboxPopover>
                         </Combobox>
