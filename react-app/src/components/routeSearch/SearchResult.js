@@ -107,7 +107,7 @@ const SearchResult = () => {
                     <DirectionsBikeIcon fontSize="large" style={{ color: "gray", marginBottom: '5pt', marginTop: '15pt', marginRight: '12.5pt', marginLeft: "12.5" }}></DirectionsBikeIcon>
                     <DirectionsRunIcon fontSize="large" style={{ color: "gray", marginBottom: '5pt', marginTop: '15pt', marginLeft: '25pt' }}></DirectionsRunIcon>
                     <div className="splashSearchBar1">
-                        <IconButton type="submit" className={classes.iconButton} aria-label="search" onClick={onClick}>
+                        <IconButton >
                             <SearchIcon />
                         </IconButton>
 
@@ -160,6 +160,12 @@ const SearchResult = () => {
                                 </ComboboxList>
                             </ComboboxPopover>
                         </Combobox>
+                        <Button
+      style={{height:"20pt", top:'2pt'}}
+      size="small"
+      variant="contained"
+      color='primary' aria-label="search" onClick={onClick}
+      >Search</Button>
                     </div>
                 </Grid>
             </Grid>

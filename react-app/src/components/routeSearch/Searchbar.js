@@ -7,6 +7,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import { getAllRouteWithCoords, searchedPlaceCoord } from "../../store/actions/routeSearch"
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom"
+import Button from '@material-ui/core/Button';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -54,7 +55,7 @@ const Search = () => {
   } else {
     return (<>
     <div className="splashSearchBar1">
-    <IconButton type="submit" className={classes.iconButton} aria-label="search" onClick={onClick}>
+    <IconButton>
         <SearchIcon/>
       </IconButton>
 
@@ -97,6 +98,12 @@ const Search = () => {
           </ComboboxList>
         </ComboboxPopover>
       </Combobox>
+      <Button
+      style={{height:"20pt", top:'2pt'}}
+      size="small"
+      variant="contained"
+      color='primary' aria-label="search" onClick={onClick}
+      >Search</Button>
       </div>
     </>)
   }
