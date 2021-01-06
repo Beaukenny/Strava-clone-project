@@ -388,7 +388,7 @@ if (ableToEdit) {
                 style={{left:'79%'}}
                     onClick={() =>{
                         editWorkoutDetail()
-                        // window.location.href =`/users/${userId}/myworkouts`
+                        window.location.href =`/users/${userId}/myworkouts`
                     }}
                 >Save</Button>
                                 <Button
