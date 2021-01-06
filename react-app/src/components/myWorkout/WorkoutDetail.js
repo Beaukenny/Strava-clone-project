@@ -79,6 +79,8 @@ export default function WorkoutDetail() {
     const [ableToEdit, setAbleToEdit] = useState(false)
     const [updated, setUpdated] = useState(false)
     const [ableToEditDetail, setAbleToEditDetail] = useState('')
+    const [showButtons, setShowButtons] = useState(false)
+
     useEffect(()=> {
         const getData = async () => {
             const response = await fetch(`/api/workouts/${workoutId}`)
@@ -111,6 +113,15 @@ if (ableToEdit) {
 
 
     }
+
+    const handleCancelButton = () => {
+        setShowButtons(false)
+        setDescription(false)
+        setEditName(false)
+        setEditDuration(false)
+    }
+
+
     const updateProperty3 = (cb) => (e) => {
         if (ableToEdit) {
             setDescription(true)
@@ -135,11 +146,21 @@ if (ableToEdit) {
   }
 
   const editWorkoutDetail = async () => {
-      const payload = {
-        workoutName,
-        workoutDescription,
-        workoutDuration,
+      if (!workoutName) {
+
       }
+      const payload = {
+        workoutName: workoutName !== "" ? workoutName : data.name,
+        workoutDescription : workoutDescription !== "" ? workoutDescription : data.description,
+        workoutDuration : workoutDuration !== 0 ? Number(workoutDuration) : Number(data.time),
+      }
+      const tempPayload = {
+          dataName:data.name,
+          dataDescription:data.description,
+          dataTime:data.time,
+      }
+      console.log(payload)
+      console.log('temp',tempPayload)
     //   console.log(payload)
     try {
       const response = await fetch(`/api/workouts/${Number.parseInt(workoutId)}/${window.localStorage.getItem("currentUser")}`,{
@@ -287,7 +308,10 @@ if (ableToEdit) {
                     }}
                     value={editDuration ? workoutDuration :data.time}
                     onClick={()=>{
-                        if (ableToEdit) {setEditDuration(true)}}}
+                        if (ableToEdit) {
+                            setEditDuration(true)
+                            setShowButtons(true)
+                        }}}
                     onChange={updateProperty1(setworkoutDuration)}
                 />
               </Typography>
@@ -321,6 +345,8 @@ if (ableToEdit) {
                         onClick={()=>{
                             if (ableToEdit) {
                                 setEditName(true)
+                            setShowButtons(true)
+
                             }
 
                         }
@@ -343,7 +369,11 @@ if (ableToEdit) {
                         id="description"
                         value ={editDescription ? workoutDescription :data.description}
                         onClick={()=>{
-                            if (ableToEdit) {setDescription(true)}}}
+                            if (ableToEdit) {
+                                setDescription(true)
+                            setShowButtons(true)
+
+                            }}}
                         onChange={updateProperty3(setworkoutDescription)}
 
                     />
@@ -351,12 +381,22 @@ if (ableToEdit) {
 
                 </Grid>
 
-                <Button
+
+                {showButtons?<><Button
                 variant="contained"
                 color="primary"
-                style={{left:'91%'}}
-                    onClick={() =>editWorkoutDetail()}
+                style={{left:'79%'}}
+                    onClick={() =>{
+                        editWorkoutDetail()
+                        // window.location.href =`/users/${userId}/myworkouts`
+                    }}
                 >Save</Button>
+                                <Button
+                variant="contained"
+                style={{left:'79%', backgroundColor:"crimson", color:"white"}}
+                            
+                onClick={handleCancelButton}
+                >Cancel</Button></>:null}
 
         </Paper>
 
