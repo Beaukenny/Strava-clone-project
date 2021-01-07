@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { getAllPhotos } from '../services/photos';
 import { DropzoneArea, DropzoneDialog } from 'material-ui-dropzone';
 import  { addPhoto } from '../services/photos'
+
 const PhotoArray = ( props ) => {
     const [workout_id, setWorkout_id] = useState(1);
     const [tileData, setTileData] = useState([]);
@@ -82,17 +83,28 @@ const PhotoArray = ( props ) => {
 
     const handleOnSave = async (file) => {
         const form_data = new FormData();
-        form_data.append('image', file[0]);
-        const photo = await addPhoto(form_data, 2);
-         if (!photo.errors) {
-            //... remap photos with new data
-         } else {
-            //post error message
+        console.log("file:  ", file);
+        console.log("file length: ", file.length);
+        for (let i=0; i < file.length; i++) {
+            console.log("Calling addPhoto on: ", file[i]);
+            form_data.append('image', file[i]);
         }
+            const photo = await addPhoto(form_data, 2);
+            if (!photo.errors) {
+                console.log("No error ")
+                //...remap photos with new data
+            } else {
+                console.log("Got an error ");
+                //post error message
+            }
+
+        //}
         setDropZoneOpen(false)
     }
 
-    if (!init && tileData.length === 0 ) {
+    //if (!init && tileData.length === 0 ) {
+        if (false) {
+        console.log("init is: ", init, " and tileData.length is: ", tileData.length);
         return null;
     } else {
         return (

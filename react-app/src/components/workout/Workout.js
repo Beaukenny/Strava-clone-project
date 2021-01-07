@@ -16,6 +16,7 @@ import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import workout from "./workout.css"
+import PhotoArray from "../PhotoArray";
 
 
 
@@ -147,7 +148,7 @@ export default function Workout() {
                                 style={{ color: "gray" }}
                             >EST_Time
               </Typography>
-              
+
                         </Grid>
                         <Grid item xs={3} align="center">
                             {routeData.travelingMode == "BICYCLING" ?
@@ -217,7 +218,7 @@ export default function Workout() {
                     onChange={updateProperty(setworkoutDuration)}
                 />
                 </Grid>
-                
+
                 <Grid item xs={12}>
                     <Typography
                         variant="h6"
@@ -248,6 +249,7 @@ export default function Workout() {
                     value={workoutDuration}
                     onChange={updateProperty(setworkoutDuration)}
                 /> */}
+                <PhotoArray></PhotoArray>
                 <Button
                     style={{left:'85%'}}
                     variant="contained"

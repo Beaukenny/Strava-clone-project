@@ -13,8 +13,6 @@ import Theme from './Theme';
 import Workout from './components/workout/Workout'
 import Home from "./components/Home";
 import Menuw from "./components/Menu";
-import PhotoArray from "./components/PhotoArray";
-
 import MyRoutes from "./components/myRoute/MyRoutes"
 import Splash from './Splash';
 import SearchResult from './components/routeSearch/SearchResult';
@@ -62,7 +60,6 @@ function App() {
         <Route exact path="/login" component={LoginForm} />
         <Route exact path="/logout" redirect="/" />
 
-
         <Route path='/' exact={true}>
           <Splash setAuthenticated={setAuthenticated} authenticated={authenticated} />
         </Route>
@@ -73,9 +70,6 @@ function App() {
 
         <Route path="/sign-up" exact={true}>
           <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
-        </Route>
-        <Route path="/photos" exact={true}>
-          <PhotoArray></PhotoArray>
         </Route>
 
         <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
