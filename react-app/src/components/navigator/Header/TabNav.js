@@ -100,18 +100,18 @@ const TabNav = () => {
   )}else {
     return(
     <>
-    <Tabs indicatorColor={'primary'} value={selectedTab} onChange={handleChange}>
-        <Tab style={{ marginRight: "4em"}} value={0} onClick={() => history.push('/workouts')}
+    <Tabs style={{ display: 'grid', position: 'relative', width: '80vw'}} indicatorColor={'primary'} value={selectedTab} onChange={handleChange}>
+        <Tab style={{ position: 'absolute', left: '5vw' }} value={0} onClick={() => history.push('/workouts')}
             label={ <img className={classes.large} style={{maxHeight: "3em", maxWidth: "3em"}} src={image}/>
                     }>
         </Tab>
         {/* <Tab value={0} onClick={() => history.push(`/workouts`)}
             label="Home" /> */}
-        <Tab value={1} onClick={() => history.push(`/users/${window.localStorage.getItem("currentUser")}/myworkouts`)}
+        <Tab style={{ left: '20vw', position: 'absolute'}}  value={1} onClick={() => history.push(`/users/${window.localStorage.getItem("currentUser")}/myworkouts`)}
             label="Workouts" />
-        <Tab value={2} onClick={() => history.push(`/users/${window.localStorage.getItem("currentUser")}/myroutes`)}
+        <Tab style={{ left: '30vw' , position: 'absolute'}}  value={2} onClick={() => history.push(`/users/${window.localStorage.getItem("currentUser")}/myroutes`)}
         label="Routes" />
-        <Tab value={3} onClick={() => history.push('/search-result')}
+        <Tab style={{ left: '40vw', position: 'absolute'}} value={3} onClick={() => history.push('/search-result')}
         label="explore" />
     </Tabs>
 </>)
