@@ -13,6 +13,8 @@ import Theme from './Theme';
 import Workout from './components/workout/Workout'
 import Home from "./components/Home";
 import Menuw from "./components/Menu";
+import PhotoArray from "./components/PhotoArray";
+
 import MyRoutes from "./components/myRoute/MyRoutes"
 import Splash from './Splash';
 import SearchResult from './components/routeSearch/SearchResult';
@@ -33,7 +35,7 @@ function App() {
         window.localStorage.setItem("currentUser",user.id)
 
       }
-      
+
       setLoaded(true);
     })();
   }, []);
@@ -45,7 +47,7 @@ function App() {
   return (
     <CssBaseline>
     <Theme>
-      
+
       <BrowserRouter>
 <NavBar2 ></NavBar2>
         {/* <NavBar setAuthenticated={setAuthenticated} authenticated={authenticated} /> */}
@@ -54,11 +56,12 @@ function App() {
           <Route exact path="/home/:page?" render={props => <Home {...props} />} />
         </Switch> */}
 
-      
+
         <Switch>
         <Route exact path="/sign-up" component={SignUpForm} />
         <Route exact path="/login" component={LoginForm} />
         <Route exact path="/logout" redirect="/" />
+
 
         <Route path='/' exact={true}>
           <Splash setAuthenticated={setAuthenticated} authenticated={authenticated} />
@@ -70,6 +73,9 @@ function App() {
 
         <Route path="/sign-up" exact={true}>
           <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
+        </Route>
+        <Route path="/photos" exact={true}>
+          <PhotoArray></PhotoArray>
         </Route>
 
         <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
@@ -98,8 +104,8 @@ function App() {
         </ProtectedRoute>
 
 
-          
-        
+
+
         <ProtectedRoute path="/user-options" exact={true} authenticated={authenticated}>
           <div style={{ height: "fit-content", width: "fit-content", marginLeft: "60vw"}}>
             <Menuw />
