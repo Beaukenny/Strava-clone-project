@@ -28,6 +28,7 @@ import { apiUrl } from '../../config';
 import { useParams } from 'react-router-dom';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { red } from '@material-ui/core/colors';
+import PhotoArray from '../PhotoArray';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -66,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function WorkoutDetail() {
+    console.log("Inside Workout Details")
     const classes = useStyles();
     const {workoutId,userId} = useParams()
     const [data, setDate] = useState('')
@@ -80,6 +82,7 @@ export default function WorkoutDetail() {
     const [updated, setUpdated] = useState(false)
     const [ableToEditDetail, setAbleToEditDetail] = useState('')
     const [showButtons, setShowButtons] = useState(false)
+    console.log("workoutId = ", workoutId);
 
     useEffect(()=> {
         const getData = async () => {
@@ -381,7 +384,7 @@ if (ableToEdit) {
 
                 </Grid>
 
-
+                <PhotoArray workout_id={workoutId}></PhotoArray>
                 {showButtons?<><Button
                 variant="contained"
                 color="primary"
@@ -394,7 +397,7 @@ if (ableToEdit) {
                                 <Button
                 variant="contained"
                 style={{left:'79%', backgroundColor:"crimson", color:"white"}}
-                            
+
                 onClick={handleCancelButton}
                 >Cancel</Button></>:null}
 

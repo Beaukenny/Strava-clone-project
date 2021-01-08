@@ -88,31 +88,9 @@ def postPhoto(id):
             photoUrl = 'https://%s.s3-%s.amazonaws.com/%s' % (bucket, region, key)
             print('New workout ', id,  ': photoUrl: ', photoUrl)
             updatePicture(photoUrl, workoutId)
-    return 'ok'
+    return {"message": "ok"}
 
-    file = request.files['image']
-    filename = file.filename.replace(" ", "")
 
-    print("New filename: ", filename)
-    client = boto3.client('s3', region, **credentials)
-    print("File type:  ", type(request.files['image']))
-    bucket = Config.S3_BUCKET
-    key = '%s-%s' % (date.today(), filename)
-    properties = {'ACL': 'public-read',
-                  'Body': request.files['image'],
-                  'Bucket': bucket,
-                  'Key': key,
-                  'ContentType': request.files['image'].mimetype}
-    retVal = client.put_object(**properties)
-    status = retVal['ResponseMetadata']['HTTPStatusCode']
-
-    if (status != 200):
-        return status
-    else:
-        photoUrl = 'https://%s.s3-%s.amazonaws.com/%s' % (bucket, region, key)
-        print('New workout ', id,  ': photoUrl: ', photoUrl)
-        updatePicture(photoUrl, workoutId)
-        return 'ok'
 
 
 def updatePicture(photoUrl, workoutId):

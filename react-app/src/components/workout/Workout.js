@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Workout() {
+    console.log("Inside Workout()")
     const classes = useStyles();
     const {userId, routeId } = useParams()
     const [userData, setuserData] = useState("")

@@ -46,6 +46,8 @@ const MyWorkouts = () => {
     const [load, setLoad] = useState(false)
     const [data, setData] = useState([])
     const {userId} = useParams()
+
+
     useEffect(() => {
         async function getAllRoutes() {
             const result = await fetch(`/api/workouts/myworkout/${Number.parseInt(userId)}`)
@@ -53,7 +55,7 @@ const MyWorkouts = () => {
             // setData(data.myRoutes)
             setData(data.workouts)
             // console.log(data.workouts)
-        }   
+        }
         getAllRoutes();
     }, [])
 
@@ -64,7 +66,7 @@ const MyWorkouts = () => {
             <Typography variant="h3" component="h3" color="primary" align="center">My Workouts:</Typography>
             {/* <Tooltip title={<h2>Create a brand new route</h2>}>
                 <IconButton className="createRouteButtonInSearch">
-                    <AddBoxIcon className="createRouteButtonInSearch" fontSize="large" 
+                    <AddBoxIcon className="createRouteButtonInSearch" fontSize="large"
                     onClick={()=>window.location.replace(`/users/${window.localStorage.getItem("currentUser")}/route/create`)}
                     />
                 </IconButton>
@@ -81,6 +83,7 @@ const MyWorkouts = () => {
                 </Grid>
             </Grid>
             <Paper className={classes.paper}>
+
                 {data.length == 0 ? <h1>There is no Workout</h1> : data.map(each =>
                     <WorkoutCard data={each}></WorkoutCard>
                 )}

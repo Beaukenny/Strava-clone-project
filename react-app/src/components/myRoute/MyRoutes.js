@@ -55,7 +55,7 @@ const MyRoutes = () => {
             })
             const data = await result.json()
             setData(data.myRoutes)
-        }   
+        }
         getAllRoutes();
     }, [])
 
@@ -66,7 +66,7 @@ const MyRoutes = () => {
             <Typography variant="h3" component="h3" color="primary" align="center">My Routes:</Typography>
             {/* <Tooltip title={<h2>Create a brand new route</h2>}>
                 <IconButton className="createRouteButtonInSearch">
-                    <AddBoxIcon className="createRouteButtonInSearch" fontSize="large" 
+                    <AddBoxIcon className="createRouteButtonInSearch" fontSize="large"
                     onClick={()=>window.location.replace(`/users/${window.localStorage.getItem("currentUser")}/route/create`)}
                     />
                 </IconButton>
@@ -76,7 +76,7 @@ const MyRoutes = () => {
                     onClick={()=>window.location.replace(`/users/${window.localStorage.getItem("currentUser")}/route/create`)}
                     >Create Route</Button>
 
-           
+
 
             <Grid container>
                 <Grid item xs={12} align="center" >
@@ -90,7 +90,6 @@ const MyRoutes = () => {
                 {data.length == 0 ? <h1>There is no Route</h1> : data.map(each =>
                     <RouteCard data={each}></RouteCard>
                 )}
-
             </Paper>
         </>
     )

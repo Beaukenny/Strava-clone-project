@@ -20,6 +20,7 @@ import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import Tooltip from '@material-ui/core/Tooltip';
+import PhotoArray from '../PhotoArray';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -63,7 +64,7 @@ export default function RouteCard({ data }) {
                 subheader={date}
             />
             <Typography style={{marginLeft:"1em"}}variant="h5" component="h5">{data.name}</Typography>
-            
+
             <Grid container>
             <Grid item xs={3}
             align="center">
@@ -126,10 +127,9 @@ export default function RouteCard({ data }) {
             <CardContent>
                 <Typography variant="h6" color="textSecondary" component="h6">
                     Description: {data.description}
-        </Typography>
+            </Typography>
             </CardContent>
+            <PhotoArray workout_id={data.id}></PhotoArray>
         </Card>
     );
 }
-
-

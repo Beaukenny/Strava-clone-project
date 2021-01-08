@@ -1,5 +1,5 @@
-export const getAllPhotos = async (id) => {
-    const response = await fetch(`/api/photos/${id}`, {
+export const getAllPhotos = async (workout_id) => {
+    const response = await fetch(`/api/pictures/${workout_id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -19,5 +19,8 @@ export const getAllPhotos = async (id) => {
       // author also used:  delete options.headers['Content-Type'];
       body: formData,
     });
-    return await response.json();
+
+    const resp = await response.json();
+    console.log("returning response: ", resp);
+    return resp; //await response.json();
   }
