@@ -114,10 +114,7 @@ const PhotoArray = ( {workout_id} ) => {
             getPhotos();
         } else {
             console.log("Got an error ");
-            //post error message
         }
-
-        //}
         console.log("Setting DropZone to false");
 
 
