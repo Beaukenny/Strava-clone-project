@@ -48,9 +48,8 @@ const MyWorkouts = () => {
         async function getAllRoutes() {
             const result = await fetch(`/api/workouts/myworkout/${Number.parseInt(userId)}`)
             const data = await result.json()
-            // setData(data.myRoutes)
             setData(data.workouts)
-            console.log(data.workouts)
+
         }
         getAllRoutes();
     }, [])
@@ -60,13 +59,6 @@ const MyWorkouts = () => {
     return (
         <>
             <Typography variant="h3" component="h3" color="primary" align="center">My Workouts:</Typography>
-            {/* <Tooltip title={<h2>Create a brand new route</h2>}>
-                <IconButton className="createRouteButtonInSearch">
-                    <AddBoxIcon className="createRouteButtonInSearch" fontSize="large"
-                    onClick={()=>window.location.replace(`/users/${window.localStorage.getItem("currentUser")}/route/create`)}
-                    />
-                </IconButton>
-            </Tooltip> */}
                     <Button style={{left:'70%'}} fontSize="large" color="primary" variant="contained"
                     onClick={()=>window.location.replace(`/users/${window.localStorage.getItem("currentUser")}/route/create`)}
                     >Create Route</Button>
@@ -81,10 +73,10 @@ const MyWorkouts = () => {
             <Paper className={classes.paper}>
 
                 {data.length == 0 ? <h1>There is no Workout</h1> : data.map(each =>
-                <>
-                    <WorkoutCard data={each}></WorkoutCard>
-                    <PhotoArray workout_id={each.id}></PhotoArray>
-                </>
+                    <>
+                        <WorkoutCard data={each}></WorkoutCard>
+                        <PhotoArray workout_id={each.id}></PhotoArray>
+                    </>
                 )}
 
             </Paper>

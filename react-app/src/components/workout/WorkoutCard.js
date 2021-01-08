@@ -26,12 +26,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function RouteCard({ data }) {
     const classes = useStyles();
-
-
     const arrayDate = data.created_at.split("GMT")[0].split(",").join("").split(" ")
     const date = [arrayDate[2], arrayDate[1], ",", arrayDate[3], "at", arrayDate[4]].join(" ")
-
-
 
     return (
         <Card className={classes.root}>

@@ -54,22 +54,19 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
         if (e) { e.preventDefault()};
         const user = await login(values.email, values.password);
         if (!user.errors) {
-        //   setAuthenticated(true);
-        // console.log(setAuthenticated)
           setOpen(false);
           setValues({['email']:''});
           setValues({['password']:''});
           setErrors('');
           window.localStorage.setItem("currentUser",user.id)
-        //   return <Redirect to="/" />
-        window.location.href="/workouts"
+          window.location.href="/workouts"
         } else {
           setErrors(user.errors);
         }
     };
 
     const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+        setValues({ ...values, [prop]: event.target.value });
     };
 
     const handleSubmit = () => {
@@ -82,17 +79,14 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
         return <Redirect to="/sign-up" />
       }
 
-
-
     const loginDemo = async () => {
         const user = await login('demo@demo.com', 'appacademy');
         if (!user.errors) {
-        //   setAuthenticated(true);
+
           setOpen(false);
           setValues({['email']:''});
           setValues({['password']:''});
           setErrors('')
-          //return <Redirect to="/" />
           window.localStorage.setItem("currentUser",user.id)
           window.location.href="/workouts"
         } else {
@@ -121,7 +115,6 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
 
                         </Grid>
                         <ValidatorForm
-                                //ref="form"
                                 onSubmit={handleSignIn}
                                 style={{width:"75%", justifyContent:"center"}}
                             >

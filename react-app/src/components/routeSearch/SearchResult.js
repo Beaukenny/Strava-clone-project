@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getAllRouteWithCoords, searchedPlaceCoord } from '../../store/actions/routeSearch';
-import { apiUrl } from '../../config';
 import RouteCard from './RouteCard'
-import SearchBar from "./Searchbar"
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
@@ -11,15 +8,14 @@ import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-import AddBoxIcon from '@material-ui/icons/AddBox';
-import Tooltip from '@material-ui/core/Tooltip';
 import Paper from '@material-ui/core/Paper';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 import { getCertainRoutes, getCertainRoutes2 } from "./utils"
 import usePlacesAutocomplete, { getGeocode, getLatLng, } from "use-places-autocomplete"
 import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption, } from "@reach/combobox";
 import SearchIcon from '@material-ui/icons/Search';
-import { Redirect } from "react-router-dom"
+import PhotoArray from '../PhotoArray'
+
 const styles = makeStyles((theme) => ({
     paper: {
         maxWidth: 750,
@@ -90,14 +86,7 @@ const SearchResult = () => {
     return (
         <>
             <Typography variant="h3" component="h3" color="primary" align="center">Explore Routes:</Typography>
-            {/* <Tooltip title={<h2>Create a brand new route</h2>}>
-                <IconButton className="createRouteButtonInSearch">
-                    <AddBoxIcon className="createRouteButtonInSearch" fontSize="large"
-                        onClick={() => window.location.replace(`/users/${window.localStorage.getItem("currentUser")}/route/create`)}
-                    />
-                </IconButton>
-            </Tooltip> */}
-                                <Button style={{left:'70%'}} fontSize="large" color="primary" variant="contained"
+                    <Button style={{left:'70%'}} fontSize="large" color="primary" variant="contained"
                     onClick={()=>window.location.replace(`/users/${window.localStorage.getItem("currentUser")}/route/create`)}
                     >Create Route</Button>
 
@@ -122,7 +111,7 @@ const SearchResult = () => {
                                     setSearchCoord({ lat: lat, lng: lng })
 
                                 } catch (e) {
-                                    // console.log(e)
+                                    console.log("Error received from either getGeocode or getLatLng:  ", e)
                                 }
                             }}>
 
@@ -137,7 +126,7 @@ const SearchResult = () => {
                                 <ComboboxList
                                     className="splashSeachOption"
                                 >
-                                    
+
                                     {status === "OK" && data.length > 3 &&
                                         <>
                                             <ComboboxOption
@@ -171,7 +160,10 @@ const SearchResult = () => {
             </Grid>
             <Paper className={classes.paper}>
                 {data2.routes.length == 0 ? <h1>There is no Route</h1> : data2.routes.map(each =>
+                <>
                     <RouteCard data={each}></RouteCard>
+                    <PhotoArray workout_id={each.id}></PhotoArray>
+                </>
                 )}
 
             </Paper>

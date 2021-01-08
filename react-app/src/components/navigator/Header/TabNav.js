@@ -1,25 +1,12 @@
-import React, {useState, history} from 'react';
-import { 
-    Tabs, 
+import React, {useState} from 'react';
+import {
+    Tabs,
     Tab,
-    Avatar, 
-    makeStyles, 
-    // AppBar, 
-    // Button, 
-    // List, 
-    // ListItem, 
-    // ListItemText, 
-    // ListItemAvatar, 
-    // Grid, 
-    // Menu, 
-    // MenuItem, 
-    // ListItemIcon 
+    makeStyles,
 } from "@material-ui/core";
 
-import { useHistory, useLocation, useParams } from "react-router-dom";
-import Logo from "./Logo"
-import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
-// import CadenceLogo;
+import { useHistory, useParams } from "react-router-dom";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -43,13 +30,13 @@ const useStyles = makeStyles((theme) => ({
 
 const TabNav = () => {
 
-    const tabNameToIndex = {
-        0: "Feeds",
-        1: "workouts",
-        2: "routes",
-        3: "explore",
-        4: "user",
-    }
+    // const tabNameToIndex = {
+    //     0: "Feeds",
+    //     1: "workouts",
+    //     2: "routes",
+    //     3: "explore",
+    //     4: "user",
+    // }
 
     const indexToTabName = {
         feeds: 0,
@@ -79,7 +66,7 @@ const TabNav = () => {
     }
     if ((window.location.href).endsWith("create")){
 
-    
+
   return (
     <>
         <Tabs style={{marginLeft:"5%"}} indicatorColor={'primary'} value={selectedTab} onChange={handleChange}>

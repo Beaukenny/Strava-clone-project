@@ -7,7 +7,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { Button } from '@material-ui/core';
 import { useParams, Redirect, useHistory } from 'react-router-dom';
-import {apiUrl} from "../../config"
 
 
 const Form = (
@@ -46,7 +45,6 @@ userId =  Number.parseInt(userId);
             starting_point: {lat:requestData.origin.lat, lng:requestData.origin.lng}
 
         }
-        // console.log(JSON.stringify(payload))
 
         const response = await fetch(`/api/routes/custom`, {
             method: "POST",
@@ -55,9 +53,7 @@ userId =  Number.parseInt(userId);
         })
         if (response.ok) {
             const data = await response.json()
-            console.log(data)
             const userId = window.localStorage.getItem("currentUser")
-            // window.location.href=`/users/${userId}/myroutes`
             history.push(`/workouts`)
 
         }

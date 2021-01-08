@@ -16,7 +16,6 @@ const theme = createMuiTheme({
     fontFamily: "Helvetica"
   }
 });
-// console.log(theme);
 
 const Theme = props => {
   return (

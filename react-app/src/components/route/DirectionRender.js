@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { staticMapImage } from "../routeUtil/utils"
 import { DirectionsRenderer } from "react-google-maps"
 
@@ -11,7 +11,7 @@ const DirectionRender = ({ markers, directionsService, travelingMode, setDistanc
         let request
         let waypts = []
         if (markers.length > 2) {
-            
+
             let newMarkers = markers.slice(1, markers.length - 1)
             newMarkers.map(each => {
                 waypts.push({ location: each, stopover: false })

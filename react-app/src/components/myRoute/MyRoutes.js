@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { apiUrl } from '../../config';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
 import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
-import AddBoxIcon from '@material-ui/icons/AddBox';
-import Tooltip from '@material-ui/core/Tooltip';
 import Paper from '@material-ui/core/Paper';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
-import usePlacesAutocomplete, { getGeocode, getLatLng, } from "use-places-autocomplete"
-import { Redirect,useParams } from "react-router-dom"
+import {useParams } from "react-router-dom"
 import RouteCard from "./RouteCard"
+
 const styles = makeStyles((theme) => ({
     paper: {
         maxWidth: 750,
@@ -59,24 +54,12 @@ const MyRoutes = () => {
         getAllRoutes();
     }, [])
 
-
-
     return (
         <>
             <Typography variant="h3" component="h3" color="primary" align="center">My Routes:</Typography>
-            {/* <Tooltip title={<h2>Create a brand new route</h2>}>
-                <IconButton className="createRouteButtonInSearch">
-                    <AddBoxIcon className="createRouteButtonInSearch" fontSize="large"
-                    onClick={()=>window.location.replace(`/users/${window.localStorage.getItem("currentUser")}/route/create`)}
-                    />
-                </IconButton>
-            </Tooltip> */}
-
                     <Button style={{left:'70%'}} fontSize="large" color="primary" variant="contained"
                     onClick={()=>window.location.replace(`/users/${window.localStorage.getItem("currentUser")}/route/create`)}
                     >Create Route</Button>
-
-
 
             <Grid container>
                 <Grid item xs={12} align="center" >
