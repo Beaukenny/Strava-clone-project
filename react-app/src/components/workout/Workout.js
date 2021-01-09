@@ -8,16 +8,13 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import Paper from '@material-ui/core/Paper';
-import { useParams, Redirect } from 'react-router-dom';
-import { apiUrl } from '../../config'
+import { useParams } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
-import workout from "./workout.css"
-
-
+import PhotoArray from "../PhotoArray";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -50,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Workout() {
+
     const classes = useStyles();
     const {userId, routeId } = useParams()
     const [userData, setuserData] = useState("")
@@ -58,7 +56,6 @@ export default function Workout() {
     const [workoutDescription, setworkoutDescription] = useState("")
     const [workoutDuration, setworkoutDuration] = useState(0)
 
-    // time = time.split("-0500 (Eastern Standard Time")
     useEffect(() => {
         async function getData() {
             const getUser = await fetch(`/api/users/${Number.parseInt(userId)}`)
@@ -91,7 +88,7 @@ export default function Workout() {
         } )
         if (response.ok) {
             const result = await response.json();
-            // console.log(result)
+
             const userId = window.localStorage.getItem("currentUser")
             window.location.href=`/users/${userId}/myworkouts`
 
@@ -102,8 +99,6 @@ export default function Workout() {
     return (
         <>
             <Typography variant="h3" component="h3" color="primary" align="center">Add Workout</Typography>
-            {/* <button onClick={() => console.log(typeof (time))}>bbbbbbbb</button> */}
-            {/* <h1>{userData.username}</h1> */}
             <Paper className={classes.paper}>
                 <Card className={classes.root}>
                     <CardHeader
@@ -147,7 +142,7 @@ export default function Workout() {
                                 style={{ color: "gray" }}
                             >EST_Time
               </Typography>
-              
+
                         </Grid>
                         <Grid item xs={3} align="center">
                             {routeData.travelingMode == "BICYCLING" ?
@@ -217,7 +212,7 @@ export default function Workout() {
                     onChange={updateProperty(setworkoutDuration)}
                 />
                 </Grid>
-                
+
                 <Grid item xs={12}>
                     <Typography
                         variant="h6"
@@ -236,18 +231,7 @@ export default function Workout() {
                     onChange={updateProperty(setworkoutDescription)}
                     />
                 </Grid>
-                {/* <TextField
-                    className="timeWorkout"
-                    id="filled-number"
-                    type="number"
-                    label="Time"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    // variant="filled"
-                    value={workoutDuration}
-                    onChange={updateProperty(setworkoutDuration)}
-                /> */}
+                <PhotoArray></PhotoArray>
                 <Button
                     style={{left:'85%'}}
                     variant="contained"

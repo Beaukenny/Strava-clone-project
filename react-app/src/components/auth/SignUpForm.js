@@ -82,7 +82,7 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
         }
 
       } else {
-          console.log("passwords did not match!")
+          console.log("Error:  passwords did not match!")
       }};
 
       ValidatorForm.addValidationRule('isPasswordMatch', (value) => {

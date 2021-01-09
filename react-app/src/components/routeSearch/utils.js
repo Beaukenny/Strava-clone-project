@@ -1,4 +1,3 @@
-import { apiUrl } from '../../config';
 
 export async function getCertainRoutes(startingPoint, setData, setLoad,load) {
     const result = await fetch(`/api/routes/`)
@@ -14,10 +13,9 @@ export async function getCertainRoutes(startingPoint, setData, setLoad,load) {
         if (measure(startingLat, startingLng, originLat, originLng) < 25) {
             return each
         }
-    }) 
+    })
     setData({routes:dataWithin25miles})
         setLoad(!load)
-    // console.log(dataWithin25miles)
 }
 
 export async function getCertainRoutes2(startingPoint, setData) {
@@ -34,12 +32,10 @@ export async function getCertainRoutes2(startingPoint, setData) {
         if (measure(startingLat, startingLng, originLat, originLng) < 25) {
             return each
         }
-    }) 
+    })
     setData({routes:dataWithin25miles})
-
-    // console.log(dataWithin25miles)
 }
-//starting point = {lat:41.0814447,lng:-81.51900529999999}
+
 const stringToData = (data)=> {
     let a = data.split("'").join("\"")
     return JSON.parse(a)
@@ -58,4 +54,3 @@ function measure(lat1, lon1, lat2, lon2){
     let d = R * c;
     return d * 0.62
 }
-

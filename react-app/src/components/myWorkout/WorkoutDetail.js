@@ -1,33 +1,24 @@
 import React,{useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-// import { deepPurple } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Grid from '@material-ui/core/Grid';
 import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
-import AddBoxIcon from '@material-ui/icons/AddBox';
 import Tooltip from '@material-ui/core/Tooltip';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 import Paper from '@material-ui/core/Paper';
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import { apiUrl } from '../../config';
 import { useParams } from 'react-router-dom';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { red } from '@material-ui/core/colors';
+import PhotoArray from '../PhotoArray';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -66,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function WorkoutDetail() {
+
     const classes = useStyles();
     const {workoutId,userId} = useParams()
     const [data, setDate] = useState('')
@@ -85,13 +77,10 @@ export default function WorkoutDetail() {
         const getData = async () => {
             const response = await fetch(`/api/workouts/${workoutId}`)
             const workoutData = await response.json()
-            // console.log(workoutData)
+
             await setAbleToEdit(workoutData.host.id == userId)
             await setDate(workoutData)
 
-            // const arrayDate = data.created_at.split("GMT")[0].split(",").join("").split(" ")
-            // const date = [arrayDate[2], arrayDate[1], ",", arrayDate[3], "at", arrayDate[4]].join(" ")
-            // console.log(date)
         }
 
         getData()
@@ -159,39 +148,33 @@ if (ableToEdit) {
           dataDescription:data.description,
           dataTime:data.time,
       }
-      console.log(payload)
-      console.log('temp',tempPayload)
-    //   console.log(payload)
+
     try {
       const response = await fetch(`/api/workouts/${Number.parseInt(workoutId)}/${window.localStorage.getItem("currentUser")}`,{
-        method:"PUT",
-        headers:{"Content-Type":"application/json"},
-        body: JSON.stringify(payload)
-    })
-    if (response.ok) {
-        const jsoned = await response.json()
-        setUpdated(!updated)
-        if (jsoned.message == "notgood") {
-            setAbleToEditDetail("bad")
-        } else {
-            setAbleToEditDetail("good")
+            method:"PUT",
+            headers:{"Content-Type":"application/json"},
+            body: JSON.stringify(payload)
+        })
+        if (response.ok) {
+            const jsoned = await response.json()
+            setUpdated(!updated)
+            if (jsoned.message == "notgood") {
+                setAbleToEditDetail("bad")
+            } else {
+                setAbleToEditDetail("good")
+            }
         }
+    } catch(e) {
+        console.log("Error received from fetch workouts:  ", e)
     }
-} catch(e) {
-    console.log(e)
-}
 
   }
 
-    // [data.created_at.split("GMT")[0].split(",").join("").split(" ")[2], data.created_at.split("GMT")[0].split(",").join("").split(" ")[1], ",", data.created_at.split("GMT")[0].split(",").join("").split(" ")[3], "at",data.created_at.split("GMT")[0].split(",").join("").split(" ")[4]]
+  if (!data) {
+    return null
+  }
 
-
-
-    if (!data) {
-        return null
-    }
-
-    return (
+  return (
         <>
         <Typography variant="h3" component="h3" color="primary" align="center">Edit Workout Details:</Typography>
 
@@ -200,13 +183,9 @@ if (ableToEdit) {
                 <DirectionsWalkIcon fontSize="large" style={{ color: "gray", marginBottom: '5pt', marginTop: '15pt', marginRight: '25pt' }}></DirectionsWalkIcon>
                 <DirectionsBikeIcon fontSize="large" style={{ color: "gray", marginBottom: '5pt', marginTop: '15pt', marginRight: '12.5pt', marginLeft: "12.5" }}></DirectionsBikeIcon>
                 <DirectionsRunIcon fontSize="large" style={{ color: "gray", marginBottom: '5pt', marginTop: '15pt', marginLeft: '25pt' }}></DirectionsRunIcon>
-
             </Grid>
         </Grid>
         <Paper className={classes.paper}>
-
-
-
         <Card className={classes.root}>
             <CardHeader
                 avatar={
@@ -217,27 +196,19 @@ if (ableToEdit) {
                     >
                     </Avatar>
                 }
-                action={ <>
-                {/* <Button
-                variant="contained"
-                color="primary"
-                style={{top:"2.5em"}}
-                    onClick={() =>editWorkoutDetail()}
-                >Edit Detail </Button> */}
-                <Tooltip title={deleteError ?<h2>{deleteError}</h2> :<h2>Delete</h2>}>
-                <IconButton
-                style={{top:'25pt'}}
-                onClick={()=>deleteWorkout()}
-                >
-                    {deleteError ? <DeleteIcon style={{ color: red[500] }}/>: <DeleteIcon className={classes.block} color="inherit" />}
+                action={
+                    <>
+                        <Tooltip title={deleteError ?<h2>{deleteError}</h2> :<h2>Delete</h2>}>
+                        <IconButton
+                        style={{top:'25pt'}}
+                        onClick={()=>deleteWorkout()}
+                        >
+                            {deleteError ? <DeleteIcon style={{ color: red[500] }}/>: <DeleteIcon className={classes.block} color="inherit" />}
+                        </IconButton></Tooltip>
+                    </>
 
 
-
-                    </IconButton></Tooltip>
-</>
-
-
-            }
+                }
                 title={data.host.username.toUpperCase()}
                 subheader={[data.created_at.split("GMT")[0].split(",").join("").split(" ")[2], data.created_at.split("GMT")[0].split(",").join("").split(" ")[1], ",", data.created_at.split("GMT")[0].split(",").join("").split(" ")[3], "at",data.created_at.split("GMT")[0].split(",").join("").split(" ")[4]].join(" ")}
             />
@@ -381,7 +352,7 @@ if (ableToEdit) {
 
                 </Grid>
 
-
+                <PhotoArray workout_id={workoutId}></PhotoArray>
                 {showButtons?<><Button
                 variant="contained"
                 color="primary"
@@ -394,7 +365,7 @@ if (ableToEdit) {
                                 <Button
                 variant="contained"
                 style={{left:'79%', backgroundColor:"crimson", color:"white"}}
-                            
+
                 onClick={handleCancelButton}
                 >Cancel</Button></>:null}
 

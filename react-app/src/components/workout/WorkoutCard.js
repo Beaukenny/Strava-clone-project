@@ -1,18 +1,15 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 // import { deepPurple } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
 import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
-import AddBoxIcon from '@material-ui/icons/AddBox';
 import Tooltip from '@material-ui/core/Tooltip';
 import { Button } from '@material-ui/core';
 
@@ -29,11 +26,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function RouteCard({ data }) {
     const classes = useStyles();
-
     const arrayDate = data.created_at.split("GMT")[0].split(",").join("").split(" ")
     const date = [arrayDate[2], arrayDate[1], ",", arrayDate[3], "at", arrayDate[4]].join(" ")
-
-
 
     return (
         <Card className={classes.root}>

@@ -1,6 +1,3 @@
-import { AccordionActions } from "@material-ui/core";
-import {apiUrl} from "../../config"
-
 
 export const SEARCHED_PLACE_COORD = "SEARCHED_PLACE_COORD";
 

@@ -50,7 +50,7 @@ export const getElevationData = async (distanceData, elevation, setElevationData
     }
   })
   }catch(e){
-    // console.log(e)
+    console.log("Error received from getElevationForLocations: ", e)
   }
 
 
@@ -60,7 +60,7 @@ export const getElevationData = async (distanceData, elevation, setElevationData
 export const staticMapImage = async (distanceData,setStaticImageURL) => {
   const keyOption = `key=${process.env.REACT_APP_GOOGLE_KEY}`;
   const prefix = `http://maps.googleapis.com/maps/api/staticmap?`
-  const size = `size=600x300` 
+  const size = `size=600x300`
   const overViewPoline = distanceData.routes[0].overview_path.map(each=> {
       return `${each.lat()},${each.lng()}`
     })
@@ -68,14 +68,7 @@ export const staticMapImage = async (distanceData,setStaticImageURL) => {
     const lastPoly = overViewPoline[overViewPoline.length -1]
     const path = "&path=" + overViewPoline.join("|")
     const url = prefix + size +'&zoom=15'+ '&markers=color:green|' + firstPoly+ path + '&sensor=false'+ '&markers=color:red|'+lastPoly+'&' + keyOption
-   
+
     await setStaticImageURL(url)
-  
+
   }
-
-
-
-
-
-
-
