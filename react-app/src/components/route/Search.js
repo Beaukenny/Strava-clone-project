@@ -1,6 +1,7 @@
 import React from 'react';
 import usePlacesAutocomplete, {getGeocode, getLatLng,} from "use-places-autocomplete"
 import {Combobox,ComboboxInput,ComboboxPopover,ComboboxList,ComboboxOption,} from "@reach/combobox";
+import mapStyles from "./mapStyling.css"
 
 const Search =({mapLocation}) => {
     const {ready, value, suggestions: {status, data}, setValue, clearSuggestions} = usePlacesAutocomplete({

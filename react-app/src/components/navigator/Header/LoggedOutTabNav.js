@@ -1,11 +1,26 @@
-import React, {useState} from 'react';
-import {
-    Tabs,
+import React, {useState, history} from 'react';
+import { 
+    Tabs, 
     Tab,
-    makeStyles,
+    Avatar, 
+    makeStyles, 
+    // AppBar, 
+    // Button, 
+    // List, 
+    // ListItem, 
+    // ListItemText, 
+    // ListItemAvatar, 
+    // Grid, 
+    // Menu, 
+    // MenuItem, 
+    // ListItemIcon 
 } from "@material-ui/core";
-import { useHistory, useParams } from "react-router-dom";
+import {logout} from "../../../services/auth"
 
+import { useHistory, useLocation, useParams } from "react-router-dom";
+
+import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
+// import CadenceLogo;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -29,13 +44,13 @@ const useStyles = makeStyles((theme) => ({
 
 const LoggedOutTabNav = () => {
 
-    // const tabNameToIndex = {
-    //     0: "home",
-    //     1: "workouts",
-    //     2: "routes",
-    //     3: "explore",
-    //     4: "user",
-    // }
+    const tabNameToIndex = {
+        0: "home",
+        1: "workouts",
+        2: "routes",
+        3: "explore",
+        4: "user",
+    }
 
     const indexToTabName = {
         home: 0,
@@ -63,7 +78,7 @@ const LoggedOutTabNav = () => {
         setSelectedTab(newValue);
         // event.target.indicatorColor = "primary";
     }
-
+    
 
 //history.push('/workouts'
   return (
@@ -73,7 +88,7 @@ const LoggedOutTabNav = () => {
                 // label={ <img className={classes.large} style={{maxHeight: "3em", maxWidth: "3em"}} src='CadenceLogo.png'/>}>
                 label={ <img className={classes.large} style={{maxHeight: "3em", maxWidth: "3em"}} src='https://cadenceappacademy.s3.amazonaws.com/CadenceLogo.png'/>}>
 
-
+                
             </Tab>
 
         </Tabs>

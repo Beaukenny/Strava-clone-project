@@ -1,12 +1,25 @@
-import React, {useState} from 'react';
-import {
-    Tabs,
+import React, {useState, history} from 'react';
+import { 
+    Tabs, 
     Tab,
-    makeStyles,
+    Avatar, 
+    makeStyles, 
+    // AppBar, 
+    // Button, 
+    // List, 
+    // ListItem, 
+    // ListItemText, 
+    // ListItemAvatar, 
+    // Grid, 
+    // Menu, 
+    // MenuItem, 
+    // ListItemIcon 
 } from "@material-ui/core";
 
-import { useHistory, useParams } from "react-router-dom";
-
+import { useHistory, useLocation, useParams } from "react-router-dom";
+import Logo from "./Logo"
+import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
+// import CadenceLogo;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -30,13 +43,13 @@ const useStyles = makeStyles((theme) => ({
 
 const TabNav = () => {
 
-    // const tabNameToIndex = {
-    //     0: "Feeds",
-    //     1: "workouts",
-    //     2: "routes",
-    //     3: "explore",
-    //     4: "user",
-    // }
+    const tabNameToIndex = {
+        0: "Feeds",
+        1: "workouts",
+        2: "routes",
+        3: "explore",
+        4: "user",
+    }
 
     const indexToTabName = {
         feeds: 0,
@@ -66,7 +79,7 @@ const TabNav = () => {
     }
     if ((window.location.href).endsWith("create")){
 
-
+    
   return (
     <>
         <Tabs style={{marginLeft:"5%"}} indicatorColor={'primary'} value={selectedTab} onChange={handleChange}>
@@ -87,18 +100,18 @@ const TabNav = () => {
   )}else {
     return(
     <>
-    <Tabs style={{ display: 'grid', position: 'relative', width: '80vw'}} indicatorColor={'primary'} value={selectedTab} onChange={handleChange}>
-        <Tab style={{ position: 'absolute', left: '5vw' }} value={0} onClick={() => history.push('/workouts')}
+    <Tabs indicatorColor={'primary'} value={selectedTab} onChange={handleChange}>
+        <Tab style={{ marginRight: "4em"}} value={0} onClick={() => history.push('/workouts')}
             label={ <img className={classes.large} style={{maxHeight: "3em", maxWidth: "3em"}} src={image}/>
                     }>
         </Tab>
         {/* <Tab value={0} onClick={() => history.push(`/workouts`)}
             label="Home" /> */}
-        <Tab style={{ left: '20vw', position: 'absolute'}}  value={1} onClick={() => history.push(`/users/${window.localStorage.getItem("currentUser")}/myworkouts`)}
+        <Tab value={1} onClick={() => history.push(`/users/${window.localStorage.getItem("currentUser")}/myworkouts`)}
             label="Workouts" />
-        <Tab style={{ left: '30vw' , position: 'absolute'}}  value={2} onClick={() => history.push(`/users/${window.localStorage.getItem("currentUser")}/myroutes`)}
+        <Tab value={2} onClick={() => history.push(`/users/${window.localStorage.getItem("currentUser")}/myroutes`)}
         label="Routes" />
-        <Tab style={{ left: '40vw', position: 'absolute'}} value={3} onClick={() => history.push('/search-result')}
+        <Tab value={3} onClick={() => history.push('/search-result')}
         label="explore" />
     </Tabs>
 </>)
