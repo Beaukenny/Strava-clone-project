@@ -50,6 +50,8 @@ const ShowLogoutNav = () => {
         //? TODO *******
         await logout()
         window.localStorage.removeItem("currentUser")
+        setAvatorUrl('')
+
         history.push('/');
     }
 
